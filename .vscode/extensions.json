@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.debugpy",
+    "ms-python.black-formatter",
+    "ms-python.pylint",
+    "ms-python.isort",
+    "ms-toolsai.jupyter",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-json",
+    "redhat.vscode-yaml",
+    "ms-vscode.vscode-markdownlint",
+    "streetsidesoftware.code-spell-checker",
+    "ms-vscode.test-adapter-converter",
+    "hbenl.vscode-test-explorer",
+    "littlefoxteam.vscode-python-test-adapter",
+    "editorconfig.editorconfig",
+    "ms-vscode.vscode-typescript-next",
+    "gruntfuggly.todo-tree",
+    "christian-kohler.path-intellisense",
+    "ms-vscode.vscode-git-graph"
+  ]
+}

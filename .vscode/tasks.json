@@ -1,0 +1,291 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Tests",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "pytest", "wavetable_tests/", "-v"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": [
+        {
+          "owner": "pytest",
+          "source": "pytest",
+          "fileLocation": "relative",
+          "pattern": {
+            "regexp": "^([^:]+)::([^:]+)::([^:]+): (.*)$",
+            "file": 1,
+            "line": 2,
+            "severity": 3,
+            "message": 4
+          }
+        }
+      ]
+    },
+    {
+      "label": "Run Tests with Coverage",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": [
+        "-m",
+        "pytest",
+        "wavetable_tests/",
+        "--cov=wavetable_synthesis",
+        "--cov-report=term-missing",
+        "--cov-report=html"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Current Test File",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "pytest", "${file}", "-v"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Type Check (mypy)",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "mypy", "wavetable_synthesis/", "--strict", "--show-error-codes"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": [
+        {
+          "owner": "mypy",
+          "source": "mypy",
+          "fileLocation": "relative",
+          "pattern": {
+            "regexp": "^([^:]+):(\\d+): (error|note|warning): (.*)$",
+            "file": 1,
+            "line": 2,
+            "severity": 3,
+            "message": 4
+          }
+        }
+      ]
+    },
+    {
+      "label": "Lint Python",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "pylint", "wavetable_synthesis/", "wavetable_generators/", "wavetable_tests/", "--score=yes"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": [
+        {
+          "owner": "pylint",
+          "source": "pylint",
+          "fileLocation": "relative",
+          "pattern": {
+            "regexp": "^([^:]+):(\\d+):(\\d+): (\\w+): (.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+          }
+        }
+      ]
+    },
+    {
+      "label": "Format Python",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "black", "wavetable_synthesis/", "wavetable_generators/", "wavetable_tests/"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Sort Python Imports",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "isort", "wavetable_synthesis/", "wavetable_generators/", "wavetable_tests/"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Format & Lint All",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "format:fix"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Generate Wavetable (Prompt)",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "wavetable_synthesis", "${input:generatorName}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Generate All Wavetables (Batch)",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "wavetable_synthesis", "--batch"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "List Generators",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "wavetable_synthesis", "--list"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Clean Build Artifacts",
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-Command",
+        "Remove-Item -Recurse -Force -ErrorAction SilentlyContinue build,dist,wavetable_dist,htmlcov,.pytest_cache,.coverage,*.egg-info; Write-Host 'Cleaned build artifacts'"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Quick Test (Current File)",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "pytest", "${file}", "-v", "-x"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Open Coverage Report",
+      "type": "shell",
+      "command": "start htmlcov/index.html",
+      "windows": {
+        "command": "start htmlcov/index.html"
+      },
+      "osx": {
+        "command": "open htmlcov/index.html"
+      },
+      "linux": {
+        "command": "xdg-open htmlcov/index.html"
+      },
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Install Development Dependencies",
+      "type": "shell",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "pip", "install", "-e", ".[dev]"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "lint:py:fix",
+      "problemMatcher": [],
+      "label": "npm: lint:py:fix",
+      "detail": "python -m black wavetable_synthesis/ wavetable_generators/ wavetable_tests/ && python -m isort --profile black wavetable_synthesis/ wavetable_generators/ wavetable_tests/"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "generatorName",
+      "type": "promptString",
+      "description": "Enter generator name (e.g., sine_to_triangle, square_pwm_tz)",
+      "default": "sine_to_triangle"
+    }
+  ]
+}

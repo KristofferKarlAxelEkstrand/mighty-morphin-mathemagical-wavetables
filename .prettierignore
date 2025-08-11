@@ -1,0 +1,14 @@
+node_modules
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.mypy_cache
+.coverage
+wavetable_dist
+dist
+wavetables
+*.wav
+package-lock.json
+# Chatmode files use YAML frontmatter - don't auto-format
+.github/chatmodes/**/*.chatmode.md

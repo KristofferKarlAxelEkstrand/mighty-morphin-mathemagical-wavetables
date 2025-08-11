@@ -1,0 +1,202 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mighty-morphin-mathemagical-wavetables"
+version = "0.1.0"
+description = "Mighty Morphin Mathemagical Wavetables - Where math meets magic in wavetable synthesis"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Kristoffer Ekstrand", email = "kristoffer.ekstrand@gmail.com"},
+]
+maintainers = [
+    {name = "Kristoffer Ekstrand", email = "kristoffer.ekstrand@gmail.com"},
+]
+keywords = ["wavetable", "synthesis", "audio", "dsp", "music"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Multimedia :: Sound/Audio :: Analysis",
+    "Topic :: Multimedia :: Sound/Audio :: Synthesis",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = [
+    "numpy>=2.0.0",
+    "soundfile>=0.13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=6.0.0",
+    "black>=24.0.0",
+    "isort>=5.13.0",
+    "mypy>=1.13.0",
+    "flake8>=7.0.0",
+    "pylint>=3.3.0",
+    "pre-commit>=4.0.0",
+]
+web = [
+    "flask>=2.3.0",
+    "flask-cors>=4.0.0",
+]
+docs = [
+    "sphinx>=5.0.0",
+    "sphinx-rtd-theme>=1.2.0",
+]
+
+[project.scripts]
+wavetable = "wavetable_synthesis.cli.cli:main"
+run-tests = "wavetable_synthesis.cli.test_cli:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/wavetable-synthesis"
+Documentation = "https://wavetable-synthesis.readthedocs.io/"
+Repository = "https://github.com/yourusername/wavetable-synthesis.git"
+Issues = "https://github.com/yourusername/wavetable-synthesis/issues"
+Changelog = "https://github.com/yourusername/wavetable-synthesis/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["test*", "docs*"]
+
+[tool.setuptools.package-data]
+"wavetable_synthesis" = ["wavetable_generators/*.py"]
+
+[tool.black]
+line-length = 128
+target-version = ['py310', 'py311', 'py312', 'py313']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | wavetable_dist
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 128
+known_first_party = ["wavetable_synthesis"]
+skip = ["__init__.py"]
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "soundfile.*",
+]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "test_basic",
+    "test_advanced",
+    "test_integration",
+    "test_wavetable_generation"
+]
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --cov=wavetable_synthesis --cov-report=term-missing"
+testpaths = [
+    "wavetable_tests",
+]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+
+[tool.coverage.run]
+source = ["wavetable_synthesis"]
+omit = [
+    "*/wavetable_tests/*",
+    "*/test_*.py",
+    "setup.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]
+
+[tool.pylint.main]
+init-hook = "import sys; sys.path.insert(0, '.')"
+
+[tool.pylint.messages_control]
+disable = [
+    "C0114",  # missing-module-docstring
+    "C0115",  # missing-class-docstring
+    "C0116",  # missing-function-docstring
+    "C0413",  # wrong-import-position - necessary for test files with path manipulation
+    "C0415",  # import-outside-toplevel - allowed in tests for isolation
+    "E1102",  # not-callable - false positive for dynamic registry generators
+    "R0801",  # duplicate-code - expected in template-style generator files
+    "R0903",  # too-few-public-methods
+    "R0913",  # too-many-arguments
+    "R0914",  # too-many-locals
+    "R0915",  # too-many-statements
+    "W0613",  # unused-argument
+    "W0621",  # redefined-outer-name - expected in pytest conftest files
+]
+extension-pkg-whitelist = ["numpy"]
+
+[tool.pylint.format]
+max-line-length = 128
+
+[tool.pylint.design]
+max-args = 8
+max-locals = 20
+max-returns = 6
+max-branches = 12
+max-statements = 50
+max-parents = 7
+
+[tool.pylint.similarities]
+min-similarity-lines = 4
+ignore-comments = true
+ignore-docstrings = true
+ignore-imports = false
+
+[tool.pylint.master]
+extension-pkg-allow-list = ["numpy"]

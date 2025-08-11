@@ -1,0 +1,41 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "🎵 Wavetable Generator",
+    },
+  ],
+  "settings": {
+    "files.associations": {
+      "*.md": "markdown",
+      "*.toml": "toml",
+      ".editorconfig": "editorconfig",
+      ".envrc": "shellscript",
+      "*.ipynb": "jupyter",
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+      "*.py": "${capture}.pyc, ${capture}.pyi",
+      "pyproject.toml": "setup.py, setup.cfg, MANIFEST.in, requirements*.txt, PIP.MD",
+      "package.json": "package-lock.json, .nvmrc, .npmrc, .prettierrc, .prettierignore",
+      "README.md": "QUICKSTART.md, AGENTS.md",
+      ".gitignore": ".gitattributes, .editorconfig, .envrc",
+    },
+    "search.useIgnoreFiles": true,
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.debugpy",
+      "ms-python.black-formatter",
+      "ms-python.pylint",
+      "ms-python.isort",
+      "esbenp.prettier-vscode",
+      "streetsidesoftware.code-spell-checker",
+      "editorconfig.editorconfig",
+    ],
+  },
+}

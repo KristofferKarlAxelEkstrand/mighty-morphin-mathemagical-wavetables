@@ -298,12 +298,12 @@ def generate_all_wavetables(output_dir: str) -> None:
         for frames in frame_counts:
             for sample_rate in sample_rates:
                 for bit_depth in bit_depths:
-                    progress_pct = ((current_item + 1) / total_combinations) * 100
+                    current_item += 1
+                    progress_pct = (current_item / total_combinations) * 100
                     print(
-                        f"  [{current_item + 1}/{total_combinations}] ({progress_pct:.1f}%) "
+                        f"  [{current_item}/{total_combinations}] ({progress_pct:.1f}%) "
                         f"{generator} - {frames} frames, {sample_rate}Hz, {bit_depth}bit"
                     )
-                    current_item += 1
 
                     try:
                         generate_wavetable(generator, frames, sample_rate, bit_depth, output_dir)

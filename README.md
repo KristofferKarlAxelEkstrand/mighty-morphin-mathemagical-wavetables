@@ -2,7 +2,7 @@
 
 **Use math to create sound!**
 
-Create wavetables for any synthesizer that supports wavetable loading — and we can add support for others if needed — using pure mathematical formulas.
+Create wavetables for any synthesizer that supports wavetable loading — using mathematical formulas.
 
 Generate clean, morphing waveforms for Serum, Vital, Pigments, and other wavetable synthesizers.
 
@@ -358,6 +358,10 @@ WAV files are raw audio - they need to be loaded into a wavetable synthesizer (S
 5.  **Share your creations** - Contribute back to the project!
 
 ---
+
+Created by Kristoffer Ekstrand at [https://adventurekid.se/](https://adventurekid.se/).
+
+Check out AKWF for more wavetables.
 
 ## 📄 License
 

@@ -104,6 +104,19 @@ def show_available_generators() -> None:
     print(f"\nTotal: {len(registry)} generators")
 
 
+def create_test_theta(sample_size: int) -> np.ndarray:
+    """Create a test phase array from 0 to 2π for validation testing.
+    
+    Args:
+        sample_size: Number of samples in the phase array
+        
+    Returns:
+        Phase array (theta) spanning 0 to 2π as float64
+    """
+    from ..core.constants import TAU
+    return TAU * np.arange(sample_size, dtype=np.float64) / sample_size
+
+
 def validate_generators() -> bool:
     """Validate all registered generators.
     
@@ -116,7 +129,6 @@ def validate_generators() -> bool:
         True if all generators are valid, False otherwise
     """
     from ..core.base_generator import BaseGenerator
-    from ..core.constants import TAU
     
     registry = get_registry(verbose=False)
     generators = sorted(registry.keys())
@@ -126,7 +138,7 @@ def validate_generators() -> bool:
     print(f"Found {len(generators)} generators to validate\n")
     
     all_valid = True
-    theta = TAU * np.arange(VALIDATION_SAMPLE_SIZE, dtype=np.float64) / VALIDATION_SAMPLE_SIZE  # Test phase array
+    theta = create_test_theta(VALIDATION_SAMPLE_SIZE)
     
     for name in generators:
         print(f"Validating: {name}")

@@ -135,6 +135,20 @@ class BaseGenerator(ABC):
             "free": True,
         }
 
+    @staticmethod
+    def _validate_required_string_field(info: GeneratorInfo, field_name: str) -> None:
+        """Validate that a field is a non-empty string.
+
+        Args:
+            info: Generator information dictionary
+            field_name: Name of the field to validate
+
+        Raises:
+            ValueError: If field is not a non-empty string
+        """
+        if not isinstance(info[field_name], str) or not info[field_name]:
+            raise ValueError(f"Field '{field_name}' must be a non-empty string")
+
     @classmethod
     def validate_info(cls, info: GeneratorInfo) -> None:
         """Validate generator metadata for required fields and correct types.
@@ -152,16 +166,12 @@ class BaseGenerator(ABC):
         if missing_fields:
             raise ValueError(f"Missing required fields in generator info: {missing_fields}")
         
-        # Validate field types
-        if not isinstance(info["name"], str) or not info["name"]:
-            raise ValueError("Field 'name' must be a non-empty string")
+        # Validate required non-empty string fields
+        cls._validate_required_string_field(info, "name")
+        cls._validate_required_string_field(info, "id")
+        cls._validate_required_string_field(info, "description")
         
-        if not isinstance(info["id"], str) or not info["id"]:
-            raise ValueError("Field 'id' must be a non-empty string")
-        
-        if not isinstance(info["description"], str) or not info["description"]:
-            raise ValueError("Field 'description' must be a non-empty string")
-        
+        # Author can be empty but must be a string
         if not isinstance(info["author"], str):
             raise ValueError("Field 'author' must be a string")
         

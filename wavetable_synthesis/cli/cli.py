@@ -351,8 +351,11 @@ def main() -> int:
     except Exception as e:  # pylint: disable=broad-except
         # Broad except is intentional for top-level CLI error handling
         # to provide user-friendly error messages for any unexpected errors
+        import traceback
         print(f"\nUnexpected error ({type(e).__name__}): {e}")
         print("Please report this issue with the full error message.")
+        print("\nFull traceback:")
+        traceback.print_exc()
         return 1
 
 

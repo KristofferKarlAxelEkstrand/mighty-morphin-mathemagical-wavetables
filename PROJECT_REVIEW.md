@@ -352,6 +352,6 @@ BaseGenerator.validate_info(info)
 ---
 
 **Review Date**: 2025-11-02
-**Reviewer**: Copilot
+**Reviewer**: GitHub Copilot
 **Project Version**: 0.1.0
 **Review Status**: Complete

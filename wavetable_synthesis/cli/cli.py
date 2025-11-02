@@ -36,12 +36,19 @@ Examples:
   wavetable sine_to_triangle          # Generate sine-to-triangle morph
   wavetable square_pwm_tz             # Generate square with PWM
   wavetable --list                    # Show available generators
+  wavetable --validate                # Validate all registered generators
   wavetable --batch                   # Generate ALL wavetables with all configs
         """,
     )
 
     parser.add_argument("waveform", nargs="?", help="Generator name")
     parser.add_argument("--list", "-l", action="store_true", help="List available generators")
+    parser.add_argument(
+        "--validate",
+        "-v",
+        action="store_true",
+        help="Validate all registered generators",
+    )
     parser.add_argument(
         "--batch",
         action="store_true",
@@ -94,6 +101,95 @@ def show_available_generators() -> None:
         print(f"  {name:<20} - {doc}")
 
     print(f"\nTotal: {len(registry)} generators")
+
+
+def validate_generators() -> bool:
+    """Validate all registered generators.
+    
+    Checks that each generator:
+    - Has valid metadata (get_info)
+    - Has required methods (generate, get_processing, get_info)
+    - Can be called with test parameters
+    
+    Returns:
+        True if all generators are valid, False otherwise
+    """
+    from ..core.base_generator import BaseGenerator
+    from ..core.constants import TAU
+    
+    registry = get_registry(verbose=False)
+    generators = sorted(registry.keys())
+    
+    print("Validating Registered Generators")
+    print("=" * 50)
+    print(f"Found {len(generators)} generators to validate\n")
+    
+    all_valid = True
+    theta = TAU * np.arange(128, dtype=np.float64) / 128  # Test phase array
+    
+    for name in generators:
+        print(f"Validating: {name}")
+        generator = registry[name]
+        has_errors = False
+        
+        # Check required methods
+        required_methods = ["generate", "get_processing", "get_info"]
+        for method in required_methods:
+            if not hasattr(generator, method):
+                print(f"  ✗ Missing method: {method}")
+                has_errors = True
+                all_valid = False
+        
+        # Validate metadata
+        if hasattr(generator, "get_info"):
+            try:
+                info = generator.get_info()
+                BaseGenerator.validate_info(info)
+                print(f"  ✓ Metadata valid")
+            except ValueError as e:
+                print(f"  ✗ Invalid metadata: {e}")
+                has_errors = True
+                all_valid = False
+        
+        # Test generation with sample parameters
+        if hasattr(generator, "generate"):
+            try:
+                # Test with u=0.0
+                result = generator.generate(theta, 0.0)
+                if not isinstance(result, np.ndarray):
+                    print(f"  ✗ generate() must return numpy array, got {type(result)}")
+                    has_errors = True
+                    all_valid = False
+                elif len(result) != len(theta):
+                    print(f"  ✗ generate() returned wrong length: {len(result)} vs {len(theta)}")
+                    has_errors = True
+                    all_valid = False
+                else:
+                    # Test with u=0.5
+                    generator.generate(theta, 0.5)
+                    # Test with u=1.0
+                    generator.generate(theta, 1.0)
+                    print(f"  ✓ Generate function works")
+            except Exception as e:  # pylint: disable=broad-except
+                # Broad except is intentional here - we want to catch all generator errors
+                # for validation purposes and report them in a user-friendly way
+                print(f"  ✗ Generation failed ({type(e).__name__}): {e}")
+                has_errors = True
+                all_valid = False
+        
+        if not has_errors:
+            print(f"  ✓ {name} is valid\n")
+        else:
+            print()
+    
+    print("=" * 50)
+    if all_valid:
+        print("✓ All generators are valid!")
+    else:
+        print("✗ Some generators have errors")
+    print("=" * 50)
+    
+    return all_valid
 
 
 def get_generator_function(waveform_name: str) -> Optional[Any]:
@@ -230,6 +326,9 @@ def main() -> int:
 
         if args.list:
             show_available_generators()
+        elif args.validate:
+            if not validate_generators():
+                exit_code = 1
         elif args.batch:
             # Create output directory
             try:
@@ -249,7 +348,9 @@ def main() -> int:
         print("\n\nOperation cancelled by user.")
         return 130  # Standard Unix exit code for SIGINT
     except Exception as e:  # pylint: disable=broad-except
-        print(f"\nUnexpected error: {e}")
+        # Broad except is intentional for top-level CLI error handling
+        # to provide user-friendly error messages for any unexpected errors
+        print(f"\nUnexpected error ({type(e).__name__}): {e}")
         print("Please report this issue with the full error message.")
         return 1
 

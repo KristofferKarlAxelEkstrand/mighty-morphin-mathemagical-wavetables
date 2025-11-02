@@ -21,6 +21,7 @@ DEFAULT_SAMPLE_RATE = 44100
 DEFAULT_BIT_DEPTH = 16
 DEFAULT_OUTPUT_DIR = "./wavetable_dist"
 FRAME_SIZE = 2048
+VALIDATION_SAMPLE_SIZE = 128  # Sample size for generator validation testing
 
 VALID_SAMPLE_RATES = [44100, 48000, 96000]
 VALID_BIT_DEPTHS = [16, 24, 32]
@@ -125,7 +126,7 @@ def validate_generators() -> bool:
     print(f"Found {len(generators)} generators to validate\n")
     
     all_valid = True
-    theta = TAU * np.arange(128, dtype=np.float64) / 128  # Test phase array
+    theta = TAU * np.arange(VALIDATION_SAMPLE_SIZE, dtype=np.float64) / VALIDATION_SAMPLE_SIZE  # Test phase array
     
     for name in generators:
         print(f"Validating: {name}")
@@ -170,9 +171,9 @@ def validate_generators() -> bool:
                     # Test with u=1.0
                     generator.generate(theta, 1.0)
                     print(f"  ✓ Generate function works")
+            # Broad except is intentional here - we want to catch all generator errors
+            # for validation purposes and report them in a user-friendly way
             except Exception as e:  # pylint: disable=broad-except
-                # Broad except is intentional here - we want to catch all generator errors
-                # for validation purposes and report them in a user-friendly way
                 print(f"  ✗ Generation failed ({type(e).__name__}): {e}")
                 has_errors = True
                 all_valid = False
@@ -297,12 +298,12 @@ def generate_all_wavetables(output_dir: str) -> None:
         for frames in frame_counts:
             for sample_rate in sample_rates:
                 for bit_depth in bit_depths:
-                    current_item += 1
-                    progress_pct = (current_item / total_combinations) * 100
+                    progress_pct = ((current_item + 1) / total_combinations) * 100
                     print(
-                        f"  [{current_item}/{total_combinations}] ({progress_pct:.1f}%) "
+                        f"  [{current_item + 1}/{total_combinations}] ({progress_pct:.1f}%) "
                         f"{generator} - {frames} frames, {sample_rate}Hz, {bit_depth}bit"
                     )
+                    current_item += 1
 
                     try:
                         generate_wavetable(generator, frames, sample_rate, bit_depth, output_dir)

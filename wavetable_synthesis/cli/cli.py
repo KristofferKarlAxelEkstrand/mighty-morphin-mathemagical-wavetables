@@ -170,8 +170,14 @@ def generate_wavetable(waveform_name: str, frames: int, sample_rate: int, bit_de
 
 
 def generate_all_wavetables(output_dir: str) -> None:
-    """Generate all wavetables with multiple configurations."""
-
+    """Generate all wavetables with multiple configurations.
+    
+    Generates wavetables for all registered generators with various
+    configurations including different frame counts, sample rates, and bit depths.
+    
+    Args:
+        output_dir: Directory to save generated wavetables
+    """
     registry = get_registry(verbose=False)
     generators = sorted(registry.keys())
     print(f"Found {len(generators)} generators: {', '.join(generators)}")
@@ -185,6 +191,7 @@ def generate_all_wavetables(output_dir: str) -> None:
     print(f"Generating {total_combinations} wavetable combinations...")
 
     generated_count = 0
+    current_item = 0
 
     for generator in generators:
         print(f"\n{'='*50}")
@@ -194,7 +201,12 @@ def generate_all_wavetables(output_dir: str) -> None:
         for frames in frame_counts:
             for sample_rate in sample_rates:
                 for bit_depth in bit_depths:
-                    print(f"  {generator} - {frames} frames, " f"{sample_rate}Hz, {bit_depth}bit")
+                    current_item += 1
+                    progress_pct = (current_item / total_combinations) * 100
+                    print(
+                        f"  [{current_item}/{total_combinations}] ({progress_pct:.1f}%) "
+                        f"{generator} - {frames} frames, {sample_rate}Hz, {bit_depth}bit"
+                    )
 
                     try:
                         generate_wavetable(generator, frames, sample_rate, bit_depth, output_dir)
@@ -203,30 +215,43 @@ def generate_all_wavetables(output_dir: str) -> None:
                         print(f"    Error: {e}")
 
     print(f"\n{'='*50}")
-    print(f"Generation complete! Generated {generated_count}/" f"{total_combinations} wavetables")
+    print(f"Generation complete! Generated {generated_count}/{total_combinations} wavetables")
     print(f"Output directory: {output_dir}")
     print(f"{'='*50}")
 
 
 def main() -> int:
-    """Main CLI entry point."""
-    parser = create_parser()
-    args = parser.parse_args()
+    """Main CLI entry point with comprehensive error handling."""
+    try:
+        parser = create_parser()
+        args = parser.parse_args()
 
-    exit_code = 0
+        exit_code = 0
 
-    if args.list:
-        show_available_generators()
-    elif args.batch:
-        # Create output directory
-        Path(args.output).mkdir(parents=True, exist_ok=True)
-        generate_all_wavetables(args.output)
-    elif args.waveform:
-        generate_wavetable(args.waveform, args.frames, args.rate, args.bits, args.output)
-    else:
-        parser.print_help()
+        if args.list:
+            show_available_generators()
+        elif args.batch:
+            # Create output directory
+            try:
+                Path(args.output).mkdir(parents=True, exist_ok=True)
+            except (OSError, PermissionError) as e:
+                print(f"Error: Cannot create output directory '{args.output}': {e}")
+                return 1
+            generate_all_wavetables(args.output)
+        elif args.waveform:
+            generate_wavetable(args.waveform, args.frames, args.rate, args.bits, args.output)
+        else:
+            parser.print_help()
 
-    return exit_code
+        return exit_code
+
+    except KeyboardInterrupt:
+        print("\n\nOperation cancelled by user.")
+        return 130  # Standard Unix exit code for SIGINT
+    except Exception as e:  # pylint: disable=broad-except
+        print(f"\nUnexpected error: {e}")
+        print("Please report this issue with the full error message.")
+        return 1
 
 
 if __name__ == "__main__":

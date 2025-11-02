@@ -134,3 +134,45 @@ class BaseGenerator(ABC):
             "keywords": [],
             "free": True,
         }
+
+    @classmethod
+    def validate_info(cls, info: GeneratorInfo) -> None:
+        """Validate generator metadata for required fields and correct types.
+
+        Args:
+            info: Generator information dictionary to validate
+
+        Raises:
+            ValueError: If required fields are missing or have incorrect types
+        """
+        required_fields = ["name", "id", "description", "author", "tags", "collections", "keywords", "free"]
+        
+        # Check for required fields
+        missing_fields = [field for field in required_fields if field not in info]
+        if missing_fields:
+            raise ValueError(f"Missing required fields in generator info: {missing_fields}")
+        
+        # Validate field types
+        if not isinstance(info["name"], str) or not info["name"]:
+            raise ValueError("Field 'name' must be a non-empty string")
+        
+        if not isinstance(info["id"], str) or not info["id"]:
+            raise ValueError("Field 'id' must be a non-empty string")
+        
+        if not isinstance(info["description"], str) or not info["description"]:
+            raise ValueError("Field 'description' must be a non-empty string")
+        
+        if not isinstance(info["author"], str):
+            raise ValueError("Field 'author' must be a string")
+        
+        if not isinstance(info["tags"], list):
+            raise ValueError("Field 'tags' must be a list")
+        
+        if not isinstance(info["collections"], list):
+            raise ValueError("Field 'collections' must be a list")
+        
+        if not isinstance(info["keywords"], list):
+            raise ValueError("Field 'keywords' must be a list")
+        
+        if not isinstance(info["free"], bool):
+            raise ValueError("Field 'free' must be a boolean")

@@ -40,6 +40,19 @@ class BaseGenerator(ABC):
                 return np.sin(theta)  # Example: simple sine wave
     """
 
+    @staticmethod
+    def _validate_u(u: float) -> None:
+        """Validate that the u parameter is within valid bounds.
+
+        Args:
+            u: Morph parameter to validate
+
+        Raises:
+            ValueError: If u is outside the range [0, 1]
+        """
+        if not 0.0 <= u <= 1.0:
+            raise ValueError(f"Morph parameter u must be in range [0, 1], got {u}")
+
     # Function to generate the wavetable one sample at a time
     @abstractmethod
     def generate(

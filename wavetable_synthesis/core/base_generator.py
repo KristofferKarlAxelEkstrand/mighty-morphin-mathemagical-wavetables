@@ -40,6 +40,19 @@ class BaseGenerator(ABC):
                 return np.sin(theta)  # Example: simple sine wave
     """
 
+    @staticmethod
+    def _validate_u(u: float) -> None:
+        """Validate that the u parameter is within valid bounds.
+
+        Args:
+            u: Morph parameter to validate
+
+        Raises:
+            ValueError: If u is outside the range [0, 1]
+        """
+        if not 0.0 <= u <= 1.0:
+            raise ValueError(f"Morph parameter u must be in range [0, 1], got {u}")
+
     # Function to generate the wavetable one sample at a time
     @abstractmethod
     def generate(
@@ -121,3 +134,55 @@ class BaseGenerator(ABC):
             "keywords": [],
             "free": True,
         }
+
+    @staticmethod
+    def _validate_required_string_field(info: GeneratorInfo, field_name: str) -> None:
+        """Validate that a field is a non-empty string.
+
+        Args:
+            info: Generator information dictionary
+            field_name: Name of the field to validate
+
+        Raises:
+            ValueError: If field is not a non-empty string
+        """
+        if not isinstance(info[field_name], str) or not info[field_name]:
+            raise ValueError(f"Field '{field_name}' must be a non-empty string")
+
+    @classmethod
+    def validate_info(cls, info: GeneratorInfo) -> None:
+        """Validate generator metadata for required fields and correct types.
+
+        Args:
+            info: Generator information dictionary to validate
+
+        Raises:
+            ValueError: If required fields are missing or have incorrect types
+        """
+        required_fields = ["name", "id", "description", "author", "tags", "collections", "keywords", "free"]
+        
+        # Check for required fields
+        missing_fields = [field for field in required_fields if field not in info]
+        if missing_fields:
+            raise ValueError(f"Missing required fields in generator info: {missing_fields}")
+        
+        # Validate required non-empty string fields
+        cls._validate_required_string_field(info, "name")
+        cls._validate_required_string_field(info, "id")
+        cls._validate_required_string_field(info, "description")
+        
+        # Author can be empty but must be a string
+        if not isinstance(info["author"], str):
+            raise ValueError("Field 'author' must be a string")
+        
+        if not isinstance(info["tags"], list):
+            raise ValueError("Field 'tags' must be a list")
+        
+        if not isinstance(info["collections"], list):
+            raise ValueError("Field 'collections' must be a list")
+        
+        if not isinstance(info["keywords"], list):
+            raise ValueError("Field 'keywords' must be a list")
+        
+        if not isinstance(info["free"], bool):
+            raise ValueError("Field 'free' must be a boolean")

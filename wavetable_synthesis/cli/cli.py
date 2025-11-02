@@ -21,6 +21,7 @@ DEFAULT_SAMPLE_RATE = 44100
 DEFAULT_BIT_DEPTH = 16
 DEFAULT_OUTPUT_DIR = "./wavetable_dist"
 FRAME_SIZE = 2048
+VALIDATION_SAMPLE_SIZE = 128  # Sample size for generator validation testing
 
 VALID_SAMPLE_RATES = [44100, 48000, 96000]
 VALID_BIT_DEPTHS = [16, 24, 32]
@@ -36,12 +37,19 @@ Examples:
   wavetable sine_to_triangle          # Generate sine-to-triangle morph
   wavetable square_pwm_tz             # Generate square with PWM
   wavetable --list                    # Show available generators
+  wavetable --validate                # Validate all registered generators
   wavetable --batch                   # Generate ALL wavetables with all configs
         """,
     )
 
     parser.add_argument("waveform", nargs="?", help="Generator name")
     parser.add_argument("--list", "-l", action="store_true", help="List available generators")
+    parser.add_argument(
+        "--validate",
+        "-v",
+        action="store_true",
+        help="Validate all registered generators",
+    )
     parser.add_argument(
         "--batch",
         action="store_true",
@@ -94,6 +102,107 @@ def show_available_generators() -> None:
         print(f"  {name:<20} - {doc}")
 
     print(f"\nTotal: {len(registry)} generators")
+
+
+def create_test_theta(sample_size: int) -> np.ndarray:
+    """Create a test phase array from 0 to 2π for validation testing.
+    
+    Args:
+        sample_size: Number of samples in the phase array
+        
+    Returns:
+        Phase array (theta) spanning 0 to 2π as float64
+    """
+    from ..core.constants import TAU
+    return TAU * np.arange(sample_size, dtype=np.float64) / sample_size
+
+
+def validate_generators() -> bool:
+    """Validate all registered generators.
+    
+    Checks that each generator:
+    - Has valid metadata (get_info)
+    - Has required methods (generate, get_processing, get_info)
+    - Can be called with test parameters
+    
+    Returns:
+        True if all generators are valid, False otherwise
+    """
+    from ..core.base_generator import BaseGenerator
+    
+    registry = get_registry(verbose=False)
+    generators = sorted(registry.keys())
+    
+    print("Validating Registered Generators")
+    print("=" * 50)
+    print(f"Found {len(generators)} generators to validate\n")
+    
+    all_valid = True
+    theta = create_test_theta(VALIDATION_SAMPLE_SIZE)
+    
+    for name in generators:
+        print(f"Validating: {name}")
+        generator = registry[name]
+        has_errors = False
+        
+        # Check required methods
+        required_methods = ["generate", "get_processing", "get_info"]
+        for method in required_methods:
+            if not hasattr(generator, method):
+                print(f"  ✗ Missing method: {method}")
+                has_errors = True
+                all_valid = False
+        
+        # Validate metadata
+        if hasattr(generator, "get_info"):
+            try:
+                info = generator.get_info()
+                BaseGenerator.validate_info(info)
+                print(f"  ✓ Metadata valid")
+            except ValueError as e:
+                print(f"  ✗ Invalid metadata: {e}")
+                has_errors = True
+                all_valid = False
+        
+        # Test generation with sample parameters
+        if hasattr(generator, "generate"):
+            try:
+                # Test with u=0.0
+                result = generator.generate(theta, 0.0)
+                if not isinstance(result, np.ndarray):
+                    print(f"  ✗ generate() must return numpy array, got {type(result)}")
+                    has_errors = True
+                    all_valid = False
+                elif len(result) != len(theta):
+                    print(f"  ✗ generate() returned wrong length: {len(result)} vs {len(theta)}")
+                    has_errors = True
+                    all_valid = False
+                else:
+                    # Test with u=0.5
+                    generator.generate(theta, 0.5)
+                    # Test with u=1.0
+                    generator.generate(theta, 1.0)
+                    print(f"  ✓ Generate function works")
+            # Broad except is intentional here - we want to catch all generator errors
+            # for validation purposes and report them in a user-friendly way
+            except Exception as e:  # pylint: disable=broad-except
+                print(f"  ✗ Generation failed ({type(e).__name__}): {e}")
+                has_errors = True
+                all_valid = False
+        
+        if not has_errors:
+            print(f"  ✓ {name} is valid\n")
+        else:
+            print()
+    
+    print("=" * 50)
+    if all_valid:
+        print("✓ All generators are valid!")
+    else:
+        print("✗ Some generators have errors")
+    print("=" * 50)
+    
+    return all_valid
 
 
 def get_generator_function(waveform_name: str) -> Optional[Any]:
@@ -170,8 +279,14 @@ def generate_wavetable(waveform_name: str, frames: int, sample_rate: int, bit_de
 
 
 def generate_all_wavetables(output_dir: str) -> None:
-    """Generate all wavetables with multiple configurations."""
-
+    """Generate all wavetables with multiple configurations.
+    
+    Generates wavetables for all registered generators with various
+    configurations including different frame counts, sample rates, and bit depths.
+    
+    Args:
+        output_dir: Directory to save generated wavetables
+    """
     registry = get_registry(verbose=False)
     generators = sorted(registry.keys())
     print(f"Found {len(generators)} generators: {', '.join(generators)}")
@@ -185,6 +300,7 @@ def generate_all_wavetables(output_dir: str) -> None:
     print(f"Generating {total_combinations} wavetable combinations...")
 
     generated_count = 0
+    current_item = 0
 
     for generator in generators:
         print(f"\n{'='*50}")
@@ -194,7 +310,12 @@ def generate_all_wavetables(output_dir: str) -> None:
         for frames in frame_counts:
             for sample_rate in sample_rates:
                 for bit_depth in bit_depths:
-                    print(f"  {generator} - {frames} frames, " f"{sample_rate}Hz, {bit_depth}bit")
+                    current_item += 1
+                    progress_pct = (current_item / total_combinations) * 100
+                    print(
+                        f"  [{current_item}/{total_combinations}] ({progress_pct:.1f}%) "
+                        f"{generator} - {frames} frames, {sample_rate}Hz, {bit_depth}bit"
+                    )
 
                     try:
                         generate_wavetable(generator, frames, sample_rate, bit_depth, output_dir)
@@ -203,30 +324,51 @@ def generate_all_wavetables(output_dir: str) -> None:
                         print(f"    Error: {e}")
 
     print(f"\n{'='*50}")
-    print(f"Generation complete! Generated {generated_count}/" f"{total_combinations} wavetables")
+    print(f"Generation complete! Generated {generated_count}/{total_combinations} wavetables")
     print(f"Output directory: {output_dir}")
     print(f"{'='*50}")
 
 
 def main() -> int:
-    """Main CLI entry point."""
-    parser = create_parser()
-    args = parser.parse_args()
+    """Main CLI entry point with comprehensive error handling."""
+    try:
+        parser = create_parser()
+        args = parser.parse_args()
 
-    exit_code = 0
+        exit_code = 0
 
-    if args.list:
-        show_available_generators()
-    elif args.batch:
-        # Create output directory
-        Path(args.output).mkdir(parents=True, exist_ok=True)
-        generate_all_wavetables(args.output)
-    elif args.waveform:
-        generate_wavetable(args.waveform, args.frames, args.rate, args.bits, args.output)
-    else:
-        parser.print_help()
+        if args.list:
+            show_available_generators()
+        elif args.validate:
+            if not validate_generators():
+                exit_code = 1
+        elif args.batch:
+            # Create output directory
+            try:
+                Path(args.output).mkdir(parents=True, exist_ok=True)
+            except (OSError, PermissionError) as e:
+                print(f"Error: Cannot create output directory '{args.output}': {e}")
+                return 1
+            generate_all_wavetables(args.output)
+        elif args.waveform:
+            generate_wavetable(args.waveform, args.frames, args.rate, args.bits, args.output)
+        else:
+            parser.print_help()
 
-    return exit_code
+        return exit_code
+
+    except KeyboardInterrupt:
+        print("\n\nOperation cancelled by user.")
+        return 130  # Standard Unix exit code for SIGINT
+    except Exception as e:  # pylint: disable=broad-except
+        # Broad except is intentional for top-level CLI error handling
+        # to provide user-friendly error messages for any unexpected errors
+        import traceback
+        print(f"\nUnexpected error ({type(e).__name__}): {e}")
+        print("Please report this issue with the full error message.")
+        print("\nFull traceback:")
+        traceback.print_exc()
+        return 1
 
 
 if __name__ == "__main__":

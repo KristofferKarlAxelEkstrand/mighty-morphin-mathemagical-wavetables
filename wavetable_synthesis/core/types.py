@@ -42,14 +42,12 @@ class GeneratorProtocol(Protocol):
     def generate(
         self,
         theta: NDArray[np.float64],
-        t: NDArray[np.float64],
         u: float,
     ) -> NDArray[np.float64]:
         """Generate waveform samples.
 
         Args:
-            theta: Phase array (2π * t) for one complete cycle
-            t: Normalized position array [0, 1] within the frame
+            theta: Phase array (0 to 2π) for one complete cycle
             u: Morph parameter [0, 1] - controls waveform transformation
 
         Returns:
@@ -77,7 +75,7 @@ class GeneratorProtocol(Protocol):
 # Union type for generator inputs (class instances or functions)
 GeneratorInput = Union[
     GeneratorProtocol,
-    Callable[[NDArray[np.float64], NDArray[np.float64], float], NDArray[np.float64]],
+    Callable[[NDArray[np.float64], float], NDArray[np.float64]],
 ]
 
 
@@ -86,7 +84,7 @@ Registry = Dict[str, TRegistryValue]
 
 
 # Function signature for generator functions
-GeneratorFunction = Callable[[NDArray[np.float64], NDArray[np.float64], float], NDArray[np.float64]]
+GeneratorFunction = Callable[[NDArray[np.float64], float], NDArray[np.float64]]
 
 
 # Export all types for external use

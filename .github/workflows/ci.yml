@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+# Set minimal permissions for GITHUB_TOKEN
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Test Python ${{ matrix.python-version }}
@@ -41,6 +45,8 @@ jobs:
         file: ./coverage.xml
         flags: unittests
         name: codecov-umbrella
+        # Don't fail CI if codecov upload fails (external service)
+        # Coverage is still validated locally and in code review
         fail_ci_if_error: false
 
   lint:

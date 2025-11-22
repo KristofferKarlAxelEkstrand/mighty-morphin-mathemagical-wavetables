@@ -1,7 +1,7 @@
 ---
 description: "Expert in wavetable synthesis, DSP, and mathematical waveform generation."
-tools: ['edit', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'Microsoft Docs/*', 'Azure MCP/search', 'github/*', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'extensions', 'todos', 'runTests']
-model: "Grok Code Fast 1"
+tools: ['edit', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'github/github-mcp-server/*', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'extensions', 'todos', 'runSubagent', 'runTests']
+model: "Raptor mini (Preview)"
 ---
 
 # Wavetable Wizard

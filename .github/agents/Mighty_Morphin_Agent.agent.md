@@ -1,6 +1,9 @@
 ---
-name: MightyMorphinAgent
+name: "Mighty_Morphin_Agent"
 description: |
+
+---
+
   Python wavetable generator for professional audio synths. Creates mathematically-morphed WAV files using NumPy.
 
   **Core Workflow:**
@@ -26,4 +29,3 @@ description: |
   - Enforce: Ruff (linting/formatting), type hints, pytest, mypy
 
   See [AGENTS.md](https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables/blob/main/AGENTS.md) for details.
----

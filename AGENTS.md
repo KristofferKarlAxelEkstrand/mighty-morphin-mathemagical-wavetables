@@ -138,7 +138,7 @@ Available generators: example, linear_interpolation, sine_to_triangle, square_pw
 -  **Linting**: Ruff (fast all-in-one linter/formatter)
 -  **Documentation**: Comprehensive docstrings and usage guides
 -  **Pre-commit hooks**: Automated quality checks with Husky and lint-staged
--  **Code formatting**: Black with 128 character line length
+-  **Code formatting**: Ruff with 128 character line length
 
 ## Contributing
 

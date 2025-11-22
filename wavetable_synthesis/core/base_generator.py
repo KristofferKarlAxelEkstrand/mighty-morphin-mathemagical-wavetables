@@ -160,29 +160,29 @@ class BaseGenerator(ABC):
             ValueError: If required fields are missing or have incorrect types
         """
         required_fields = ["name", "id", "description", "author", "tags", "collections", "keywords", "free"]
-        
+
         # Check for required fields
         missing_fields = [field for field in required_fields if field not in info]
         if missing_fields:
             raise ValueError(f"Missing required fields in generator info: {missing_fields}")
-        
+
         # Validate required non-empty string fields
         cls._validate_required_string_field(info, "name")
         cls._validate_required_string_field(info, "id")
         cls._validate_required_string_field(info, "description")
-        
+
         # Author can be empty but must be a string
         if not isinstance(info["author"], str):
             raise ValueError("Field 'author' must be a string")
-        
+
         if not isinstance(info["tags"], list):
             raise ValueError("Field 'tags' must be a list")
-        
+
         if not isinstance(info["collections"], list):
             raise ValueError("Field 'collections' must be a list")
-        
+
         if not isinstance(info["keywords"], list):
             raise ValueError("Field 'keywords' must be a list")
-        
+
         if not isinstance(info["free"], bool):
             raise ValueError("Field 'free' must be a boolean")

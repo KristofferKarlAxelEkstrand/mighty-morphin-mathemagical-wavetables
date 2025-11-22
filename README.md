@@ -1,5 +1,10 @@
 # 🎵 Mighty Morphin Mathemagical Wavetables
 
+[![CI](https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables/actions/workflows/ci.yml/badge.svg)](https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables/actions/workflows/ci.yml)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 **Use math to create sound!**
 
 Create wavetables for any synthesizer that supports wavetable loading — using mathematical formulas.

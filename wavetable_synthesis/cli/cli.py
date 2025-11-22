@@ -106,45 +106,47 @@ def show_available_generators() -> None:
 
 def create_test_theta(sample_size: int) -> np.ndarray:
     """Create a test phase array from 0 to 2π for validation testing.
-    
+
     Args:
         sample_size: Number of samples in the phase array
-        
+
     Returns:
         Phase array (theta) spanning 0 to 2π as float64
     """
     from ..core.constants import TAU
+
     return TAU * np.arange(sample_size, dtype=np.float64) / sample_size
 
 
 def validate_generators() -> bool:
     """Validate all registered generators.
-    
+
     Checks that each generator:
     - Has valid metadata (get_info)
     - Has required methods (generate, get_processing, get_info)
     - Can be called with test parameters
-    
+
     Returns:
         True if all generators are valid, False otherwise
     """
+    # pylint: disable=too-many-branches
     from ..core.base_generator import BaseGenerator
-    
+
     registry = get_registry(verbose=False)
     generators = sorted(registry.keys())
-    
+
     print("Validating Registered Generators")
     print("=" * 50)
     print(f"Found {len(generators)} generators to validate\n")
-    
+
     all_valid = True
     theta = create_test_theta(VALIDATION_SAMPLE_SIZE)
-    
+
     for name in generators:
         print(f"Validating: {name}")
         generator = registry[name]
         has_errors = False
-        
+
         # Check required methods
         required_methods = ["generate", "get_processing", "get_info"]
         for method in required_methods:
@@ -152,18 +154,18 @@ def validate_generators() -> bool:
                 print(f"  ✗ Missing method: {method}")
                 has_errors = True
                 all_valid = False
-        
+
         # Validate metadata
         if hasattr(generator, "get_info"):
             try:
                 info = generator.get_info()
                 BaseGenerator.validate_info(info)
-                print(f"  ✓ Metadata valid")
+                print("  ✓ Metadata valid")
             except ValueError as e:
                 print(f"  ✗ Invalid metadata: {e}")
                 has_errors = True
                 all_valid = False
-        
+
         # Test generation with sample parameters
         if hasattr(generator, "generate"):
             try:
@@ -182,26 +184,26 @@ def validate_generators() -> bool:
                     generator.generate(theta, 0.5)
                     # Test with u=1.0
                     generator.generate(theta, 1.0)
-                    print(f"  ✓ Generate function works")
+                    print("  ✓ Generate function works")
             # Broad except is intentional here - we want to catch all generator errors
             # for validation purposes and report them in a user-friendly way
             except Exception as e:  # pylint: disable=broad-except
                 print(f"  ✗ Generation failed ({type(e).__name__}): {e}")
                 has_errors = True
                 all_valid = False
-        
+
         if not has_errors:
             print(f"  ✓ {name} is valid\n")
         else:
             print()
-    
+
     print("=" * 50)
     if all_valid:
         print("✓ All generators are valid!")
     else:
         print("✗ Some generators have errors")
     print("=" * 50)
-    
+
     return all_valid
 
 
@@ -280,10 +282,10 @@ def generate_wavetable(waveform_name: str, frames: int, sample_rate: int, bit_de
 
 def generate_all_wavetables(output_dir: str) -> None:
     """Generate all wavetables with multiple configurations.
-    
+
     Generates wavetables for all registered generators with various
     configurations including different frame counts, sample rates, and bit depths.
-    
+
     Args:
         output_dir: Directory to save generated wavetables
     """
@@ -364,6 +366,7 @@ def main() -> int:
         # Broad except is intentional for top-level CLI error handling
         # to provide user-friendly error messages for any unexpected errors
         import traceback
+
         print(f"\nUnexpected error ({type(e).__name__}): {e}")
         print("Please report this issue with the full error message.")
         print("\nFull traceback:")

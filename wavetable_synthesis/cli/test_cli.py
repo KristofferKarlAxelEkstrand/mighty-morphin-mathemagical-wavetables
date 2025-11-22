@@ -7,12 +7,15 @@ Run the wavetable synthesis test suite.
 
 import subprocess
 import sys
-from typing import Any
+from typing import Any, Optional
 
-pytest: Any = None
+# Module-level reference to pytest (if available)
+_pytest_module: Optional[Any] = None
 
 try:
     import pytest
+
+    _pytest_module = pytest
 except ImportError:
     pass
 
@@ -22,7 +25,7 @@ def run_tests() -> int:
     print("Running wavetable synthesis tests...")
     print("=" * 45)
 
-    if pytest is None:
+    if _pytest_module is None:
         print("❌ pytest not found. Install with: pip install pytest")
         return 1
 

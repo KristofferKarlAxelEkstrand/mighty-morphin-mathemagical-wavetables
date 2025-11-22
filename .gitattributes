@@ -1,0 +1,74 @@
+# Git attributes for language detection and line endings
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Python files
+*.py text eol=lf
+*.pyx text eol=lf
+*.pyi text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Documentation
+*.md text eol=lf
+*.rst text eol=lf
+*.txt text eol=lf
+
+# Configuration files
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.cfg text eol=lf
+
+# Git configuration
+.gitignore text eol=lf
+.gitattributes text eol=lf
+.editorconfig text eol=lf
+
+# Audio files (binary)
+*.wav binary
+*.mp3 binary
+*.flac binary
+
+# Images (binary)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+
+# Archives (binary)
+*.zip binary
+*.tar binary
+*.gz binary
+*.7z binary
+
+# Python bytecode (binary)
+*.pyc binary
+*.pyo binary
+*.pyd binary
+
+# Exclude from exports
+.github export-ignore
+.vscode export-ignore
+wavetable_tests export-ignore
+docs_tech export-ignore
+.gitignore export-ignore
+.editorconfig export-ignore
+.flake8 export-ignore
+.markdownlint.json export-ignore
+.prettierignore export-ignore
+.prettierrc export-ignore
+setup.sh export-ignore
+auto_activate.sh export-ignore
+*.code-workspace export-ignore
+
+# Mark documentation and examples
+docs/* linguist-documentation
+*.md linguist-documentation
+wavetable_generators/example.py linguist-documentation

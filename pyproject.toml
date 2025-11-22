@@ -61,11 +61,11 @@ wavetable = "wavetable_synthesis.cli.cli:main"
 run-tests = "wavetable_synthesis.cli.test_cli:main"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/wavetable-synthesis"
-Documentation = "https://wavetable-synthesis.readthedocs.io/"
-Repository = "https://github.com/yourusername/wavetable-synthesis.git"
-Issues = "https://github.com/yourusername/wavetable-synthesis/issues"
-Changelog = "https://github.com/yourusername/wavetable-synthesis/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables"
+Documentation = "https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables#readme"
+Repository = "https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables.git"
+Issues = "https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables/issues"
+Changelog = "https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
 zip-safe = false

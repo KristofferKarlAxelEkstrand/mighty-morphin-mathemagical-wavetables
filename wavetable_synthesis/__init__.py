@@ -29,9 +29,8 @@ def _get_all_exports() -> List[str]:
     Note: This imports the generators module to ensure decorators are executed.
     """
     # Import generators to trigger @register_generator decorators
-    import wavetable_generators  # noqa: F401
-
     # pylint: disable=import-outside-toplevel,unused-import
+    import wavetable_generators  # noqa: F401
 
     exports = [
         "generate_wavetable",

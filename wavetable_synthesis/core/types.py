@@ -11,10 +11,12 @@ import numpy as np
 from numpy.typing import NDArray
 
 # Generic type for generator classes
-TGenerator = TypeVar("TGenerator", bound="GeneratorProtocol")
+# Using GeneratorT pattern to conform to pylint naming style
+GeneratorT = TypeVar("GeneratorT", bound="GeneratorProtocol")
 
 # Generic type for registry values
-TRegistryValue = TypeVar("TRegistryValue")
+# Using RegistryValueT pattern to conform to pylint naming style
+RegistryValueT = TypeVar("RegistryValueT")
 
 # Processing configuration type
 ProcessingConfig = Dict[str, bool]
@@ -53,7 +55,6 @@ class GeneratorProtocol(Protocol):
         Returns:
             Generated waveform as float64 array
         """
-        ...
 
     def get_processing(self) -> ProcessingConfig:
         """Get processing configuration flags.
@@ -61,7 +62,6 @@ class GeneratorProtocol(Protocol):
         Returns:
             Dictionary with processing control flags
         """
-        ...
 
     def get_info(self) -> GeneratorInfo:
         """Get generator metadata.
@@ -69,7 +69,6 @@ class GeneratorProtocol(Protocol):
         Returns:
             Dictionary containing generator information
         """
-        ...
 
 
 # Union type for generator inputs (class instances or functions)
@@ -80,7 +79,7 @@ GeneratorInput = Union[
 
 
 # Registry type using generics
-Registry = Dict[str, TRegistryValue]
+Registry = Dict[str, RegistryValueT]
 
 
 # Function signature for generator functions
@@ -89,8 +88,8 @@ GeneratorFunction = Callable[[NDArray[np.float64], float], NDArray[np.float64]]
 
 # Export all types for external use
 __all__ = [
-    "TGenerator",
-    "TRegistryValue",
+    "GeneratorT",
+    "RegistryValueT",
     "ProcessingConfig",
     "GeneratorInfo",
     "GeneratorCollections",

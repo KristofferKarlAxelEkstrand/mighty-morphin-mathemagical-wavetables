@@ -27,11 +27,12 @@ We value the security of our users and contributors. If you've found a vulnerabi
 
 This project implements several security best practices:
 
--  **Code Quality**: All code passes strict linting (pylint, flake8, mypy)
+-  **Code Quality**: All code passes strict linting (Ruff) and type checking (mypy)
 -  **Type Safety**: Complete type hints with strict mypy checking
+-  **Security Scanning**: Automated security checks with Bandit
 -  **Testing**: 88% test coverage with comprehensive test suite
 -  **Dependencies**: Automated dependency updates via Dependabot
--  **CI/CD**: Automated testing on all pull requests
+-  **CI/CD**: Automated testing and security scanning on all pull requests
 -  **Input Validation**: All user inputs are validated before processing
 
 ## Security Considerations

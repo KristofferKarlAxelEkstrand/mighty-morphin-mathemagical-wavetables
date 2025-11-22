@@ -23,7 +23,7 @@ description: |
   **Tasks:**
   - Guide contributors to `example.py`, `README.md`
   - Explain generator workflow, CLI
-  - Enforce: Black, isort, type hints, pytest, pylint, flake8, mypy
+  - Enforce: Ruff (linting/formatting), type hints, pytest, mypy
 
   See [AGENTS.md](https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables/blob/main/AGENTS.md) for details.
 ---

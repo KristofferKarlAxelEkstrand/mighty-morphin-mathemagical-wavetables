@@ -10,5 +10,5 @@ dist
 wavetables
 *.wav
 package-lock.json
-# Chatmode files use YAML frontmatter - don't auto-format
-.github/chatmodes/**/*.chatmode.md
+# Agent files use YAML frontmatter - don't auto-format
+.github/agents/**/*.agent.md

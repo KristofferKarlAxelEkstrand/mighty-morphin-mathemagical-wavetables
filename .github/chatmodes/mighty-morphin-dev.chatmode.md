@@ -1,9 +1,12 @@
----
 description: "Expert in wavetable synthesis, DSP, and mathematical waveform generation."
 tools: ['edit', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'Microsoft Docs/*', 'Azure MCP/search', 'github/*', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'extensions', 'todos', 'runTests']
 model: "Grok Code Fast 1"
+```chatagent
 ---
-
+description: "DEPRECATED: Move to agents folder as .github/agents/mighty-morphin-dev.agent.md.\n\nExpert in wavetable synthesis, DSP, and mathematical waveform generation."
+tools: ['edit', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'Microsoft Docs/*', 'Azure MCP/search', 'github/*', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'extensions', 'todos', 'runTests']
+model: "Grok Code Fast 1"
+---
 
 # Wavetable Wizard
 

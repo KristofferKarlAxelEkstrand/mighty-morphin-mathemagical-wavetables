@@ -1,3 +1,4 @@
+---
 name: MightyMorphinAgent
 description: |
   I am the custom Copilot Agent for Mighty Morphin Mathemagical Wavetables — a Python project for creating mathematically-morphed wavetables for professional audio synths.
@@ -51,3 +52,4 @@ description: |
   - [PIP.MD](https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables/blob/main/PIP.MD)
 
   _Built for musicians and mathematicians by Mighty Morphin Mathemagical Wavetables. Code, create, and learn math through sound._
+---

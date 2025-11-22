@@ -365,7 +365,18 @@ Check out AKWF for more wavetables.
 
 ## 📄 License
 
-MIT License - Free to use, modify, and distribute.
+This project is licensed under the GNU General Public License v3.0 or later (GPL-3.0-or-later).
+
+You are free to use, modify, and distribute this software under the terms of the GPL-3.0 license.
+See the [LICENSE](LICENSE) file for the full license text.
+
+**Key Points:**
+- ✅ Free to use, modify, and distribute
+- ✅ Source code must remain open and available
+- ✅ Derivative works must also be GPL-3.0 licensed
+- ✅ No warranty provided
+
+For more information about the GPL-3.0 license, visit: https://www.gnu.org/licenses/gpl-3.0.html
 
 ---
 

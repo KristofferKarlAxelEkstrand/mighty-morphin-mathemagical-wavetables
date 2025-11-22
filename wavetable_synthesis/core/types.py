@@ -5,7 +5,8 @@ This module contains all type definitions, protocols, and generic types
 used throughout the wavetable synthesis system.
 """
 
-from typing import Callable, Dict, List, Protocol, TypeVar, Union
+from collections.abc import Callable
+from typing import Protocol, TypeVar, Union
 
 import numpy as np
 from numpy.typing import NDArray
@@ -19,19 +20,19 @@ GeneratorT = TypeVar("GeneratorT", bound="GeneratorProtocol")
 RegistryValueT = TypeVar("RegistryValueT")
 
 # Processing configuration type
-ProcessingConfig = Dict[str, bool]
+ProcessingConfig = dict[str, bool]
 
 # Generator metadata type
-GeneratorInfo = Dict[str, Union[str, List[str], bool]]
+GeneratorInfo = dict[str, str | list[str] | bool]
 
 # Generator collections type
-GeneratorCollections = List[str]
+GeneratorCollections = list[str]
 
 # Generator tags type
-GeneratorTags = List[str]
+GeneratorTags = list[str]
 
 # Generator keywords type
-GeneratorKeywords = List[str]
+GeneratorKeywords = list[str]
 
 
 class GeneratorProtocol(Protocol):
@@ -79,7 +80,7 @@ GeneratorInput = Union[
 
 
 # Registry type using generics
-Registry = Dict[str, RegistryValueT]
+Registry = dict[str, RegistryValueT]
 
 
 # Function signature for generator functions
@@ -88,15 +89,15 @@ GeneratorFunction = Callable[[NDArray[np.float64], float], NDArray[np.float64]]
 
 # Export all types for external use
 __all__ = [
-    "GeneratorT",
-    "RegistryValueT",
-    "ProcessingConfig",
-    "GeneratorInfo",
     "GeneratorCollections",
-    "GeneratorTags",
+    "GeneratorFunction",
+    "GeneratorInfo",
+    "GeneratorInput",
     "GeneratorKeywords",
     "GeneratorProtocol",
-    "GeneratorInput",
+    "GeneratorT",
+    "GeneratorTags",
+    "ProcessingConfig",
     "Registry",
-    "GeneratorFunction",
+    "RegistryValueT",
 ]

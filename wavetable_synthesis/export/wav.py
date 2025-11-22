@@ -6,7 +6,6 @@ and managing output directories.
 """
 
 from pathlib import Path
-from typing import List, Optional, Union
 
 import numpy as np
 import soundfile as sf
@@ -83,10 +82,10 @@ def generate_filename(
 def save_wavetable(  # pylint: disable=too-many-arguments,too-many-positional-arguments
     name: str,
     data: np.ndarray,
-    output_dir: Union[str, Path] = DEFAULT_OUTPUT_DIR,
+    output_dir: str | Path = DEFAULT_OUTPUT_DIR,
     sample_rate: int = 44100,
     bit_depth: int = 16,
-    frames: Optional[int] = None,
+    frames: int | None = None,
 ) -> Path:
     """Save wavetable to WAV file.
 
@@ -134,11 +133,11 @@ def save_wavetable(  # pylint: disable=too-many-arguments,too-many-positional-ar
 def export_wavetable(
     name: str,
     data: np.ndarray,
-    output_dir: Union[str, Path] = DEFAULT_OUTPUT_DIR,
-    sample_rate: Union[int, List[int]] = 44100,
-    bit_depth: Union[int, List[int]] = 16,
-    frames: Optional[int] = None,
-) -> Union[Path, List[Path]]:
+    output_dir: str | Path = DEFAULT_OUTPUT_DIR,
+    sample_rate: int | list[int] = 44100,
+    bit_depth: int | list[int] = 16,
+    frames: int | None = None,
+) -> Path | list[Path]:
     """Unified export function for wavetable in single or multiple formats.
 
     This is the main export function that handles both single file export
@@ -184,7 +183,7 @@ def export_wavetable(
 
     for depth in bit_depths:
         if depth not in SUPPORTED_BIT_DEPTHS:
-            raise ValueError(f"Unsupported bit depth {depth}. " f"Must be one of {SUPPORTED_BIT_DEPTHS}")
+            raise ValueError(f"Unsupported bit depth {depth}. Must be one of {SUPPORTED_BIT_DEPTHS}")
 
     # If only single configuration, use simple export
     if len(sample_rates) == 1 and len(bit_depths) == 1:

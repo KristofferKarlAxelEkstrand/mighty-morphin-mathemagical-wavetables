@@ -60,10 +60,7 @@ def test_performance_benchmark(any_generator, frames, frame_size):
         generation_time = 1e-6  # Avoid division by zero for very fast operations
     samples_per_second = (frames * frame_size) / generation_time
 
-    print(
-        f"Generated {frames} frames of {frame_size} samples in {generation_time:.3f}s "
-        f"({samples_per_second:.1f} samples/sec)"
-    )
+    print(f"Generated {frames} frames of {frame_size} samples in {generation_time:.3f}s ({samples_per_second:.1f} samples/sec)")
 
     # Performance should be reasonable
     assert generation_time < 10.0  # Less than 10 seconds for any test case

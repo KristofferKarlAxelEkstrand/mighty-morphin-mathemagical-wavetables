@@ -2,7 +2,7 @@
 Pytest configuration and shared fixtures for wavetable synthesis tests.
 """
 
-from typing import Any, Dict
+from typing import Any
 
 import numpy as np
 import pytest
@@ -26,13 +26,13 @@ def sample_t() -> np.ndarray:
 
 
 @pytest.fixture
-def registry() -> Dict[str, Any]:
+def registry() -> dict[str, Any]:
     """Generator registry fixture."""
     return get_registry(verbose=False)
 
 
 @pytest.fixture
-def any_generator(registry: Dict[str, Any]) -> Any:
+def any_generator(registry: dict[str, Any]) -> Any:
     """Fixture that returns the first available generator for basic testing."""
     if not registry:
         pytest.skip("No generators available")
@@ -40,7 +40,7 @@ def any_generator(registry: Dict[str, Any]) -> Any:
 
 
 @pytest.fixture
-def first_generator_name(registry: Dict[str, Any]) -> str:
+def first_generator_name(registry: dict[str, Any]) -> str:
     """Fixture that returns the name of the first available generator."""
     if not registry:
         pytest.skip("No generators available")

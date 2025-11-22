@@ -191,6 +191,15 @@ ignore = [
     "PLR2004",  # Magic value used in comparison
     "ISC001",   # Conflicts with formatter
     "COM812",   # Trailing comma conflicts with formatter
+    "EM101",    # Exception string literals (too verbose for this project)
+    "EM102",    # Exception f-string literals (too verbose for this project)
+    "TID252",   # Relative imports are fine within package
+    "SIM108",   # Ternary operator suggestion (readability preference)
+    "SIM102",   # Nested if suggestion (readability preference)
+    "RUF002",   # Ambiguous unicode in docstrings (false positive with math symbols)
+    "RUF003",   # Ambiguous unicode in comments (false positive with math symbols)
+    "RET504",   # Unnecessary variable assignment before return
+    "UP007",    # Union type syntax (maintaining compatibility)
 ]
 
 # Allow autofix for all enabled rules
@@ -201,9 +210,12 @@ unfixable = []
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401"]  # Allow unused imports in __init__.py
-"wavetable_tests/**" = ["ARG", "PLR"]  # Relax argument and complexity rules in tests
+"__init__.py" = ["F401", "PLE0605"]  # Allow unused imports and dynamic __all__ in __init__.py
+"wavetable_tests/**" = ["ARG", "PLR", "PLC0415", "PT015", "B011", "B009", "PT017", "PT006", "RUF003", "RUF043"]  # Relax test file rules
 "wavetable_generators/**" = ["PLR0915"]  # Allow more statements in generator implementations
+"wavetable_synthesis/__init__.py" = ["PLC0415", "UP035"]  # Allow lazy imports and legacy typing in package init
+"wavetable_synthesis/cli/__init__.py" = ["PLC0415"]  # Allow lazy imports in CLI module
+"wavetable_synthesis/cli/cli.py" = ["PLC0415", "PLR0912", "PLR0915"]  # Allow imports in functions and complexity in CLI
 
 [tool.ruff.lint.isort]
 known-first-party = ["wavetable_synthesis"]

@@ -2,6 +2,8 @@
 
 This document provides information for automated agents, AI assistants, and GitHub integrations about the Mighty Morphin Mathemagical Wavetables project.
 
+**Note:** The project previously used `.github/chatmodes/*.chatmode.md` for chat mode definitions; these are deprecated. Place agent configuration files under `.github/agents/*.agent.md` going forward.
+
 ## Project Overview
 
 **Mighty Morphin Mathemagical Wavetables** is a Python library for generating professional audio wavetables using mathematical synthesis techniques.

@@ -16,7 +16,7 @@ class TestInputValidation:
         # Test valid boundary values
         BaseGenerator._validate_u(0.0)
         BaseGenerator._validate_u(1.0)
-        
+
         # Test valid middle values
         BaseGenerator._validate_u(0.5)
         BaseGenerator._validate_u(0.25)
@@ -26,7 +26,7 @@ class TestInputValidation:
         """Test that negative u values raise ValueError."""
         with pytest.raises(ValueError, match="must be in range"):
             BaseGenerator._validate_u(-0.1)
-        
+
         with pytest.raises(ValueError, match="must be in range"):
             BaseGenerator._validate_u(-1.0)
 
@@ -34,7 +34,7 @@ class TestInputValidation:
         """Test that u values above 1.0 raise ValueError."""
         with pytest.raises(ValueError, match="must be in range"):
             BaseGenerator._validate_u(1.1)
-        
+
         with pytest.raises(ValueError, match="must be in range"):
             BaseGenerator._validate_u(2.0)
 
@@ -42,7 +42,7 @@ class TestInputValidation:
         """Test validation with extreme values."""
         with pytest.raises(ValueError, match="must be in range"):
             BaseGenerator._validate_u(-100.0)
-        
+
         with pytest.raises(ValueError, match="must be in range"):
             BaseGenerator._validate_u(100.0)
 
@@ -50,14 +50,14 @@ class TestInputValidation:
         """Test that generators can use validation in their generate methods."""
         # This tests that the validation method is available to generators
         theta = np.linspace(0, 2 * np.pi, 1024)
-        
+
         # Valid values should work
         result = any_generator.generate(theta, 0.5)
         assert isinstance(result, np.ndarray)
-        
+
         # Test that generators could use validation if they choose to
         # (though not all generators currently do)
-        assert hasattr(any_generator, '_validate_u')
+        assert hasattr(any_generator, "_validate_u")
 
 
 class TestMetadataValidation:
@@ -139,4 +139,3 @@ class TestMetadataValidation:
         info = any_generator.get_info()
         # Should not raise any exception
         BaseGenerator.validate_info(info)
-

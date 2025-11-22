@@ -277,6 +277,55 @@ pytest wavetable_tests/
 
 ---
 
+## 🚀 Modern Development (New!)
+
+This project now supports modern, fast development tools:
+
+### Quick Commands (Make/Just)
+
+```bash
+# Show all available commands
+make help
+
+# Common tasks
+make test          # Run tests
+make lint          # Check code quality with Ruff (10-100x faster!)
+make format        # Format code with Ruff
+make quality       # Run all quality checks
+```
+
+### Ruff - Fast Linting & Formatting
+
+[Ruff](https://docs.astral.sh/ruff/) replaces Black, isort, Flake8, and many Pylint rules:
+
+```bash
+# Check and fix issues (blazing fast!)
+ruff check --fix .
+ruff format .
+```
+
+### Pre-commit Hooks
+
+Automatically check code quality before commits:
+
+```bash
+pre-commit install    # One-time setup
+git commit           # Hooks run automatically
+```
+
+### Development Container
+
+Open in VS Code or GitHub Codespaces for instant setup - everything pre-configured!
+
+**Learn More:**
+
+-  [DEVELOPMENT.md](DEVELOPMENT.md) - Complete modern development guide
+-  [MODERNIZATION.md](MODERNIZATION.md) - Migration guide and tool comparison
+
+**All legacy tools (Black, isort, Flake8, Pylint) still work!** Adopt modern tools at your own pace.
+
+---
+
 ## 📚 Learning Resources
 
 **Getting Started:**
@@ -290,8 +339,11 @@ pytest wavetable_tests/
 
 **Development:**
 
+-  [DEVELOPMENT.md](DEVELOPMENT.md) - Modern development setup ✨ **New!**
+-  [MODERNIZATION.md](MODERNIZATION.md) - Modern tooling guide ✨ **New!**
 -  [docs/development-setup.md](docs/development-setup.md) - Development environment setup
 -  [docs/pathlib-guide.md](docs/pathlib-guide.md) - Modern path handling with pathlib
+-  [docs/uv-guide.md](docs/uv-guide.md) - Fast package installer guide ✨ **New!**
 -  [PIP.MD](PIP.MD) - Python package management
 -  [AGENTS.md](AGENTS.md) - For AI assistants and automated tools
 
@@ -378,12 +430,13 @@ You are free to use, modify, and distribute this software under the terms of the
 See the [LICENSE](LICENSE) file for the full license text.
 
 **Key Points:**
-- ✅ Free to use, modify, and distribute
-- ✅ Source code must remain open and available
-- ✅ Derivative works must also be GPL-3.0 licensed
-- ✅ No warranty provided
 
-For more information about the GPL-3.0 license, visit: https://www.gnu.org/licenses/gpl-3.0.html
+-  ✅ Free to use, modify, and distribute
+-  ✅ Source code must remain open and available
+-  ✅ Derivative works must also be GPL-3.0 licensed
+-  ✅ No warranty provided
+
+For more information about the GPL-3.0 license, visit: <https://www.gnu.org/licenses/gpl-3.0.html>
 
 ---
 

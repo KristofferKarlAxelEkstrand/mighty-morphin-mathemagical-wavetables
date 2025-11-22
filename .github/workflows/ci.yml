@@ -98,6 +98,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -e ".[dev]"
 
+    # Modern linting with Ruff (optional - uncomment to use instead of legacy tools)
+    # Ruff is 10-100x faster and replaces Black, isort, Flake8, and many pylint rules
+    # - name: Lint and format check with Ruff
+    #   run: |
+    #     ruff check wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+    #     ruff format --check wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+
+    # Legacy linting (can be removed once Ruff is adopted)
     - name: Check code formatting with Black
       run: |
         black --check wavetable_synthesis/ wavetable_generators/ wavetable_tests/

@@ -129,6 +129,7 @@ def validate_generators() -> bool:
     Returns:
         True if all generators are valid, False otherwise
     """
+    # pylint: disable=too-many-branches
     from ..core.base_generator import BaseGenerator
 
     registry = get_registry(verbose=False)

@@ -1,6 +1,7 @@
 ---
 name: "Mighty_Morphin_Agent"
-description: |
+description: "Developer who has very good knwledge about the Mighty Morphin Mathemagical Wavetables project."
+tools: ['edit', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'pylance mcp server/*', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'extensions', 'todos', 'runSubagent', 'runTests']
 
 ---
 

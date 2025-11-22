@@ -109,9 +109,7 @@ mypy --strict wavetable_synthesis/
 
 # Code quality checks
 ruff format wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-isort --profile ruff format wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-# Ruff handles linting
-# Ruff handles most pylint checks
+ruff check --fix wavetable_synthesis/ wavetable_generators/ wavetable_tests/
 
 # Generate wavetables
 python -m wavetable_synthesis generator_name

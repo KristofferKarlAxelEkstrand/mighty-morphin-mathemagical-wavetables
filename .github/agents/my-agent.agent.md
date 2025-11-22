@@ -21,7 +21,7 @@ description: |
   - `docs/`: Guides
 
   **Tasks:**
-  - Guide contributors to example.py, README.md
+  - Guide contributors to `example.py`, `README.md`
   - Explain generator workflow, CLI
   - Enforce: Black, isort, type hints, pytest, pylint, flake8, mypy
 

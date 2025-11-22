@@ -58,8 +58,10 @@ pytest wavetable_tests/ --cov=wavetable_synthesis
 mypy wavetable_synthesis/ --strict
 
 # Check code style
-pylint wavetable_synthesis/ wavetable_generators/
-flake8 wavetable_synthesis/ wavetable_generators/
+ruff check wavetable_synthesis/ wavetable_generators/
+
+# Or use Make for all checks
+make quality
 ```
 
 ### 6. Submit a Pull Request

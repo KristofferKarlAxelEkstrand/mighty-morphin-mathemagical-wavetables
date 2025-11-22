@@ -268,7 +268,7 @@ Install additional development tools for contributing:
 # Activate virtual environment
 source .venv/Scripts/activate
 
-# Install dev dependencies (pytest, mypy, pylint, black, etc.)
+# Install dev dependencies (pytest, ruff, mypy, etc.)
 pip install -e ".[dev]"
 
 # Run tests to verify installation

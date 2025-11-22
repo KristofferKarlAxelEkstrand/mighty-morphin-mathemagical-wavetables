@@ -34,11 +34,9 @@
       "prettier --write"
     ],
     "*.py": [
-      ".venv\\Scripts\\python -m black",
-      ".venv\\Scripts\\python -m isort --profile black",
-      ".venv\\Scripts\\python -m flake8",
-      ".venv\\Scripts\\python -m mypy --strict",
-      ".venv\\Scripts\\python -m pylint --exit-zero"
+      ".venv\\Scripts\\python -m ruff format",
+      ".venv\\Scripts\\python -m ruff check --fix",
+      ".venv\\Scripts\\python -m mypy --strict"
     ]
   }
 }

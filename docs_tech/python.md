@@ -2,8 +2,7 @@
 
 ## What is Python?
 
-Python is the primary programming language used in this project. It's a high-level, interpreted language known for its clean syntax, powerful
-standard library, and excellent support for scientific computing and audio processing.
+Python is the primary programming language used in this project. It's a high-level, interpreted language known for its clean syntax, powerful standard library, and excellent support for scientific computing and audio processing.
 
 This project uses **Python 3.10+** with modern features like type hints, dataclasses, and pattern matching.
 
@@ -15,55 +14,48 @@ This project uses **Python 3.10+** with modern features like type hints, datacla
 
 **Type Safety**: Modern Python (3.10+) with type hints provides strong type checking while keeping code readable.
 
-**Rich Ecosystem**: Extensive tooling for testing (pytest), linting (pylint, flake8), type checking (mypy), and formatting (black).
+**Modern Tooling**: Fast, efficient tools like Ruff for linting/formatting, mypy for type checking, and pytest for testing.
 
 **Cross-Platform**: Works on Windows, macOS, and Linux without code changes.
 
-## How We Use Python in This Project
-
-### Core Libraries
+## Core Libraries
 
 **NumPy (≥2.0.0)**
-
 -  IEEE 754 double-precision floating-point calculations
 -  Vectorized array operations for performance
 -  Mathematical functions (sin, cos, arcsin, etc.)
 -  Phase and waveform generation
 
 **soundfile (≥0.13.0)**
-
 -  WAV file export (16/24/32-bit)
 -  Professional audio format support
 -  Sample rate and bit depth control
 
-### Project Structure
+## Development Tools
 
-```text
-wavetable_synthesis/          # Main package
-├── core/                     # Core generation engine
-│   ├── base_generator.py     # Abstract base class
-│   ├── wavetable_generator.py # Generation pipeline
-│   ├── processing.py         # Audio processing utilities
-│   └── constants.py          # Mathematical constants
-├── export/                   # WAV export functionality
-│   └── wav.py               # File export logic
-└── cli/                     # Command-line interface
-    └── cli.py               # User-facing CLI
+**Ruff** - Ultra-fast linter and formatter
+-  Replaces Black, isort, Flake8, and many Pylint rules
+-  10-100x faster than traditional tools
+-  Auto-fixes most issues
+-  Zero configuration needed
 
-wavetable_generators/        # Generator implementations
-├── example.py               # Template and working example
-├── sine_to_triangle.py      # Production generators
-└── square_pwm_tz.py
+**mypy** - Static type checker
+-  Strict mode enabled
+-  Catches type errors before runtime
+-  Full type hint coverage required
 
-wavetable_tests/             # Comprehensive test suite
-├── conftest.py              # Pytest fixtures
-└── test_*.py                # Test modules
-```
+**pytest** - Testing framework
+-  90%+ code coverage required
+-  Fast, expressive test syntax
+-  Comprehensive test suite
 
-### Modern Python Features Used
+**Bandit** - Security linter
+-  Detects security issues
+-  Integrated into pre-commit hooks
+
+## Modern Python Features Used
 
 **Type Hints (Full Coverage)**
-
 ```python
 from numpy.typing import NDArray
 import numpy as np
@@ -78,7 +70,6 @@ def generate(
 ```
 
 **Dataclasses (Clean Data Structures)**
-
 ```python
 from dataclasses import dataclass, field
 
@@ -89,7 +80,6 @@ class MyGenerator(BaseGenerator):
 ```
 
 **Decorators (Auto-Registration)**
-
 ```python
 @register_generator("sine_to_triangle")
 class SineToTriangleGenerator(BaseGenerator):
@@ -97,310 +87,90 @@ class SineToTriangleGenerator(BaseGenerator):
     ...
 ```
 
-**Abstract Base Classes (Interface Contracts)**
-
-```python
-from abc import ABC, abstractmethod
-
-class BaseGenerator(ABC):
-    @abstractmethod
-    def generate(self, theta, u) -> NDArray[np.float64]:
-        """All generators must implement this."""
-        ...
-```
-
-### Development Environment
-
-**Virtual Environment (.venv)**
-
-```bash
-# Create virtual environment
-python -m venv .venv
-
-# Activate (Windows Git Bash)
-source .venv/Scripts/activate
-
-# Activate (Windows PowerShell)
-.venv\Scripts\Activate.ps1
-
-# Install package in development mode
-pip install -e .
-```
-
-**Development Tools**
-
--  `pytest` - Testing framework with fixtures and coverage
--  `pytest-cov` - Code coverage reporting (90% target)
--  `mypy` - Static type checking (strict mode)
--  `pylint` - Code quality linting (9.8+ score target)
--  `flake8` - Style guide enforcement (PEP 8)
--  `black` - Automatic code formatting (88 char line length)
--  `isort` - Import statement sorting
-
-### Package Management
-
-**pyproject.toml (Modern Python Packaging)**
+## Development Dependencies
 
 ```toml
-[project]
-name = "wavetable-synthesis"
-version = "0.1.0"
-requires-python = ">=3.10"
-dependencies = [
-    "numpy>=2.0.0",
-    "soundfile>=0.13.0",
-]
-
 [project.optional-dependencies]
 dev = [
+    # Testing
     "pytest>=8.0.0",
     "pytest-cov>=6.0.0",
+    # Linting and formatting
+    "ruff>=0.9.0",
+    # Type checking
     "mypy>=1.13.0",
-    "pylint>=3.3.0",
-    "flake8>=7.0.0",
-    "black>=24.0.0",
+    # Security
+    "bandit[toml]>=1.8.0",
+    # Pre-commit hooks
+    "pre-commit>=4.0.0",
 ]
 ```
 
-**Editable Installation**
+## Code Quality Commands
 
+### Linting and Formatting
 ```bash
-# Install in development mode (changes take effect immediately)
-pip install -e .
+# Check code quality
+ruff check .
 
-# Install with development tools
-pip install -e ".[dev]"
+# Auto-fix issues
+ruff check --fix .
+
+# Format code
+ruff format .
+
+# Or use Make
+make lint
+make format
 ```
 
-## Quality Standards
-
-### Type Checking (mypy --strict)
-
-**Zero type errors required**
-
+### Type Checking
 ```bash
+# Check types
 mypy wavetable_synthesis/ --strict
+
+# Or use Make
+make type-check
 ```
 
-Configuration in `pyproject.toml`:
-
--  `disallow_untyped_defs = true`
--  `disallow_incomplete_defs = true`
--  `warn_return_any = true`
--  Full type coverage on all functions
-
-### Code Quality (pylint)
-
-**9.8+ score target (currently 9.95)**
-
+### Testing
 ```bash
-pylint wavetable_synthesis/ --fail-under=9.8
-```
+# Run tests
+pytest wavetable_tests/
 
-Configuration:
-
--  88 character line length (Black compatible)
--  NumPy extension support
--  Specific disabled checks for test files
-
-### Code Style (flake8 + black)
-
-**PEP 8 compliance with Black formatting**
-
-```bash
-# Check style
-flake8 wavetable_synthesis/
-
-# Auto-format
-black wavetable_synthesis/
-```
-
-### Testing (pytest)
-
-**90% coverage minimum (currently 90%)**
-
-```bash
-# Run tests with coverage
-pytest wavetable_tests/ --cov=wavetable_synthesis --cov-report=term-missing
-
-# Verbose output
-pytest wavetable_tests/ -v
-
-# Run specific test file
-pytest wavetable_tests/test_wavetable_generation.py
-```
-
-Configuration in `pyproject.toml`:
-
--  Dynamic test fixtures
--  Coverage reporting
--  Test discovery patterns
-
-## Python-Specific Patterns
-
-### Decorator-Based Registry
-
-Generators self-register using decorators:
-
-```python
-# In decorator_registry.py
-_DECORATOR_REGISTRY: Dict[str, Any] = {}
-
-def register_generator(name: str):
-    def decorator(cls):
-        _DECORATOR_REGISTRY[name] = cls()
-        return cls
-    return decorator
-
-# Usage
-@register_generator("my_wave")
-class MyWaveGenerator(BaseGenerator):
-    ...
-```
-
-### NumPy Vectorization
-
-All audio operations use vectorized NumPy for performance:
-
-```python
-# Good: Vectorized (fast)
-waveform = np.sin(theta) + 0.5 * np.sin(2 * theta)
-
-# Bad: Loop-based (slow)
-for i in range(len(theta)):
-    waveform[i] = np.sin(theta[i])
-```
-
-### IEEE 754 Precision
-
-All calculations use double precision internally:
-
-```python
-# Generate phase with float64 precision
-t = np.arange(frame_size, dtype=np.float64) / frame_size
-theta = TAU * t  # TAU = 2π
-
-# Convert to float32 only for export
-return table.flatten().astype(np.float32)
-```
-
-### Module Entry Point
-
-Package can be run as a module:
-
-```bash
-python -m wavetable_synthesis sine_to_triangle
-```
-
-Implemented via `__main__.py`:
-
-```python
-from wavetable_synthesis.cli.cli import main
-
-if __name__ == "__main__":
-    main()
-```
-
-## Performance Characteristics
-
-**Generation Speed**: 100+ Msamples/sec
-
-**Memory Efficiency**: Float64 calculations with float32 export
-
-**Optimization**: Pure NumPy vectorized operations with SIMD awareness
-
-**Python Performance Notes**:
-
--  NumPy operations are C-speed (compiled)
--  Vectorized operations avoid Python interpreter overhead
--  Float64 internally provides IEEE 754 precision
--  Float32 export reduces file size without quality loss
-
-## Common Commands
-
-### Development Workflow
-
-```bash
-# Setup
-python -m venv .venv
-source .venv/Scripts/activate
-pip install -e ".[dev]"
-
-# Development
-python -m wavetable_synthesis --list
-python -m wavetable_synthesis sine_to_triangle
-
-# Quality checks
+# With coverage
 pytest wavetable_tests/ --cov=wavetable_synthesis
-mypy wavetable_synthesis/ --strict
-pylint wavetable_synthesis/ --fail-under=9.8
-black wavetable_synthesis/ --check
-flake8 wavetable_synthesis/
 
-# Auto-format
-black wavetable_synthesis/
-isort wavetable_synthesis/
+# Or use Make
+make test
+make test-cov
 ```
 
-### Package Installation
-
+### All Checks
 ```bash
-# User installation
-pip install -e .
-
-# Development installation
-pip install -e ".[dev]"
-
-# Web features (optional)
-pip install -e ".[web]"
-
-# Documentation tools (optional)
-pip install -e ".[docs]"
+make quality
 ```
 
-## Benefits for This Project
+## CI/CD Integration
 
-1.  **Clear Code**: Python's readability makes mathematical algorithms easy to understand
-2.  **Strong Types**: Type hints catch errors before runtime
-3.  **Fast Computation**: NumPy provides C-speed performance
-4.  **Rich Testing**: Pytest makes comprehensive testing simple
-5.  **Professional Quality**: Tools ensure consistent, high-quality code
-6.  **Educational Value**: Clean code helps users learn synthesis concepts
+All quality checks run automatically in GitHub Actions:
+-  Ruff linting and formatting
+-  mypy type checking
+-  pytest with coverage
+-  Bandit security scanning
 
-## Troubleshooting
+## Best Practices
 
-**Import errors?**
+1. **Type Everything**: All functions must have complete type hints
+2. **Test Everything**: Maintain 90%+ test coverage
+3. **Format Automatically**: Let Ruff handle formatting
+4. **Use Modern Features**: Leverage Python 3.10+ capabilities
+5. **Keep It Simple**: Clear code over clever code
 
-```bash
-# Ensure package is installed in development mode
-pip install -e .
-```
+## Resources
 
-**Type errors?**
-
-```bash
-# Check with mypy
-mypy wavetable_synthesis/ --strict
-```
-
-**Test failures?**
-
-```bash
-# Run tests with verbose output
-pytest wavetable_tests/ -v --tb=short
-```
-
-**Virtual environment issues?**
-
-```bash
-# Recreate virtual environment
-rm -rf .venv
-python -m venv .venv
-source .venv/Scripts/activate
-pip install -e ".[dev]"
-```
-
-## Summary
-
-Python is the foundation of this project, providing **clean, type-safe code** for mathematical audio synthesis. With modern features, excellent
-libraries, and comprehensive tooling, Python enables both **professional wavetable generation** and **educational exploration** of synthesis concepts.
+-  [Python Documentation](https://docs.python.org/3/)
+-  [NumPy Documentation](https://numpy.org/doc/)
+-  [Ruff Documentation](https://docs.astral.sh/ruff/)
+-  [mypy Documentation](https://mypy.readthedocs.io/)
+-  [pytest Documentation](https://docs.pytest.org/)

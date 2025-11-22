@@ -133,7 +133,7 @@ Based on typical usage patterns:
 
 ### What's Maintained
 ✅ Test coverage on oldest and newest Python versions  
-✅ All code quality checks (black, isort, flake8, mypy, pylint)  
+✅ All code quality checks (Ruff linting/formatting, mypy type checking, Bandit security)  
 ✅ All CLI functionality tests  
 ✅ Coverage reporting to Codecov  
 ✅ Fail-fast disabled (all tests run even if one fails)

@@ -4,13 +4,14 @@ Decorator-based generator registry for MAWT.
 This allows generators to self-register using decorators.
 """
 
-from typing import Any, Callable, Dict, Type
+from collections.abc import Callable
+from typing import Any
 
 # Global registry for decorator-based registration
-_DECORATOR_REGISTRY: Dict[str, Any] = {}
+_DECORATOR_REGISTRY: dict[str, Any] = {}
 
 
-def register_generator(name: str) -> Callable[[Type[Any]], Type[Any]]:
+def register_generator(name: str) -> Callable[[type[Any]], type[Any]]:
     """Decorator to register a generator class in the wavetable synthesis registry.
 
     This decorator automatically instantiates and registers generator classes,
@@ -28,7 +29,7 @@ def register_generator(name: str) -> Callable[[Type[Any]], Type[Any]]:
             pass
     """
 
-    def decorator(cls: Type[Any]) -> Type[Any]:
+    def decorator(cls: type[Any]) -> type[Any]:
         """Internal decorator function that performs the actual registration.
 
         Args:
@@ -43,7 +44,7 @@ def register_generator(name: str) -> Callable[[Type[Any]], Type[Any]]:
     return decorator
 
 
-def get_registry(verbose: bool = True) -> Dict[str, Any]:
+def get_registry(verbose: bool = True) -> dict[str, Any]:
     """Get decorator-registered generators with optional status reporting.
 
     Retrieves all generators that have been registered via the @register_generator

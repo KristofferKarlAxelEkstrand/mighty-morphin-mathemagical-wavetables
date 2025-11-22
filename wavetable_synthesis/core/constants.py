@@ -5,7 +5,6 @@ Professional audio standards and configuration values.
 """
 
 import math
-from typing import List
 
 # Mathematical constants
 TAU: float = 2.0 * math.pi  # 2π for phase calculations
@@ -18,7 +17,7 @@ DEFAULT_FRAME_SIZE: int = 2048
 DEFAULT_FRAMES: int = 256
 
 # Supported formats
-SUPPORTED_BIT_DEPTHS: List[int] = [16, 24, 32]
+SUPPORTED_BIT_DEPTHS: list[int] = [16, 24, 32]
 
 # Output configuration
 DEFAULT_OUTPUT_DIR: str = "wavetable_dist"

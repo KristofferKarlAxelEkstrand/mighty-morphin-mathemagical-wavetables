@@ -7,10 +7,10 @@ Run the wavetable synthesis test suite.
 
 import subprocess
 import sys
-from typing import Any, Optional
+from typing import Any
 
 # Module-level reference to pytest (if available)
-_pytest_module: Optional[Any] = None
+_pytest_module: Any | None = None
 
 try:
     import pytest

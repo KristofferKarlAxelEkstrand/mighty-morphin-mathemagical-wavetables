@@ -7,7 +7,7 @@ Generate wavetables for modern synthesizers.
 import argparse
 import sys
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 
@@ -207,7 +207,7 @@ def validate_generators() -> bool:
     return all_valid
 
 
-def get_generator_function(waveform_name: str) -> Optional[Any]:
+def get_generator_function(waveform_name: str) -> Any | None:
     """Get generator function from registry."""
     registry = get_registry(verbose=False)
 
@@ -276,7 +276,7 @@ def generate_wavetable(waveform_name: str, frames: int, sample_rate: int, bit_de
 
         print(f"Success! File: {filepath}")
 
-    except (ValueError, OSError, IOError, RuntimeError) as e:
+    except (ValueError, OSError, RuntimeError) as e:
         print(f"Error: {e}")
 
 
@@ -305,9 +305,9 @@ def generate_all_wavetables(output_dir: str) -> None:
     current_item = 0
 
     for generator in generators:
-        print(f"\n{'='*50}")
+        print(f"\n{'=' * 50}")
         print(f"Generating wavetables for: {generator}")
-        print(f"{'='*50}")
+        print(f"{'=' * 50}")
 
         for frames in frame_counts:
             for sample_rate in sample_rates:
@@ -325,10 +325,10 @@ def generate_all_wavetables(output_dir: str) -> None:
                     except (ValueError, OSError, RuntimeError) as e:
                         print(f"    Error: {e}")
 
-    print(f"\n{'='*50}")
+    print(f"\n{'=' * 50}")
     print(f"Generation complete! Generated {generated_count}/{total_combinations} wavetables")
     print(f"Output directory: {output_dir}")
-    print(f"{'='*50}")
+    print(f"{'=' * 50}")
 
 
 def main() -> int:

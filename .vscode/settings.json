@@ -44,7 +44,7 @@
     "gpeak",
     "ipynb",
     "isfinite",
-    "isort",
+
     "iterdir",
     "Kristoffer",
     "linestyle",
@@ -72,7 +72,7 @@
     "psutil",
     "PWMTZ",
     "Pylance",
-    "pylint",
+
     "pypi",
     "pyproject",
     "pytest",
@@ -107,18 +107,16 @@
     "editor.formatOnSave": true
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
       "source.organizeImports": "explicit"
     }
   },
-  "python.formatting.provider": "black",
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.mypyEnabled": true,
-  "python.linting.flake8Enabled": true,
-  "python.linting.lintOnSave": true,
+  "ruff.enable": true,
+  "ruff.lint.enable": true,
+  "ruff.format.enable": true,
   "python.defaultInterpreterPath": "./.venv/Scripts/python",
   "python.terminal.activateEnvironment": true,
   "python.analysis.typeCheckingMode": "strict",

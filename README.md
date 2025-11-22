@@ -2,8 +2,10 @@
 
 [![CI](https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables/actions/workflows/ci.yml/badge.svg)](https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Code style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 **Use math to create sound!**
 
@@ -266,12 +268,52 @@ Install additional development tools for contributing:
 # Activate virtual environment
 source .venv/Scripts/activate
 
-# Install dev dependencies (pytest, mypy, pylint, black, etc.)
+# Install dev dependencies (pytest, ruff, mypy, etc.)
 pip install -e ".[dev]"
 
 # Run tests to verify installation
 pytest wavetable_tests/
 ```
+
+---
+
+## 🚀 Modern Development
+
+Fast, streamlined development tools:
+
+### Quick Commands
+
+```bash
+make help          # Show all available commands
+make test          # Run tests
+make lint          # Check code quality with Ruff
+make format        # Format code with Ruff
+make quality       # Run all quality checks
+```
+
+### Ruff - Fast Linting & Formatting
+
+[Ruff](https://docs.astral.sh/ruff/) - 10-100x faster than traditional tools:
+
+```bash
+ruff check --fix .    # Check and auto-fix issues
+ruff format .         # Format code
+```
+
+### Pre-commit Hooks
+
+Automated quality checks before commits:
+
+```bash
+pre-commit install    # One-time setup
+git commit           # Hooks run automatically
+```
+
+### Development Container
+
+Open in VS Code or GitHub Codespaces for instant, pre-configured setup.
+
+**Learn More:** [DEVELOPMENT.md](DEVELOPMENT.md)
 
 ---
 
@@ -288,8 +330,10 @@ pytest wavetable_tests/
 
 **Development:**
 
--  [docs/development-setup.md](docs/development-setup.md) - Development environment setup
--  [docs/pathlib-guide.md](docs/pathlib-guide.md) - Modern path handling with pathlib
+-  [DEVELOPMENT.md](DEVELOPMENT.md) - Development workflow
+-  [docs/development-setup.md](docs/development-setup.md) - Environment setup
+-  [docs/pathlib-guide.md](docs/pathlib-guide.md) - Modern path handling
+-  [docs/uv-guide.md](docs/uv-guide.md) - Fast package installer (optional)
 -  [PIP.MD](PIP.MD) - Python package management
 -  [AGENTS.md](AGENTS.md) - For AI assistants and automated tools
 
@@ -376,12 +420,13 @@ You are free to use, modify, and distribute this software under the terms of the
 See the [LICENSE](LICENSE) file for the full license text.
 
 **Key Points:**
-- ✅ Free to use, modify, and distribute
-- ✅ Source code must remain open and available
-- ✅ Derivative works must also be GPL-3.0 licensed
-- ✅ No warranty provided
 
-For more information about the GPL-3.0 license, visit: https://www.gnu.org/licenses/gpl-3.0.html
+-  ✅ Free to use, modify, and distribute
+-  ✅ Source code must remain open and available
+-  ✅ Derivative works must also be GPL-3.0 licensed
+-  ✅ No warranty provided
+
+For more information about the GPL-3.0 license, visit: <https://www.gnu.org/licenses/gpl-3.0.html>
 
 ---
 

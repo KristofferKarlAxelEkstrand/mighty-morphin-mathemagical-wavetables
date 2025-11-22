@@ -94,10 +94,10 @@
       ]
     },
     {
-      "label": "Lint Python",
+      "label": "Lint Python (Ruff)",
       "type": "shell",
       "command": ".venv/Scripts/python",
-      "args": ["-m", "pylint", "wavetable_synthesis/", "wavetable_generators/", "wavetable_tests/", "--score=yes"],
+      "args": ["-m", "ruff", "check", "wavetable_synthesis/", "wavetable_generators/", "wavetable_tests/"],
       "group": "build",
       "presentation": {
         "echo": true,
@@ -107,8 +107,8 @@
       },
       "problemMatcher": [
         {
-          "owner": "pylint",
-          "source": "pylint",
+          "owner": "ruff",
+          "source": "ruff",
           "fileLocation": "relative",
           "pattern": {
             "regexp": "^([^:]+):(\\d+):(\\d+): (\\w+): (.*)$",
@@ -122,10 +122,10 @@
       ]
     },
     {
-      "label": "Format Python",
+      "label": "Format Python (Ruff)",
       "type": "shell",
       "command": ".venv/Scripts/python",
-      "args": ["-m", "black", "wavetable_synthesis/", "wavetable_generators/", "wavetable_tests/"],
+      "args": ["-m", "ruff", "format", "wavetable_synthesis/", "wavetable_generators/", "wavetable_tests/"],
       "group": "build",
       "presentation": {
         "echo": true,
@@ -136,25 +136,16 @@
       "problemMatcher": []
     },
     {
-      "label": "Sort Python Imports",
-      "type": "shell",
-      "command": ".venv/Scripts/python",
-      "args": ["-m", "isort", "wavetable_synthesis/", "wavetable_generators/", "wavetable_tests/"],
+      "label": "Format & Lint All (Ruff)",
+      "dependsOn": ["Format Python (Ruff)", "Lint Python (Ruff) --fix"],
       "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared"
-      },
       "problemMatcher": []
     },
     {
-      "label": "Format & Lint All",
+      "label": "Lint Python (Ruff) --fix",
       "type": "shell",
-      "command": "npm",
-      "args": ["run", "format:fix"],
-      "group": "build",
+      "command": ".venv/Scripts/python",
+      "args": ["-m", "ruff", "check", "--fix", "."],
       "presentation": {
         "echo": true,
         "reveal": "silent",
@@ -272,13 +263,7 @@
       },
       "problemMatcher": []
     },
-    {
-      "type": "npm",
-      "script": "lint:py:fix",
-      "problemMatcher": [],
-      "label": "npm: lint:py:fix",
-      "detail": "python -m black wavetable_synthesis/ wavetable_generators/ wavetable_tests/ && python -m isort --profile black wavetable_synthesis/ wavetable_generators/ wavetable_tests/"
-    }
+
   ],
   "inputs": [
     {

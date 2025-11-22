@@ -5,7 +5,6 @@ Type-safe configuration using dataclasses.
 """
 
 from dataclasses import dataclass
-from typing import Optional
 
 from .constants import (
     DEFAULT_BIT_DEPTH,
@@ -30,7 +29,7 @@ class WavetableConfig:
 
     def get_filename(self) -> str:
         """Generate filename based on configuration."""
-        return f"{self.waveform_name}_{self.frames}frames_" f"{self.sample_rate}Hz_{self.bit_depth}bit.wav"
+        return f"{self.waveform_name}_{self.frames}frames_{self.sample_rate}Hz_{self.bit_depth}bit.wav"
 
     def validate(self) -> None:
         """Validate configuration parameters."""
@@ -52,7 +51,7 @@ class CLIConfig:
 
     list_generators: bool = False
     clear_output: bool = False
-    wavetable_config: Optional[WavetableConfig] = None
+    wavetable_config: WavetableConfig | None = None
 
     def should_generate(self) -> bool:
         """Check if generation should proceed."""

@@ -58,8 +58,10 @@ pytest wavetable_tests/ --cov=wavetable_synthesis
 mypy wavetable_synthesis/ --strict
 
 # Check code style
-pylint wavetable_synthesis/ wavetable_generators/
-flake8 wavetable_synthesis/ wavetable_generators/
+ruff check wavetable_synthesis/ wavetable_generators/
+
+# Or use Make for all checks
+make quality
 ```
 
 ### 6. Submit a Pull Request
@@ -75,20 +77,29 @@ flake8 wavetable_synthesis/ wavetable_generators/
 
 ### Code Style
 
-We use strict code quality tools:
+We use modern, fast code quality tools:
 
--  **Black** for formatting (88 character line length)
--  **isort** for import sorting
+-  **Ruff** for linting and formatting
 -  **mypy** for type checking (strict mode)
--  **pylint** for code quality (target score: 9.8+)
--  **flake8** for PEP 8 compliance
+-  **pre-commit** for automated checks
 
-**Format your code before committing:**
+**Format your code:**
 
 ```bash
-black wavetable_generators/ wavetable_synthesis/
-isort wavetable_generators/ wavetable_synthesis/
+# Format and fix issues with Ruff
+ruff format wavetable_generators/ wavetable_synthesis/
+ruff check --fix wavetable_generators/ wavetable_synthesis/
+
+# Or use Make:
+make format
 ```
+
+**Why Ruff?**
+- ⚡ 10-100x faster than traditional tools
+- 🔧 Auto-fixes most issues
+- 🎯 Replaces multiple tools in one
+- 📦 Zero configuration needed
+
 
 ### Type Hints
 

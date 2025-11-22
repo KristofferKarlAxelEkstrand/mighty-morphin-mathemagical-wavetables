@@ -8,6 +8,13 @@ echo "🎵 Wavetable Generator Setup"
 echo "================================"
 echo ""
 
+# Detect OS
+if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* ]]; then
+    VENV_ACTIVATE=".venv/Scripts/activate"
+else
+    VENV_ACTIVATE=".venv/bin/activate"
+fi
+
 # Check if venv already exists
 if [ -d ".venv" ]; then
     echo "⚠️  Virtual environment already exists (.venv)"
@@ -28,7 +35,7 @@ python -m venv .venv
 
 # Activate it
 echo "✨ Activating virtual environment..."
-source .venv/Scripts/activate
+source "$VENV_ACTIVATE"
 
 # Upgrade pip
 echo "⬆️  Upgrading pip..."
@@ -39,21 +46,42 @@ echo "📥 Installing wavetable-synthesis package..."
 pip install -e .
 
 # Install development dependencies (optional)
-read -p "Install development dependencies (pytest, pylint, mypy, etc.)? (Y/n) " -n 1 -r
+read -p "Install development dependencies (pytest, ruff, mypy, etc.)? (Y/n) " -n 1 -r
 echo
 if [[ ! $REPLY =~ ^[Nn]$ ]]; then
     echo "📥 Installing development dependencies..."
-    pip install pytest pytest-cov pylint mypy flake8 black
+    pip install -e ".[dev]"
+
+    # Install pre-commit hooks
+    read -p "Install pre-commit hooks for automatic code quality checks? (Y/n) " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Nn]$ ]]; then
+        echo "🔧 Installing pre-commit hooks..."
+        pre-commit install
+        echo "✅ Pre-commit hooks installed!"
+    fi
 fi
 
 echo ""
 echo "✅ Setup complete!"
 echo ""
 echo "To activate the virtual environment in the future, run:"
-echo "  source .venv/Scripts/activate"
+if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* ]]; then
+    echo "  source .venv/Scripts/activate"
+else
+    echo "  source .venv/bin/activate"
+fi
 echo ""
 echo "Quick start commands:"
 echo "  python -m wavetable_synthesis --list            # List generators"
 echo "  python -m wavetable_synthesis sine_to_triangle  # Generate wavetable"
-echo "  python -m pytest wavetable_tests/               # Run tests"
+echo "  pytest wavetable_tests/                        # Run tests"
+echo ""
+echo "Modern development commands (recommended):"
+echo "  make help      # Show all available commands (using Make)"
+echo ""
+echo "Linting and formatting:"
+echo "  ruff check .         # Check code style (modern, fast)"
+echo "  ruff format .        # Format code"
+echo "  make format          # Format with Ruff"
 echo ""

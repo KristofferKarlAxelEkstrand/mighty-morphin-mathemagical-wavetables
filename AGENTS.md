@@ -43,7 +43,7 @@ This design enables beginners to create generators using clear, readable code wi
 -  **pytest** for testing (90% coverage)
 -  **Modern packaging** with pyproject.toml
 -  **Decorator-based architecture** for generator registration
--  **Comprehensive linting** with Black, isort, MyPy, Pylint, Flake8
+-  **Comprehensive linting** with Ruff (replaces Black, isort, Flake8, Pylint) and MyPy
 -  **Pre-commit hooks** with Husky and lint-staged
 
 ## Project Structure
@@ -108,10 +108,8 @@ pytest --cov=wavetable_synthesis --cov-report=html
 mypy --strict wavetable_synthesis/
 
 # Code quality checks
-black wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-isort --profile black wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-flake8 wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-pylint wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+ruff format wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+ruff check --fix wavetable_synthesis/ wavetable_generators/ wavetable_tests/
 
 # Generate wavetables
 python -m wavetable_synthesis generator_name
@@ -135,10 +133,10 @@ Available generators: example, linear_interpolation, sine_to_triangle, square_pw
 
 -  **Type hints**: Full type annotation with numpy.typing.NDArray
 -  **Testing**: pytest with fixtures, minimum 90% coverage
--  **Linting**: pylint, flake8, black formatting, isort imports
+-  **Linting**: Ruff (fast all-in-one linter/formatter)
 -  **Documentation**: Comprehensive docstrings and usage guides
 -  **Pre-commit hooks**: Automated quality checks with Husky and lint-staged
--  **Code formatting**: Black with 128 character line length
+-  **Code formatting**: Ruff with 128 character line length
 
 ## Contributing
 
@@ -250,8 +248,8 @@ Think of a good programming teacher or DSP instructor who:
     -  `pip install -e .` for development
     -  pytest for testing with fixtures
     -  Type checking with mypy --strict
-    -  Code quality with pylint, flake8
-    -  Code formatting with black and isort
+    -  Code quality with Ruff, mypy
+    -  Code formatting with Ruff
 -  **NumPy** - vectorized operations, IEEE 754 precision
 -  **Package management** - setuptools, modern Python packaging
 -  **Testing** - pytest, pytest-cov, dynamic fixtures
@@ -339,7 +337,7 @@ Wavetable Project Developer: "Simple setup: Create virtual environment, then `pi
 -  Keep generators in wavetable_generators/ folder
 -  Explain in simple words
 -  Keep answers short and helpful
--  Use comprehensive tooling: black, isort, mypy, pylint, flake8
+-  Use modern tooling: Ruff (linting/formatting), mypy (type checking)
 -  Maintain 90%+ test coverage
 -  Follow pre-commit hooks for quality assurance
 

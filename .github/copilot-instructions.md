@@ -17,7 +17,7 @@ This document provides instructions for GitHub Copilot coding agent when working
 -  **SoundFile** for WAV file I/O
 -  **pytest** for testing (90%+ coverage required)
 -  **Modern packaging** with pyproject.toml
--  **Linting**: Black, isort, MyPy, Pylint, Flake8
+-  **Linting**: Ruff (replaces Black, isort, Flake8, Pylint)
 
 ## Key Commands
 
@@ -41,21 +41,29 @@ pytest --cov=wavetable_synthesis --cov-report=html
 
 # Run specific test file
 pytest wavetable_tests/test_wavetable_generation.py
+
+# Or use Make
+make test
+make test-cov
 ```
 
 ### Code Quality
 
 ```bash
 # Format code
-black wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-isort --profile black wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+ruff format .
+
+# Check and fix linting issues
+ruff check --fix .
 
 # Type checking
 mypy --strict wavetable_synthesis/
 
-# Linting
-flake8 wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-pylint wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+# Or use Make
+make format
+make lint
+make type-check
+make quality  # All checks
 ```
 
 ### Generate Wavetables
@@ -69,6 +77,11 @@ python -m wavetable_synthesis example
 
 # Generate all wavetables
 python -m wavetable_synthesis --batch
+
+# Or use Make
+make list
+make run GEN=example
+make batch
 ```
 
 ## Project Structure
@@ -109,8 +122,8 @@ wavetable_tests/        # Comprehensive test suite
 
 ### Code Style
 
--  Black formatting with 128 character line length
--  Import sorting with isort (Black profile)
+-  Ruff formatting with 128 character line length
+-  Import sorting handled by Ruff
 -  Follow existing code patterns
 -  Clear, descriptive variable names
 -  Comprehensive docstrings
@@ -122,7 +135,7 @@ wavetable_tests/        # Comprehensive test suite
 1.  **Check existing code first** - Follow established patterns
 2.  **Add tests** - Write tests before or alongside implementation
 3.  **Update documentation** - Keep docs in sync with code
-4.  **Run quality checks** - Black, isort, mypy, pylint, flake8
+4.  **Run quality checks** - Ruff, mypy
 5.  **Verify coverage** - Ensure 90%+ test coverage
 
 ### When Creating Generators
@@ -160,14 +173,13 @@ wavetable_tests/        # Comprehensive test suite
 2.  Add a test that reproduces the bug
 3.  Fix the issue with minimal changes
 4.  Verify all tests pass
-5.  Check code quality with linters
+5.  Check code quality with Ruff
 
 ### Documentation Updates
 
 1.  Update relevant markdown files in `docs/`
 2.  Update docstrings in code
-3.  Keep AGENTS.md in sync if needed
-4.  Verify markdown formatting
+3.  Verify markdown formatting
 
 ### Refactoring
 
@@ -192,6 +204,7 @@ See AGENTS.md for detailed communication guidelines.
 
 -  **AGENTS.md** - Comprehensive agent instructions
 -  **CONTRIBUTING.md** - Contribution guidelines
+-  **DEVELOPMENT.md** - Development workflow
 -  **docs/** - User documentation
 -  **docs_tech/** - Technical documentation
 -  **QUICKSTART.md** - Quick start guide

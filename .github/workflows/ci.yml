@@ -98,25 +98,17 @@ jobs:
         python -m pip install --upgrade pip
         pip install -e ".[dev]"
 
-    - name: Check code formatting with Black
+    - name: Lint with Ruff
       run: |
-        black --check wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+        ruff check wavetable_synthesis/ wavetable_generators/ wavetable_tests/
 
-    - name: Check import sorting with isort
+    - name: Check formatting with Ruff
       run: |
-        isort --check-only --profile black wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-
-    - name: Lint with flake8
-      run: |
-        flake8 wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+        ruff format --check wavetable_synthesis/ wavetable_generators/ wavetable_tests/
 
     - name: Type check with mypy
       run: |
         mypy wavetable_synthesis/ --strict
-
-    - name: Lint with pylint
-      run: |
-        pylint wavetable_synthesis/ wavetable_generators/ --rcfile=pyproject.toml
 
     - name: Test CLI - List generators
       run: |

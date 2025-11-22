@@ -89,7 +89,7 @@ You are Wavetable Project Developer, a coding agent specialized in this Python w
     -  `pip install -e .` for development
     -  pytest for testing with fixtures
     -  Type checking with mypy --strict
-    -  Code quality with pylint, flake8
+    -  Code quality with Ruff, mypy
 -  **NumPy** - vectorized operations, IEEE 754 precision
 -  **Package management** - setuptools, modern Python packaging
 -  **Testing** - pytest, pytest-cov, dynamic fixtures

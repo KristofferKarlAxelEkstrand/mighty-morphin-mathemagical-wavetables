@@ -20,6 +20,7 @@ def test_cli_list_generators():
     # Run the new CLI
     result = subprocess.run(
         [sys.executable, "-m", "wavetable_synthesis.cli.cli", "--list"],
+        check=False,
         capture_output=True,
         text=True,
         cwd=str(project_root),
@@ -51,6 +52,7 @@ def test_cli_generate_single_wavetable(tmp_path):
             "--output",
             str(tmp_path),
         ],
+        check=False,
         capture_output=True,
         text=True,
         cwd=str(project_root),
@@ -92,6 +94,7 @@ def test_file_format_correctness(tmp_path):
             "--output",
             str(tmp_path),
         ],
+        check=False,
         capture_output=True,
         text=True,
         cwd=str(project_root),

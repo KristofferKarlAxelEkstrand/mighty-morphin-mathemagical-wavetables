@@ -78,7 +78,7 @@ npx lint-staged
 
 This is primarily a **Python project**, but we use Node.js tools (Husky, Prettier, markdownlint) for **documentation quality**.
 
--  **Python code** → checked with pytest, mypy, pylint, flake8
+-  **Python code** → checked with Ruff (linting/formatting), mypy (type checking), Bandit (security)
 -  **Documentation** → checked with Husky, Prettier, markdownlint
 
 ### Workflow Example

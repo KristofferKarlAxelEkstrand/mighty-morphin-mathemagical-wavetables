@@ -80,7 +80,8 @@ profile_default/
 ipython_config.py
 
 # pyenv
-.python-version
+# Allow .python-version to specify recommended Python version for the project
+# .python-version
 
 # celery beat schedule file
 celerybeat-schedule

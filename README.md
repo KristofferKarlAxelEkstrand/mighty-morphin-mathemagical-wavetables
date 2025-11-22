@@ -277,36 +277,32 @@ pytest wavetable_tests/
 
 ---
 
-## 🚀 Modern Development (New!)
+## 🚀 Modern Development
 
-This project now supports modern, fast development tools:
+Fast, streamlined development tools:
 
-### Quick Commands (Make/Just)
+### Quick Commands
 
 ```bash
-# Show all available commands
-make help
-
-# Common tasks
+make help          # Show all available commands
 make test          # Run tests
-make lint          # Check code quality with Ruff (10-100x faster!)
+make lint          # Check code quality with Ruff
 make format        # Format code with Ruff
 make quality       # Run all quality checks
 ```
 
 ### Ruff - Fast Linting & Formatting
 
-[Ruff](https://docs.astral.sh/ruff/) replaces Black, isort, Flake8, and many Pylint rules:
+[Ruff](https://docs.astral.sh/ruff/) - 10-100x faster than traditional tools:
 
 ```bash
-# Check and fix issues (blazing fast!)
-ruff check --fix .
-ruff format .
+ruff check --fix .    # Check and auto-fix issues
+ruff format .         # Format code
 ```
 
 ### Pre-commit Hooks
 
-Automatically check code quality before commits:
+Automated quality checks before commits:
 
 ```bash
 pre-commit install    # One-time setup
@@ -315,14 +311,9 @@ git commit           # Hooks run automatically
 
 ### Development Container
 
-Open in VS Code or GitHub Codespaces for instant setup - everything pre-configured!
+Open in VS Code or GitHub Codespaces for instant, pre-configured setup.
 
-**Learn More:**
-
--  [DEVELOPMENT.md](DEVELOPMENT.md) - Complete modern development guide
--  [MODERNIZATION.md](MODERNIZATION.md) - Migration guide and tool comparison
-
-**All legacy tools (Black, isort, Flake8, Pylint) still work!** Adopt modern tools at your own pace.
+**Learn More:** [DEVELOPMENT.md](DEVELOPMENT.md)
 
 ---
 
@@ -339,11 +330,10 @@ Open in VS Code or GitHub Codespaces for instant setup - everything pre-configur
 
 **Development:**
 
--  [DEVELOPMENT.md](DEVELOPMENT.md) - Modern development setup ✨ **New!**
--  [MODERNIZATION.md](MODERNIZATION.md) - Modern tooling guide ✨ **New!**
--  [docs/development-setup.md](docs/development-setup.md) - Development environment setup
--  [docs/pathlib-guide.md](docs/pathlib-guide.md) - Modern path handling with pathlib
--  [docs/uv-guide.md](docs/uv-guide.md) - Fast package installer guide ✨ **New!**
+-  [DEVELOPMENT.md](DEVELOPMENT.md) - Development workflow
+-  [docs/development-setup.md](docs/development-setup.md) - Environment setup
+-  [docs/pathlib-guide.md](docs/pathlib-guide.md) - Modern path handling
+-  [docs/uv-guide.md](docs/uv-guide.md) - Fast package installer (optional)
 -  [PIP.MD](PIP.MD) - Python package management
 -  [AGENTS.md](AGENTS.md) - For AI assistants and automated tools
 

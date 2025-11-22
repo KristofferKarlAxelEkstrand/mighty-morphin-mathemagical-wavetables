@@ -15,18 +15,11 @@
     "prepare": "husky",
     "lint:md": "markdownlint \"**/*.md\" --ignore node_modules",
     "lint:md:fix": "markdownlint \"**/*.md\" --fix --ignore node_modules",
-    "lint:md:check": "markdownlint \"**/*.md\" --ignore node_modules || echo 'Markdown linting issues found'",
-    "lint:chatmodes": "markdownlint \".github/chatmodes/**/*.md\" --ignore node_modules",
-    "lint:chatmodes:fix": "markdownlint \".github/chatmodes/**/*.md\" --fix --ignore node_modules",
     "lint:py": ".venv\\Scripts\\python -m ruff check wavetable_synthesis/ wavetable_generators/ wavetable_tests/",
     "lint:py:fix": ".venv\\Scripts\\python -m ruff check --fix wavetable_synthesis/ wavetable_generators/ wavetable_tests/ && .venv\\Scripts\\python -m ruff format wavetable_synthesis/ wavetable_generators/ wavetable_tests/",
-    "lint:py:legacy": ".venv\\Scripts\\python -m flake8 wavetable_synthesis/ wavetable_generators/ wavetable_tests/",
-    "format:py:legacy": ".venv\\Scripts\\python -m black wavetable_synthesis/ wavetable_generators/ wavetable_tests/ && .venv\\Scripts\\python -m isort --profile black wavetable_synthesis/ wavetable_generators/ wavetable_tests/",
     "type:check": ".venv\\Scripts\\python -m mypy wavetable_synthesis/",
-    "quality:check": ".venv\\Scripts\\python -m pylint wavetable_synthesis/ wavetable_generators/ wavetable_tests/",
     "format": "prettier --write \"**/*.{md,json,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{md,json,yml,yaml}\"",
-    "format:fix": "npm run format && npm run lint:md:fix",
     "update": "npx npm-check-updates && npx npm-check-updates -u && npm install"
   },
   "engines": {

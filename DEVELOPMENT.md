@@ -1,69 +1,40 @@
 # Development Guide
 
-This guide provides detailed instructions for setting up a modern development environment for Mighty Morphin Mathemagical Wavetables.
+Modern development setup for Mighty Morphin Mathemagical Wavetables.
 
 ## Quick Start
 
 ### Prerequisites
 
--  **Python 3.10+** (3.10, 3.11, 3.12, or 3.13)
--  **Git** for version control
--  **Optional:** `pyenv` for Python version management
--  **Optional:** `just` for modern task running (alternative to `make`)
+- **Python 3.10+** (3.10, 3.11, 3.12, or 3.13)
+- **Git** for version control
 
-### Automatic Setup
+### Setup
 
 ```bash
 # Clone the repository
 git clone https://github.com/KristofferKarlAxelEkstrand/mighty-morphin-mathemagical-wavetables.git
 cd mighty-morphin-mathemagical-wavetables
 
-# Run setup script
+# Run setup script (recommended)
 bash setup.sh
-```
 
-### Manual Setup
-
-```bash
-# Create virtual environment
+# Or manually:
 python -m venv .venv
-
-# Activate virtual environment
-# On Windows (Git Bash):
-source .venv/Scripts/activate
-# On Linux/macOS:
-source .venv/bin/activate
-
-# Install package with dev dependencies
+source .venv/bin/activate  # Linux/macOS
+# or: source .venv/Scripts/activate  # Windows Git Bash
 pip install -e ".[dev]"
-
-# Install pre-commit hooks
 pre-commit install
 ```
 
-## Modern Development Tools
+## Development Tools
 
-### Ruff - Fast Python Linter & Formatter
+### Ruff - Fast Linting & Formatting
 
-We use [Ruff](https://docs.astral.sh/ruff/) as our primary linting and formatting tool. It's 10-100x faster than traditional tools and replaces:
-
--  Black (code formatter)
--  isort (import sorting)
--  Flake8 (style checker)
--  Many pylint rules
-
-**Why Ruff?**
-
--  ⚡ **Blazing fast** - Written in Rust
--  🔧 **Auto-fix** - Automatically fixes most issues
--  🎯 **All-in-one** - Replaces multiple tools
--  📦 **Zero config** - Works out of the box
--  🔄 **Drop-in replacement** - Compatible with existing tools
-
-**Usage:**
+[Ruff](https://docs.astral.sh/ruff/) is our all-in-one linter and formatter - 10-100x faster than traditional tools.
 
 ```bash
-# Lint code
+# Check code quality
 ruff check .
 
 # Auto-fix issues
@@ -72,196 +43,127 @@ ruff check --fix .
 # Format code
 ruff format .
 
-# Both format and fix
+# Or use Make:
+make lint
 make format
-# or
-just format
 ```
 
-### Task Runners
+### Make - Task Runner
 
-We provide two task runners for convenience:
-
-#### Make (Traditional)
+All common commands are available via Make:
 
 ```bash
-make help              # Show all available commands
-make install-dev       # Install dev dependencies
-make test              # Run tests
-make lint              # Run linter
-make format            # Format code
-make quality           # Run all quality checks
-```
-
-#### Just (Modern Alternative)
-
-[Just](https://github.com/casey/just) is a modern, cross-platform task runner with better syntax than Make.
-
-Install: `cargo install just` or see [installation guide](https://github.com/casey/just#installation)
-
-```bash
-just                   # Show all recipes
-just install-dev       # Install dev dependencies
-just test              # Run tests
-just lint              # Run linter
-just format            # Format code
-just quality           # Run all quality checks
-just run sine_to_triangle  # Run a specific generator
+make help          # Show all available commands
+make install-dev   # Install dev dependencies
+make test          # Run tests
+make test-cov      # Run tests with coverage
+make lint          # Check code quality
+make format        # Format code
+make quality       # Run all quality checks
+make list          # List generators
+make run GEN=name  # Run specific generator
 ```
 
 ### Pre-commit Hooks
 
-We use [pre-commit](https://pre-commit.com/) to automatically check code before commits:
+Automatically check code quality before commits:
 
 ```bash
-# Install hooks (one-time setup)
+# Install hooks (one-time)
 pre-commit install
 
-# Run manually on all files
-pre-commit run --all-files
+# Hooks run automatically on git commit
+git commit -m "your message"
 
-# Update hooks to latest versions
-pre-commit autoupdate
+# Run manually
+pre-commit run --all-files
 ```
 
 **What gets checked:**
-
--  Ruff linting and formatting
--  Type checking with mypy
--  Trailing whitespace
--  File endings
--  YAML/JSON/TOML syntax
--  Markdown linting
--  Security checks with Bandit
-
-### Python Version Management
-
-#### Using .python-version
-
-We include a `.python-version` file for tools like `pyenv` and `asdf`:
-
-```bash
-# With pyenv installed:
-pyenv install 3.10
-pyenv local 3.10
-
-# With asdf installed:
-asdf install python 3.10
-```
-
-#### Using pyenv (Recommended)
-
-```bash
-# Install pyenv (macOS)
-brew install pyenv
-
-# Install pyenv (Linux)
-curl https://pyenv.run | bash
-
-# Install Python 3.10
-pyenv install 3.10
-
-# Set local version
-pyenv local 3.10
-```
+- Ruff linting and formatting
+- Type checking with mypy
+- File quality (trailing whitespace, EOF, etc.)
+- YAML/JSON/TOML syntax
+- Markdown linting
+- Security checks with Bandit
 
 ## Development Workflow
 
 ### 1. Create a Feature Branch
 
 ```bash
-git checkout -b feature/my-new-feature
+git checkout -b feature/my-feature
 ```
 
 ### 2. Make Changes
 
-Edit code following our style guide (Ruff will help enforce this).
+Edit code following the project style (Ruff enforces this).
 
-### 3. Run Quality Checks
+### 3. Test & Lint
 
 ```bash
-# Quick check with Ruff
-just lint
-
-# Full quality check
-just quality
-
-# Run tests
-just test-cov
+make format    # Format code
+make test      # Run tests
+make quality   # Check quality
 ```
 
-### 4. Commit Changes
-
-Pre-commit hooks will run automatically:
+### 4. Commit
 
 ```bash
 git add .
 git commit -m "feat: add new feature"
+# Pre-commit hooks run automatically
 ```
 
-### 5. Push and Create PR
+### 5. Push
 
 ```bash
-git push origin feature/my-new-feature
+git push origin feature/my-feature
 ```
 
 ## Testing
 
-### Running Tests
-
 ```bash
 # Run all tests
 pytest wavetable_tests/
+# or: make test
 
 # With coverage
 pytest wavetable_tests/ --cov=wavetable_synthesis --cov-report=html
+# or: make test-cov
 
 # Verbose output
 pytest wavetable_tests/ -v
 
 # Specific test file
 pytest wavetable_tests/test_wavetable_generation.py
-
-# Specific test function
-pytest wavetable_tests/test_wavetable_generation.py::test_sine_to_triangle
 ```
 
-### Using Make/Just
-
-```bash
-make test              # Run tests
-make test-cov          # Run with coverage
-make test-verbose      # Verbose output
-
-just test              # Run tests
-just test-cov          # Run with coverage
-just test-verbose      # Verbose output
-```
-
-### Coverage Requirements
-
--  Maintain **90%+ code coverage**
--  All new code should include tests
--  Test both success and failure cases
+**Coverage requirement:** 90%+
 
 ## Code Quality
 
-### Linting and Formatting
+### Linting
 
 ```bash
-# Check code style (Ruff)
+# Check code style
 ruff check .
 
 # Auto-fix issues
 ruff check --fix .
 
+# Using Make
+make lint
+```
+
+### Formatting
+
+```bash
 # Format code
 ruff format .
 
-# All in one (recommended)
+# Format and fix
 make format
-# or
-just format
 ```
 
 ### Type Checking
@@ -270,88 +172,83 @@ just format
 # Check types
 mypy wavetable_synthesis/ --strict
 
-# Using Make/Just
+# Using Make
 make type-check
-just type-check
 ```
 
-### Legacy Tools (for migration period)
+### All Checks
 
 ```bash
-# Run legacy tools
-make lint-legacy
-make format-legacy
-
-just lint-legacy
-just format-legacy
+make quality
 ```
 
-## Creating New Generators
+## Creating Generators
 
-See [docs/wavetable_generators.md](docs/wavetable_generators.md) for detailed instructions.
-
-Quick version:
+Quick guide - see [docs/wavetable_generators.md](docs/wavetable_generators.md) for details.
 
 ```bash
-# Copy template
+# 1. Copy template
 cp wavetable_generators/example.py wavetable_generators/my_generator.py
 
-# Edit the file
-# ... implement your generator ...
+# 2. Edit and implement
+# - Extend BaseGenerator
+# - Use @register_generator("name")
+# - Implement generate(theta, u)
 
-# Test it
+# 3. Test it
 python -m wavetable_synthesis my_generator
-
-# Run tests
-pytest wavetable_tests/ -k my_generator
+make test
 ```
 
 ## IDE Setup
 
-### VS Code (Recommended)
+### VS Code
 
-The project includes `.vscode/settings.json` with recommended settings:
+Recommended extensions (auto-configured in `.vscode/settings.json`):
+- Python (ms-python.python)
+- Ruff (charliermarsh.ruff)
+- Pylance (ms-python.vscode-pylance)
 
-1.  Install Python extension
-2.  Install Ruff extension (recommended)
-3.  Reload window
-4.  Settings will be applied automatically
+### Dev Containers
 
-**Recommended Extensions:**
+Open in VS Code with dev containers for instant setup - everything pre-configured.
 
--  Python (ms-python.python)
--  Ruff (charliermarsh.ruff)
--  Pylance (ms-python.vscode-pylance)
--  Better TOML (bungcip.better-toml)
+## Python Version Management
 
-### PyCharm
-
-1.  Open project
-2.  Configure Python interpreter to `.venv/bin/python`
-3.  Enable Ruff in settings (if plugin available)
-4.  Configure mypy external tool
-
-## Dependency Management
-
-### Installing Dependencies
+The project includes a `.python-version` file for tools like `pyenv`:
 
 ```bash
-# Production dependencies only
-pip install -e .
+# With pyenv
+pyenv install 3.10
+pyenv local 3.10
 
-# With dev dependencies
-pip install -e ".[dev]"
-
-# Update all dependencies
-make update-deps
-just update-deps
+# With asdf
+asdf install python 3.10
 ```
 
-### Adding Dependencies
+## Common Tasks
 
-1.  Add to `pyproject.toml` under `dependencies` or `dev`
-2.  Install: `pip install -e ".[dev]"`
-3.  Update lockfile if using pip-tools or poetry
+```bash
+# Setup
+make install-dev       # Install dependencies
+make pre-commit        # Install git hooks
+
+# Development
+make test              # Run tests
+make format            # Format code
+make lint              # Check quality
+make quality           # All quality checks
+
+# Generators
+make list              # List generators
+make run GEN=example   # Run generator
+make validate          # Validate all
+make batch             # Generate all
+
+# Utilities
+make clean             # Clean build artifacts
+make update-deps       # Update dependencies
+```
 
 ## Troubleshooting
 
@@ -361,7 +258,7 @@ just update-deps
 # Remove and recreate
 rm -rf .venv
 python -m venv .venv
-source .venv/bin/activate  # or .venv/Scripts/activate on Windows
+source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
@@ -374,17 +271,6 @@ pre-commit install
 
 # Clear cache
 pre-commit clean
-pre-commit run --all-files
-```
-
-### Ruff Not Found
-
-```bash
-# Install Ruff
-pip install ruff
-
-# Or reinstall dev dependencies
-pip install -e ".[dev]"
 ```
 
 ### Import Errors
@@ -394,40 +280,13 @@ pip install -e ".[dev]"
 pip install -e .
 ```
 
-## Performance Tips
+## Resources
 
-### Use Ruff Instead of Multiple Tools
-
-```bash
-# Slow (multiple tools)
-black . && isort . && flake8 . && pylint .
-
-# Fast (single tool)
-ruff check --fix . && ruff format .
-```
-
-### Parallel Testing
-
-```bash
-# Run tests in parallel
-pytest wavetable_tests/ -n auto
-```
-
-## Additional Resources
-
--  [Ruff Documentation](https://docs.astral.sh/ruff/)
--  [Just Documentation](https://github.com/casey/just)
--  [Pre-commit Documentation](https://pre-commit.com/)
--  [pytest Documentation](https://docs.pytest.org/)
--  [MyPy Documentation](https://mypy.readthedocs.io/)
+- [Ruff Documentation](https://docs.astral.sh/ruff/)
+- [pytest Documentation](https://docs.pytest.org/)
+- [MyPy Documentation](https://mypy.readthedocs.io/)
+- [Pre-commit Documentation](https://pre-commit.com/)
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelines.
-
-## Need Help?
-
--  Check existing issues on GitHub
--  Review documentation in `docs/`
--  Look at existing code examples
--  Ask questions in GitHub Discussions
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.

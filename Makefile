@@ -1,4 +1,4 @@
-.PHONY: help install install-dev clean test test-cov lint format type-check quality pre-commit run list validate batch build docs
+.PHONY: help install install-dev clean test test-cov lint format type-check quality pre-commit run list validate batch
 
 # Default target - show help
 help:
@@ -16,13 +16,10 @@ help:
 	@echo "  make test-verbose    Run tests with verbose output"
 	@echo ""
 	@echo "Code Quality Commands:"
-	@echo "  make lint            Run Ruff linter (modern, fast)"
+	@echo "  make lint            Run Ruff linter"
 	@echo "  make format          Format code with Ruff"
 	@echo "  make type-check      Run mypy type checker"
 	@echo "  make quality         Run all quality checks"
-	@echo ""
-	@echo "Legacy Linting (for comparison):"
-	@echo "  make lint-legacy     Run Black, isort, Flake8, Pylint"
 	@echo ""
 	@echo "Generator Commands:"
 	@echo "  make list            List all available generators"
@@ -57,7 +54,7 @@ test-cov:
 test-verbose:
 	pytest wavetable_tests/ -v
 
-# Code Quality - Modern (Ruff)
+# Code Quality
 lint:
 	ruff check wavetable_synthesis/ wavetable_generators/ wavetable_tests/
 
@@ -70,17 +67,6 @@ type-check:
 
 quality: lint type-check
 	@echo "✅ All quality checks passed!"
-
-# Legacy linting (for comparison and gradual migration)
-lint-legacy:
-	black --check wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-	isort --check-only --profile black wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-	flake8 wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-	pylint wavetable_synthesis/ wavetable_generators/
-
-format-legacy:
-	black wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-	isort --profile black wavetable_synthesis/ wavetable_generators/ wavetable_tests/
 
 # Generator Commands
 list:

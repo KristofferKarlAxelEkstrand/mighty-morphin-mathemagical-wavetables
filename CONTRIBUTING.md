@@ -77,33 +77,25 @@ flake8 wavetable_synthesis/ wavetable_generators/
 
 We use modern, fast code quality tools:
 
--  **Ruff** for linting and formatting (replaces Black, isort, Flake8, many Pylint rules)
+-  **Ruff** for linting and formatting
 -  **mypy** for type checking (strict mode)
 -  **pre-commit** for automated checks
 
-**Modern way (recommended):**
+**Format your code:**
 
 ```bash
-# Format and fix issues with Ruff (fast!)
+# Format and fix issues with Ruff
 ruff format wavetable_generators/ wavetable_synthesis/
 ruff check --fix wavetable_generators/ wavetable_synthesis/
 
-# Or use convenience commands:
-make format    # Using Make
-just format    # Using Just
-```
-
-**Legacy way (still supported):**
-
-```bash
-black wavetable_generators/ wavetable_synthesis/
-isort wavetable_generators/ wavetable_synthesis/
+# Or use Make:
+make format
 ```
 
 **Why Ruff?**
-- ⚡ 10-100x faster than existing tools
+- ⚡ 10-100x faster than traditional tools
 - 🔧 Auto-fixes most issues
-- 🎯 Replaces multiple tools (Black, isort, Flake8, etc.)
+- 🎯 Replaces multiple tools in one
 - 📦 Zero configuration needed
 
 

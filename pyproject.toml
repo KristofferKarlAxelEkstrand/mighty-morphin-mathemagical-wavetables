@@ -41,15 +41,10 @@ dev = [
     # Testing
     "pytest>=8.0.0",
     "pytest-cov>=6.0.0",
-    # Modern linting and formatting (recommended)
+    # Linting and formatting
     "ruff>=0.9.0",
     # Type checking
     "mypy>=1.13.0",
-    # Legacy linting tools (for gradual migration)
-    "black>=24.0.0",
-    "isort>=5.13.0",
-    "flake8>=7.0.0",
-    "pylint>=3.3.0",
     # Security
     "bandit[toml]>=1.8.0",
     # Pre-commit hooks
@@ -85,32 +80,6 @@ exclude = ["test*", "docs*"]
 
 [tool.setuptools.package-data]
 "wavetable_synthesis" = ["wavetable_generators/*.py"]
-
-[tool.black]
-line-length = 128
-target-version = ['py310', 'py311', 'py312', 'py313']
-include = '\.pyi?$'
-extend-exclude = '''
-/(
-  # directories
-  \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | build
-  | wavetable_dist
-  | dist
-)/
-'''
-
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-line_length = 128
-known_first_party = ["wavetable_synthesis"]
-skip = ["__init__.py"]
 
 [tool.mypy]
 python_version = "3.13"
@@ -167,47 +136,6 @@ exclude_lines = [
     "raise AssertionError",
     "raise NotImplementedError",
 ]
-
-[tool.pylint.main]
-init-hook = "import sys; sys.path.insert(0, '.')"
-
-[tool.pylint.messages_control]
-disable = [
-    "C0114",  # missing-module-docstring
-    "C0115",  # missing-class-docstring
-    "C0116",  # missing-function-docstring
-    "C0413",  # wrong-import-position - necessary for test files with path manipulation
-    "C0415",  # import-outside-toplevel - allowed in tests for isolation
-    "E1102",  # not-callable - false positive for dynamic registry generators
-    "R0801",  # duplicate-code - expected in template-style generator files
-    "R0903",  # too-few-public-methods
-    "R0913",  # too-many-arguments
-    "R0914",  # too-many-locals
-    "R0915",  # too-many-statements
-    "W0613",  # unused-argument
-    "W0621",  # redefined-outer-name - expected in pytest conftest files
-]
-extension-pkg-whitelist = ["numpy"]
-
-[tool.pylint.format]
-max-line-length = 128
-
-[tool.pylint.design]
-max-args = 8
-max-locals = 20
-max-returns = 6
-max-branches = 12
-max-statements = 50
-max-parents = 7
-
-[tool.pylint.similarities]
-min-similarity-lines = 4
-ignore-comments = true
-ignore-docstrings = true
-ignore-imports = false
-
-[tool.pylint.master]
-extension-pkg-allow-list = ["numpy"]
 
 # Ruff - Modern, fast Python linter and formatter
 # Replaces: Black, isort, Flake8, and many pylint rules

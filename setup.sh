@@ -9,7 +9,7 @@ echo "================================"
 echo ""
 
 # Detect OS
-if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
+if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* ]]; then
     VENV_ACTIVATE=".venv/Scripts/activate"
 else
     VENV_ACTIVATE=".venv/bin/activate"
@@ -51,7 +51,7 @@ echo
 if [[ ! $REPLY =~ ^[Nn]$ ]]; then
     echo "📥 Installing development dependencies..."
     pip install -e ".[dev]"
-    
+
     # Install pre-commit hooks
     read -p "Install pre-commit hooks for automatic code quality checks? (Y/n) " -n 1 -r
     echo
@@ -66,7 +66,7 @@ echo ""
 echo "✅ Setup complete!"
 echo ""
 echo "To activate the virtual environment in the future, run:"
-if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
+if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* ]]; then
     echo "  source .venv/Scripts/activate"
 else
     echo "  source .venv/bin/activate"

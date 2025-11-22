@@ -3,8 +3,33 @@ name: CI
 on:
   push:
     branches: [ main, develop ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'docs_tech/**'
+      - 'LICENSE'
+      - '.gitignore'
+      - '.editorconfig'
+      - '.prettierrc'
+      - '.prettierignore'
+      - '.markdownlint.json'
   pull_request:
     branches: [ main, develop ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'docs_tech/**'
+      - 'LICENSE'
+      - '.gitignore'
+      - '.editorconfig'
+      - '.prettierrc'
+      - '.prettierignore'
+      - '.markdownlint.json'
+
+# Cancel in-progress runs for the same PR or branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 # Set minimal permissions for GITHUB_TOKEN
 permissions:
@@ -16,7 +41,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13']
+        # Test on oldest and newest supported versions only
+        python-version: ['3.10', '3.13']
       fail-fast: false
 
     steps:
@@ -28,6 +54,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'
+        cache-dependency-path: 'pyproject.toml'
 
     - name: Install dependencies
       run: |
@@ -40,7 +67,7 @@ jobs:
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v5
-      if: matrix.python-version == '3.12'
+      if: matrix.python-version == '3.13'
       with:
         file: ./coverage.xml
         flags: unittests
@@ -49,8 +76,10 @@ jobs:
         # Coverage is still validated locally and in code review
         fail_ci_if_error: false
 
-  lint:
-    name: Code Quality
+  # Combine code quality checks and CLI tests into a single job
+  # to reduce overhead from separate dependency installations
+  quality-and-cli:
+    name: Code Quality & CLI Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -60,8 +89,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v6
       with:
-        python-version: '3.12'
+        python-version: '3.13'
         cache: 'pip'
+        cache-dependency-path: 'pyproject.toml'
 
     - name: Install dependencies
       run: |
@@ -87,25 +117,6 @@ jobs:
     - name: Lint with pylint
       run: |
         pylint wavetable_synthesis/ wavetable_generators/ --rcfile=pyproject.toml
-
-  cli-test:
-    name: CLI Functionality Test
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v6
-
-    - name: Set up Python
-      uses: actions/setup-python@v6
-      with:
-        python-version: '3.12'
-        cache: 'pip'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -e .
 
     - name: Test CLI - List generators
       run: |

@@ -11,9 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive code quality improvements (flake8, pylint, mypy)
 - Complete Dependabot configuration for Python, npm, and GitHub Actions
 - CHANGELOG.md file for tracking project changes
-- Fixed repository URLs in pyproject.toml
 
 ### Fixed
+- Fixed repository URLs in pyproject.toml
 - Code formatting issues (trailing whitespace)
 - Unnecessary f-strings without placeholders
 - Dependabot configuration was incomplete

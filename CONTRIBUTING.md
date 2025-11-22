@@ -75,20 +75,37 @@ flake8 wavetable_synthesis/ wavetable_generators/
 
 ### Code Style
 
-We use strict code quality tools:
+We use modern, fast code quality tools:
 
--  **Black** for formatting (88 character line length)
--  **isort** for import sorting
+-  **Ruff** for linting and formatting (replaces Black, isort, Flake8, many Pylint rules)
 -  **mypy** for type checking (strict mode)
--  **pylint** for code quality (target score: 9.8+)
--  **flake8** for PEP 8 compliance
+-  **pre-commit** for automated checks
 
-**Format your code before committing:**
+**Modern way (recommended):**
+
+```bash
+# Format and fix issues with Ruff (fast!)
+ruff format wavetable_generators/ wavetable_synthesis/
+ruff check --fix wavetable_generators/ wavetable_synthesis/
+
+# Or use convenience commands:
+make format    # Using Make
+just format    # Using Just
+```
+
+**Legacy way (still supported):**
 
 ```bash
 black wavetable_generators/ wavetable_synthesis/
 isort wavetable_generators/ wavetable_synthesis/
 ```
+
+**Why Ruff?**
+- ⚡ 10-100x faster than existing tools
+- 🔧 Auto-fixes most issues
+- 🎯 Replaces multiple tools (Black, isort, Flake8, etc.)
+- 📦 Zero configuration needed
+
 
 ### Type Hints
 

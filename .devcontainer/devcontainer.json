@@ -26,7 +26,6 @@
         "davidanson.vscode-markdownlint",
         "streetsidesoftware.code-spell-checker",
         "tamasfe.even-better-toml",
-        "gruntfuggly.todo-tree",
         "eamodio.gitlens"
       ],
       "settings": {

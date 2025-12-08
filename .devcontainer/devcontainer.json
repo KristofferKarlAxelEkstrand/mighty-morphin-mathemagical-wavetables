@@ -3,16 +3,14 @@
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
 
   "features": {
-    "ghcr.io/devcontainers/features/common-utils:2": {
-      "installZsh": true,
-      "configureZshAsDefaultShell": true,
-      "username": "vscode",
-      "userUid": "automatic",
-      "userGid": "automatic"
-    },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "lts"
     }
+  },
+
+  "containerEnv": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUNBUFFERED": "1"
   },
 
   "customizations": {
@@ -27,35 +25,12 @@
         "streetsidesoftware.code-spell-checker",
         "tamasfe.even-better-toml",
         "editorconfig.editorconfig",
-        "eamodio.gitlens",
-        "github.vscode-pull-request-github"
-      ],
-      "settings": {
-        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
-        "python.terminal.activateEnvironment": true,
-        "[python]": {
-          "editor.defaultFormatter": "charliermarsh.ruff",
-          "editor.formatOnSave": true,
-          "editor.codeActionsOnSave": {
-            "source.fixAll": "explicit",
-            "source.organizeImports": "explicit"
-          }
-        },
-        "ruff.enable": true,
-        "ruff.lint.enable": true,
-        "ruff.format.enable": true,
-        "files.trimTrailingWhitespace": true,
-        "files.insertFinalNewline": true,
-        "editor.formatOnSave": true
-      }
+        "eamodio.gitlens"
+      ]
     }
   },
 
   "postCreateCommand": "bash .devcontainer/postCreate.sh",
 
-  "remoteUser": "vscode",
-
-  "forwardPorts": [],
-
-  "portsAttributes": {}
+  "remoteUser": "vscode"
 }

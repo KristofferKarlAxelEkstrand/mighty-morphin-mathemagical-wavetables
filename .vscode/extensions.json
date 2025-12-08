@@ -9,8 +9,7 @@
     "streetsidesoftware.code-spell-checker",
     "tamasfe.even-better-toml",
     "editorconfig.editorconfig",
-    "eamodio.gitlens",
-    "github.vscode-pull-request-github"
+    "eamodio.gitlens"
   ],
   "unwantedRecommendations": ["ms-python.autopep8", "ms-python.black-formatter", "ms-python.isort", "ms-python.pylint"]
 }

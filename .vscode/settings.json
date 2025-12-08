@@ -161,12 +161,6 @@
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.editing.confirmEditRequestRetry": false,
   "chat.extensionTools.enabled": true,
-  "chat.mcp.discovery.enabled": {
-    "claude-desktop": true,
-    "windsurf": true,
-    "cursor-global": true,
-    "cursor-workspace": true
-  },
   "github.copilot.chat.virtualTools.threshold": 50,
   "git.autofetch": true,
   "git.confirmSync": false,

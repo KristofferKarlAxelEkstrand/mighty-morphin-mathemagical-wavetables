@@ -1,7 +1,7 @@
 {
   "name": "Mighty Morphin Mathemagical Wavetables",
-  "image": "mcr.microsoft.com/devcontainers/python:3.10",
-  
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": true,
@@ -54,14 +54,10 @@
   },
 
   "postCreateCommand": "bash .devcontainer/postCreate.sh",
-  
+
   "remoteUser": "vscode",
-  
+
   "forwardPorts": [],
-  
-  "portsAttributes": {},
-  
-  "mounts": [
-    "source=${localWorkspaceFolder}/.venv,target=${containerWorkspaceFolder}/.venv,type=bind,consistency=cached"
-  ]
+
+  "portsAttributes": {}
 }

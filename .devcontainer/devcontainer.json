@@ -22,10 +22,12 @@
         "ms-python.vscode-pylance",
         "charliermarsh.ruff",
         "ms-python.mypy-type-checker",
-        "tamasfe.even-better-toml",
-        "davidanson.vscode-markdownlint",
         "esbenp.prettier-vscode",
-        "streetsidesoftware.code-spell-checker"
+        "davidanson.vscode-markdownlint",
+        "streetsidesoftware.code-spell-checker",
+        "tamasfe.even-better-toml",
+        "gruntfuggly.todo-tree",
+        "eamodio.gitlens"
       ],
       "settings": {
         "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",

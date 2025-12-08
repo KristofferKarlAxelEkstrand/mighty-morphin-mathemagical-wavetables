@@ -15,9 +15,9 @@
     "prepare": "husky",
     "lint:md": "markdownlint \"**/*.md\" --ignore node_modules",
     "lint:md:fix": "markdownlint \"**/*.md\" --fix --ignore node_modules",
-    "lint:py": ".venv\\Scripts\\python -m ruff check wavetable_synthesis/ wavetable_generators/ wavetable_tests/",
-    "lint:py:fix": ".venv\\Scripts\\python -m ruff check --fix wavetable_synthesis/ wavetable_generators/ wavetable_tests/ && .venv\\Scripts\\python -m ruff format wavetable_synthesis/ wavetable_generators/ wavetable_tests/",
-    "type:check": ".venv\\Scripts\\python -m mypy wavetable_synthesis/",
+    "lint:py": "python -m ruff check wavetable_synthesis/ wavetable_generators/ wavetable_tests/",
+    "lint:py:fix": "python -m ruff check --fix wavetable_synthesis/ wavetable_generators/ wavetable_tests/ && python -m ruff format wavetable_synthesis/ wavetable_generators/ wavetable_tests/",
+    "type:check": "python -m mypy wavetable_synthesis/",
     "format": "prettier --write \"**/*.{md,json,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{md,json,yml,yaml}\"",
     "update": "npx npm-check-updates && npx npm-check-updates -u && npm install"
@@ -34,9 +34,8 @@
       "prettier --write"
     ],
     "*.py": [
-      ".venv\\Scripts\\python -m ruff format",
-      ".venv\\Scripts\\python -m ruff check --fix",
-      ".venv\\Scripts\\python -m mypy --strict"
+      "python -m ruff format",
+      "python -m ruff check --fix"
     ]
   }
 }

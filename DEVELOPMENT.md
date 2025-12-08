@@ -80,6 +80,7 @@ pre-commit run --all-files
 ```
 
 **What gets checked:**
+
 - Ruff linting and formatting
 - Type checking with mypy
 - File quality (trailing whitespace, EOF, etc.)
@@ -205,6 +206,7 @@ make test
 ### VS Code
 
 Recommended extensions (auto-configured in `.vscode/settings.json`):
+
 - Python (ms-python.python)
 - Ruff (charliermarsh.ruff)
 - Pylance (ms-python.vscode-pylance)

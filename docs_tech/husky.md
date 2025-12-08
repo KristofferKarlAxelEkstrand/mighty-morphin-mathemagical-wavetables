@@ -32,10 +32,10 @@ This runs the `prepare` script which initializes Husky hooks.
 
 When you run `git commit`, Husky automatically:
 
-1.  **Runs lint-staged** - checks only the files you're committing
-2.  **Formats Markdown** - uses Prettier to format `.md` files
-3.  **Fixes Markdown linting** - uses markdownlint to check and fix Markdown
-4.  **Formats JSON/YAML** - uses Prettier for config files
+1. **Runs lint-staged** - checks only the files you're committing
+2. **Formats Markdown** - uses Prettier to format `.md` files
+3. **Fixes Markdown linting** - uses markdownlint to check and fix Markdown
+4. **Formats JSON/YAML** - uses Prettier for config files
 
 ### Configuration Files
 
@@ -63,14 +63,14 @@ npx lint-staged
 
 **Markdown files (`.md`):**
 
--  Auto-formatted with Prettier (120 chars line width)
--  Linted with markdownlint (checks for common issues)
--  Auto-fixed where possible
+- Auto-formatted with Prettier (120 chars line width)
+- Linted with markdownlint (checks for common issues)
+- Auto-fixed where possible
 
 **JSON/YAML files:**
 
--  Auto-formatted with Prettier
--  Consistent indentation and formatting
+- Auto-formatted with Prettier
+- Consistent indentation and formatting
 
 ## Project Integration
 
@@ -78,8 +78,8 @@ npx lint-staged
 
 This is primarily a **Python project**, but we use Node.js tools (Husky, Prettier, markdownlint) for **documentation quality**.
 
--  **Python code** → checked with Ruff (linting/formatting), mypy (type checking), Bandit (security)
--  **Documentation** → checked with Husky, Prettier, markdownlint
+- **Python code** → checked with Ruff (linting/formatting), mypy (type checking), Bandit (security)
+- **Documentation** → checked with Husky, Prettier, markdownlint
 
 ### Workflow Example
 
@@ -136,11 +136,11 @@ npm run lint:md:fix
 
 ## Benefits for This Project
 
-1.  **Consistent Documentation**: All Markdown files follow the same style
-2.  **Professional Quality**: README, docs, and guides are always well-formatted
-3.  **No Manual Work**: Formatting happens automatically on commit
-4.  **Focus on Content**: Write documentation, let tools handle the formatting
-5.  **Clean History**: Every commit has properly formatted files
+1. **Consistent Documentation**: All Markdown files follow the same style
+2. **Professional Quality**: README, docs, and guides are always well-formatted
+3. **No Manual Work**: Formatting happens automatically on commit
+4. **Focus on Content**: Write documentation, let tools handle the formatting
+5. **Clean History**: Every commit has properly formatted files
 
 ## Technical Details
 
@@ -149,10 +149,10 @@ npm run lint:md:fix
 
 **Tools Used**:
 
--  `husky` - Git hooks manager
--  `lint-staged` - Run linters on staged files only
--  `prettier` - Code formatter for Markdown/JSON/YAML
--  `markdownlint` - Markdown linting and style checking
+- `husky` - Git hooks manager
+- `lint-staged` - Run linters on staged files only
+- `prettier` - Code formatter for Markdown/JSON/YAML
+- `markdownlint` - Markdown linting and style checking
 
 ## Troubleshooting
 

@@ -4,11 +4,11 @@ Thank you for your interest in contributing! This project welcomes contributions
 
 ## 🎯 Ways to Contribute
 
--  **Create new wavetable generators** - Share your wave formulas
--  **Improve documentation** - Make it clearer and more helpful
--  **Fix bugs** - Help keep the code clean and working
--  **Add tests** - Improve code coverage and reliability
--  **Suggest features** - Tell us what would make this better
+- **Create new wavetable generators** - Share your wave formulas
+- **Improve documentation** - Make it clearer and more helpful
+- **Fix bugs** - Help keep the code clean and working
+- **Add tests** - Improve code coverage and reliability
+- **Suggest features** - Tell us what would make this better
 
 ## 🚀 Quick Start for Contributors
 
@@ -66,10 +66,10 @@ make quality
 
 ### 6. Submit a Pull Request
 
--  Push your branch to your fork
--  Open a Pull Request on GitHub
--  Describe your changes clearly
--  Link any related issues
+- Push your branch to your fork
+- Open a Pull Request on GitHub
+- Describe your changes clearly
+- Link any related issues
 
 ---
 
@@ -79,9 +79,9 @@ make quality
 
 We use modern, fast code quality tools:
 
--  **Ruff** for linting and formatting
--  **mypy** for type checking (strict mode)
--  **pre-commit** for automated checks
+- **Ruff** for linting and formatting
+- **mypy** for type checking (strict mode)
+- **pre-commit** for automated checks
 
 **Format your code:**
 
@@ -95,11 +95,11 @@ make format
 ```
 
 **Why Ruff?**
+
 - ⚡ 10-100x faster than traditional tools
 - 🔧 Auto-fixes most issues
 - 🎯 Replaces multiple tools in one
 - 📦 Zero configuration needed
-
 
 ### Type Hints
 
@@ -117,10 +117,10 @@ def generate(
 
 ### Documentation
 
--  All public functions need docstrings
--  Use clear, simple language
--  Include examples where helpful
--  Update relevant documentation files
+- All public functions need docstrings
+- Use clear, simple language
+- Include examples where helpful
+- Update relevant documentation files
 
 ---
 
@@ -192,31 +192,31 @@ class YourGenerator(BaseGenerator):
 
 ### Generator Requirements
 
--  ✅ Must extend `BaseGenerator`
--  ✅ Must use `@register_generator("unique_name")` decorator
--  ✅ Must implement `generate(theta, u)` method
--  ✅ Must return `NDArray[np.float64]`
--  ✅ Should validate `u` parameter with `self._validate_u(u)`
--  ✅ Should include comprehensive docstrings
--  ✅ Should handle edge cases gracefully
+- ✅ Must extend `BaseGenerator`
+- ✅ Must use `@register_generator("unique_name")` decorator
+- ✅ Must implement `generate(theta, u)` method
+- ✅ Must return `NDArray[np.float64]`
+- ✅ Should validate `u` parameter with `self._validate_u(u)`
+- ✅ Should include comprehensive docstrings
+- ✅ Should handle edge cases gracefully
 
 ### Best Practices for Generators
 
 **DO:**
 
--  Use vectorized NumPy operations
--  Keep code readable and well-commented
--  Validate input parameters
--  Handle edge cases (u=0, u=1)
--  Return normalized values (-1 to 1)
--  Add helpful docstrings
+- Use vectorized NumPy operations
+- Keep code readable and well-commented
+- Validate input parameters
+- Handle edge cases (u=0, u=1)
+- Return normalized values (-1 to 1)
+- Add helpful docstrings
 
 **DON'T:**
 
--  Use loops when vectorization is possible
--  Return NaN or infinite values
--  Assume u is always valid (validate it!)
--  Leave magic numbers unexplained
+- Use loops when vectorization is possible
+- Return NaN or infinite values
+- Assume u is always valid (validate it!)
+- Leave magic numbers unexplained
 
 ### Step 3: Test Your Generator
 
@@ -266,9 +266,9 @@ Found a bug? Please help us fix it!
 
 ### Before Reporting
 
--  Check if the bug was already reported
--  Try to reproduce it with the latest version
--  Gather information about your setup
+- Check if the bug was already reported
+- Try to reproduce it with the latest version
+- Gather information about your setup
 
 ### Bug Report Template
 
@@ -277,9 +277,9 @@ Clear description of what the bug is.
 
 **To Reproduce:**
 
-1.  Step 1
-2.  Step 2
-3.  Step 3
+1. Step 1
+2. Step 2
+3. Step 3
 
 **Expected Behavior:**
 What you expected to happen.
@@ -289,9 +289,9 @@ What actually happened.
 
 **Environment:**
 
--  OS: [e.g., Windows 11, macOS 14, Ubuntu 22.04]
--  Python Version: [e.g., 3.10.5]
--  Package Version: [e.g., 0.1.0]
+- OS: [e.g., Windows 11, macOS 14, Ubuntu 22.04]
+- Python Version: [e.g., 3.10.5]
+- Package Version: [e.g., 0.1.0]
 
 **Additional Context:**
 Any other relevant information.
@@ -324,25 +324,25 @@ Documentation is just as important as code!
 
 ### What to Document
 
--  New generators you create
--  Complex concepts that need explanation
--  Common problems and their solutions
--  Usage examples and tutorials
+- New generators you create
+- Complex concepts that need explanation
+- Common problems and their solutions
+- Usage examples and tutorials
 
 ### Documentation Style
 
--  **Clear and simple** - No jargon unless necessary
--  **Practical examples** - Show, don't just tell
--  **Accurate** - Test all code examples
--  **Well-structured** - Use headings and formatting
+- **Clear and simple** - No jargon unless necessary
+- **Practical examples** - Show, don't just tell
+- **Accurate** - Test all code examples
+- **Well-structured** - Use headings and formatting
 
 ### Documentation Files
 
--  `README.md` - Project overview
--  `QUICKSTART.md` - Fast introduction
--  `docs/wavetable_generators.md` - Generator creation guide
--  `docs/radian-pi-phase-frequency.md` - Math concepts
--  `PIP.MD` - Python package management
+- `README.md` - Project overview
+- `QUICKSTART.md` - Fast introduction
+- `docs/wavetable_generators.md` - Generator creation guide
+- `docs/radian-pi-phase-frequency.md` - Math concepts
+- `PIP.MD` - Python package management
 
 ---
 
@@ -350,16 +350,16 @@ Documentation is just as important as code!
 
 ### Writing Tests
 
--  Use `pytest` framework
--  Test both success and failure cases
--  Test edge cases (empty inputs, extreme values)
--  Use fixtures from `conftest.py`
+- Use `pytest` framework
+- Test both success and failure cases
+- Test edge cases (empty inputs, extreme values)
+- Use fixtures from `conftest.py`
 
 ### Coverage Goals
 
--  Maintain at least 90% code coverage
--  All new code should include tests
--  Tests should be clear and maintainable
+- Maintain at least 90% code coverage
+- All new code should include tests
+- Tests should be clear and maintainable
 
 ### Running Tests
 
@@ -383,18 +383,18 @@ pytest wavetable_tests/ -v
 
 ### What We Look For
 
--  ✅ Code follows style guidelines
--  ✅ All tests pass
--  ✅ Type hints are complete
--  ✅ Documentation is updated
--  ✅ Changes are well-explained
--  ✅ No breaking changes (or clearly documented)
+- ✅ Code follows style guidelines
+- ✅ All tests pass
+- ✅ Type hints are complete
+- ✅ Documentation is updated
+- ✅ Changes are well-explained
+- ✅ No breaking changes (or clearly documented)
 
 ### Review Timeline
 
--  We aim to review PRs within a few days
--  Complex changes may take longer
--  Be patient and responsive to feedback
+- We aim to review PRs within a few days
+- Complex changes may take longer
+- Be patient and responsive to feedback
 
 ---
 
@@ -408,17 +408,17 @@ By contributing, you agree that your contributions will be licensed under the GN
 
 ### Our Standards
 
--  **Be respectful** - Treat everyone with kindness
--  **Be constructive** - Focus on improving the project
--  **Be collaborative** - Work together, help each other
--  **Be patient** - Remember we're all learning
+- **Be respectful** - Treat everyone with kindness
+- **Be constructive** - Focus on improving the project
+- **Be collaborative** - Work together, help each other
+- **Be patient** - Remember we're all learning
 
 ### Unacceptable Behavior
 
--  Harassment or discrimination of any kind
--  Trolling, insulting, or inflammatory comments
--  Personal or political attacks
--  Any other unprofessional conduct
+- Harassment or discrimination of any kind
+- Trolling, insulting, or inflammatory comments
+- Personal or political attacks
+- Any other unprofessional conduct
 
 ### Enforcement
 
@@ -428,10 +428,10 @@ Project maintainers have the right to remove, edit, or reject comments, commits,
 
 ## 📞 Questions?
 
--  **Documentation:** Check `docs/` folder
--  **Examples:** Look at existing generators in `wavetable_generators/`
--  **Issues:** Open an issue on GitHub
--  **Discussion:** Start a discussion on GitHub
+- **Documentation:** Check `docs/` folder
+- **Examples:** Look at existing generators in `wavetable_generators/`
+- **Issues:** Open an issue on GitHub
+- **Discussion:** Start a discussion on GitHub
 
 ---
 
@@ -439,9 +439,9 @@ Project maintainers have the right to remove, edit, or reject comments, commits,
 
 Contributors will be recognized in:
 
--  Project README
--  Release notes
--  Generator metadata (for generator authors)
+- Project README
+- Release notes
+- Generator metadata (for generator authors)
 
 Thank you for helping make this project better! Every contribution, no matter how small, is valuable.
 

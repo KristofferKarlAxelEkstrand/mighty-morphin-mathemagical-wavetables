@@ -6,9 +6,9 @@
 
 ## ✅ Prerequisites
 
--  **Python 3.10 or newer** installed
--  **Git** (for cloning the repository)
--  **5 minutes** of your time
+- **Python 3.10 or newer** installed
+- **Git** (for cloning the repository)
+- **5 minutes** of your time
 
 Check your Python version:
 
@@ -34,9 +34,9 @@ bash setup.sh
 
 **What the script does:**
 
--  ✅ Creates Python virtual environment
--  ✅ Installs all dependencies
--  ✅ Sets up the package
+- ✅ Creates Python virtual environment
+- ✅ Installs all dependencies
+- ✅ Sets up the package
 
 ### Option B: Manual Setup
 
@@ -93,9 +93,9 @@ mighty-morphin-mathemagical-wavetables/
 
 **Next steps:**
 
--  Load this WAV file into any wavetable synthesizer (Serum, Vital, Pigments, etc.)
--  Play with the wavetable position to hear it morph from sine to triangle
--  Experiment with filters, effects, and modulation
+- Load this WAV file into any wavetable synthesizer (Serum, Vital, Pigments, etc.)
+- Play with the wavetable position to hear it morph from sine to triangle
+- Experiment with filters, effects, and modulation
 
 ---
 
@@ -149,9 +149,9 @@ python -m wavetable_synthesis sine_to_triangle --frames 256 --rate 44100 --bits 
 
 **What these options mean:**
 
--  `--frames`: Number of morphing steps (64, 128, 256, 512)
--  `--rate`: Sample rate in Hz (44100, 48000, 96000)
--  `--bits`: Bit depth (16, 24, 32)
+- `--frames`: Number of morphing steps (64, 128, 256, 512)
+- `--rate`: Sample rate in Hz (44100, 48000, 96000)
+- `--bits`: Bit depth (16, 24, 32)
 
 ### Custom Output Location
 
@@ -293,9 +293,9 @@ source .venv/bin/activate
 
 ### Generator Not Found
 
--  Check the file is in `wavetable_generators/` directory
--  Make sure you have the `@register_generator("name")` decorator
--  File name doesn't matter - decorator name does!
+- Check the file is in `wavetable_generators/` directory
+- Make sure you have the `@register_generator("name")` decorator
+- File name doesn't matter - decorator name does!
 
 ---
 
@@ -303,9 +303,9 @@ source .venv/bin/activate
 
 **Learn More:**
 
--  📖 [README.md](README.md) - Complete project overview
--  🎯 [docs/wavetable_generators.md](docs/wavetable_generators.md) - Detailed generator guide
--  🔢 [docs/radian-pi-phase-frequency.md](docs/radian-pi-phase-frequency.md) - Understand the math
+- 📖 [README.md](README.md) - Complete project overview
+- 🎯 [docs/wavetable_generators.md](docs/wavetable_generators.md) - Detailed generator guide
+- 🔢 [docs/radian-pi-phase-frequency.md](docs/radian-pi-phase-frequency.md) - Understand the math
 
 **Get Help:**
 

@@ -15,9 +15,9 @@ Generate clean, morphing waveforms for Serum, Vital, Pigments, and other wavetab
 
 This open-source project exists for three main reasons:
 
--  To provide a simple way to create expressive wavetables using mathematics.
--  To help learners understand math concepts such as radians, π, sine, and cosine.
--  To offer a small, approachable Python project that is suitable for first-time open-source contributors.
+- To provide a simple way to create expressive wavetables using mathematics.
+- To help learners understand math concepts such as radians, π, sine, and cosine.
+- To offer a small, approachable Python project that is suitable for first-time open-source contributors.
 
 In spirit, it’s a bit like creating sounds with a Casio fx-82LB calculator and then loading them into a synthesizer to hear the result.
 
@@ -25,18 +25,18 @@ In spirit, it’s a bit like creating sounds with a Casio fx-82LB calculator and
 
 This tool creates **wavetables** - collections of waveforms that smoothly transform from one shape to another. Perfect for:
 
--  🎹 **Musicians**: Generate unique sounds for your synthesizers
--  📚 **Learners**: Understand sound synthesis through code
--  🔬 **Researchers**: Create mathematically-precise waveforms
--  🎨 **Sound Designers**: Experiment with custom wave shapes
+- 🎹 **Musicians**: Generate unique sounds for your synthesizers
+- 📚 **Learners**: Understand sound synthesis through code
+- 🔬 **Researchers**: Create mathematically-precise waveforms
+- 🎨 **Sound Designers**: Experiment with custom wave shapes
 
 **Key Features:**
 
--  ✨ Mathematical precision (not sampled audio)
--  🔄 Smooth morphing between wave shapes
--  📦 Professional WAV export (16/24/32-bit)
--  🚀 Easy to create your own generators
--  🎓 Educational and well-documented
+- ✨ Mathematical precision (not sampled audio)
+- 🔄 Smooth morphing between wave shapes
+- 📦 Professional WAV export (16/24/32-bit)
+- 🚀 Easy to create your own generators
+- 🎓 Educational and well-documented
 
 ## ⚡ Quick Start
 
@@ -163,9 +163,9 @@ python -m wavetable_synthesis my_wave
 
 ## 📋 Available Generators
 
--  **sine_to_triangle** - Morphs from sine to triangle wave
--  **square_pwm_tz** - Square wave with adjustable pulse width
--  **example** - Multi-harmonic template you can customize
+- **sine_to_triangle** - Morphs from sine to triangle wave
+- **square_pwm_tz** - Square wave with adjustable pulse width
+- **example** - Multi-harmonic template you can customize
 
 ---
 
@@ -197,11 +197,11 @@ python -m wavetable_synthesis --batch
 
 ## 🔧 How It Works
 
-1.  **Generate phase array** - Create 2048 values from 0 to 2π for one waveform cycle
-2.  **Apply your formula** - Calculate waveform shape using `generate(theta, u)` method
-3.  **Process audio** - Remove DC offset, normalize volume for professional quality
-4.  **Repeat & morph** - Create 256 frames with smooth `u` transitions (0.0 → 1.0)
-5.  **Export WAV** - Save as professional WAV file for any synthesizer
+1. **Generate phase array** - Create 2048 values from 0 to 2π for one waveform cycle
+2. **Apply your formula** - Calculate waveform shape using `generate(theta, u)` method
+3. **Process audio** - Remove DC offset, normalize volume for professional quality
+4. **Repeat & morph** - Create 256 frames with smooth `u` transitions (0.0 → 1.0)
+5. **Export WAV** - Save as professional WAV file for any synthesizer
 
 ---
 
@@ -239,9 +239,9 @@ bash setup.sh
 
 The setup script automatically:
 
--  Creates a Python virtual environment (`.venv`)
--  Installs the package in development mode
--  Installs all dependencies
+- Creates a Python virtual environment (`.venv`)
+- Installs the package in development mode
+- Installs all dependencies
 
 ### Manual Setup (Alternative)
 
@@ -321,21 +321,21 @@ Open in VS Code or GitHub Codespaces for instant, pre-configured setup.
 
 **Getting Started:**
 
--  [QUICKSTART.md](QUICKSTART.md) - Get running in 5 minutes
--  [docs/wavetable_generators.md](docs/wavetable_generators.md) - Complete generator guide
+- [QUICKSTART.md](QUICKSTART.md) - Get running in 5 minutes
+- [docs/wavetable_generators.md](docs/wavetable_generators.md) - Complete generator guide
 
 **Understanding the Math:**
 
--  [docs/radian-pi-phase-frequency.md](docs/radian-pi-phase-frequency.md) - Phase, frequency, and radians explained
+- [docs/radian-pi-phase-frequency.md](docs/radian-pi-phase-frequency.md) - Phase, frequency, and radians explained
 
 **Development:**
 
--  [DEVELOPMENT.md](DEVELOPMENT.md) - Development workflow
--  [docs/development-setup.md](docs/development-setup.md) - Environment setup
--  [docs/pathlib-guide.md](docs/pathlib-guide.md) - Modern path handling
--  [docs/uv-guide.md](docs/uv-guide.md) - Fast package installer (optional)
--  [PIP.MD](PIP.MD) - Python package management
--  [AGENTS.md](AGENTS.md) - For AI assistants and automated tools
+- [DEVELOPMENT.md](DEVELOPMENT.md) - Development workflow
+- [docs/development-setup.md](docs/development-setup.md) - Environment setup
+- [docs/pathlib-guide.md](docs/pathlib-guide.md) - Modern path handling
+- [docs/uv-guide.md](docs/uv-guide.md) - Fast package installer (optional)
+- [PIP.MD](PIP.MD) - Python package management
+- [AGENTS.md](AGENTS.md) - For AI assistants and automated tools
 
 ---
 
@@ -378,9 +378,9 @@ WAV files are raw audio - they need to be loaded into a wavetable synthesizer (S
 
 ### Need More Help?
 
--  Check the documentation in `docs/`
--  Look at working examples in `wavetable_generators/`
--  Review test files in `wavetable_tests/` for usage patterns
+- Check the documentation in `docs/`
+- Look at working examples in `wavetable_generators/`
+- Review test files in `wavetable_tests/` for usage patterns
 
 ---
 
@@ -400,11 +400,11 @@ WAV files are raw audio - they need to be loaded into a wavetable synthesizer (S
 
 ## 🚀 What's Next?
 
-1.  **Generate your first wavetable** - Try the quick start above
-2.  **Explore existing generators** - See what's possible
-3.  **Read the math guide** - Understand phase and frequency
-4.  **Create your own generator** - Start with `example.py`
-5.  **Share your creations** - Contribute back to the project!
+1. **Generate your first wavetable** - Try the quick start above
+2. **Explore existing generators** - See what's possible
+3. **Read the math guide** - Understand phase and frequency
+4. **Create your own generator** - Start with `example.py`
+5. **Share your creations** - Contribute back to the project!
 
 ---
 
@@ -421,10 +421,10 @@ See the [LICENSE](LICENSE) file for the full license text.
 
 **Key Points:**
 
--  ✅ Free to use, modify, and distribute
--  ✅ Source code must remain open and available
--  ✅ Derivative works must also be GPL-3.0 licensed
--  ✅ No warranty provided
+- ✅ Free to use, modify, and distribute
+- ✅ Source code must remain open and available
+- ✅ Derivative works must also be GPL-3.0 licensed
+- ✅ No warranty provided
 
 For more information about the GPL-3.0 license, visit: <https://www.gnu.org/licenses/gpl-3.0.html>
 

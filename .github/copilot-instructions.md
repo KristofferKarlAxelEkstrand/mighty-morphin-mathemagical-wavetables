@@ -6,18 +6,18 @@ This document provides instructions for GitHub Copilot coding agent when working
 
 **Mighty Morphin Mathemagical Wavetables** is a Python library for generating professional audio wavetables using mathematical synthesis techniques. The project emphasizes:
 
--  **Educational Focus**: Learning programming, mathematics, and audio concepts
--  **Clean Code**: Modern Python with comprehensive testing and documentation
--  **Mathematical Purity**: All wavetables created through formulas, not samples
+- **Educational Focus**: Learning programming, mathematics, and audio concepts
+- **Clean Code**: Modern Python with comprehensive testing and documentation
+- **Mathematical Purity**: All wavetables created through formulas, not samples
 
 ## Tech Stack
 
--  **Python 3.10+** with type hints
--  **NumPy 2.0+** for numerical computations
--  **SoundFile** for WAV file I/O
--  **pytest** for testing (90%+ coverage required)
--  **Modern packaging** with pyproject.toml
--  **Linting**: Ruff (replaces Black, isort, Flake8, Pylint)
+- **Python 3.10+** with type hints
+- **NumPy 2.0+** for numerical computations
+- **SoundFile** for WAV file I/O
+- **pytest** for testing (90%+ coverage required)
+- **Modern packaging** with pyproject.toml
+- **Linting**: Ruff (replaces Black, isort, Flake8, Pylint)
 
 ## Key Commands
 
@@ -109,102 +109,102 @@ wavetable_tests/        # Comprehensive test suite
 
 ### Type Hints
 
--  Use full type annotations with `numpy.typing.NDArray`
--  All public functions must have type hints
--  Use `mypy --strict` for type checking
+- Use full type annotations with `numpy.typing.NDArray`
+- All public functions must have type hints
+- Use `mypy --strict` for type checking
 
 ### Testing
 
--  Maintain minimum 90% test coverage
--  Use pytest fixtures from `conftest.py`
--  Test both success and error cases
--  Follow existing test patterns
+- Maintain minimum 90% test coverage
+- Use pytest fixtures from `conftest.py`
+- Test both success and error cases
+- Follow existing test patterns
 
 ### Code Style
 
--  Ruff formatting with 128 character line length
--  Import sorting handled by Ruff
--  Follow existing code patterns
--  Clear, descriptive variable names
--  Comprehensive docstrings
+- Ruff formatting with 128 character line length
+- Import sorting handled by Ruff
+- Follow existing code patterns
+- Clear, descriptive variable names
+- Comprehensive docstrings
 
 ## Guidelines for Changes
 
 ### When Adding Features
 
-1.  **Check existing code first** - Follow established patterns
-2.  **Add tests** - Write tests before or alongside implementation
-3.  **Update documentation** - Keep docs in sync with code
-4.  **Run quality checks** - Ruff, mypy
-5.  **Verify coverage** - Ensure 90%+ test coverage
+1. **Check existing code first** - Follow established patterns
+2. **Add tests** - Write tests before or alongside implementation
+3. **Update documentation** - Keep docs in sync with code
+4. **Run quality checks** - Ruff, mypy
+5. **Verify coverage** - Ensure 90%+ test coverage
 
 ### When Creating Generators
 
-1.  **Copy example.py** as a template
-2.  **Extend BaseGenerator** class
-3.  **Implement generate(theta, u)** method
-    -  `theta`: phase array (0 to 2π)
-    -  `u`: morph parameter (0 to 1)
-4.  **Use decorator** `@register_generator("name")`
-5.  **Add validation** with `_validate_u(u)`
-6.  **Write tests** in `wavetable_tests/`
-7.  **Test CLI** with `python -m wavetable_synthesis generator_name`
+1. **Copy example.py** as a template
+2. **Extend BaseGenerator** class
+3. **Implement generate(theta, u)** method
+    - `theta`: phase array (0 to 2π)
+    - `u`: morph parameter (0 to 1)
+4. **Use decorator** `@register_generator("name")`
+5. **Add validation** with `_validate_u(u)`
+6. **Write tests** in `wavetable_tests/`
+7. **Test CLI** with `python -m wavetable_synthesis generator_name`
 
 ### Files Not to Modify
 
--  `.github/agents/` - Agent configuration files
--  `.husky/` - Pre-commit hooks
--  `package-lock.json` - Auto-generated npm lockfile
--  `node_modules/` - Dependencies (not in repo)
--  `.venv/` - Virtual environment (not in repo)
+- `.github/agents/` - Agent configuration files
+- `.husky/` - Pre-commit hooks
+- `package-lock.json` - Auto-generated npm lockfile
+- `node_modules/` - Dependencies (not in repo)
+- `.venv/` - Virtual environment (not in repo)
 
 ### Performance Philosophy
 
--  **Offline generation** - Not real-time, pre-rendering is acceptable
--  **Core efficiency** - Keep processing, export, CLI performant
--  **Generator clarity** - Prioritize readability over speed in generators
--  **Educational value** - Code should be clear for beginners
+- **Offline generation** - Not real-time, pre-rendering is acceptable
+- **Core efficiency** - Keep processing, export, CLI performant
+- **Generator clarity** - Prioritize readability over speed in generators
+- **Educational value** - Code should be clear for beginners
 
 ## Common Tasks
 
 ### Bug Fixes
 
-1.  Identify the issue with existing tests
-2.  Add a test that reproduces the bug
-3.  Fix the issue with minimal changes
-4.  Verify all tests pass
-5.  Check code quality with Ruff
+1. Identify the issue with existing tests
+2. Add a test that reproduces the bug
+3. Fix the issue with minimal changes
+4. Verify all tests pass
+5. Check code quality with Ruff
 
 ### Documentation Updates
 
-1.  Update relevant markdown files in `docs/`
-2.  Update docstrings in code
-3.  Verify markdown formatting
+1. Update relevant markdown files in `docs/`
+2. Update docstrings in code
+3. Verify markdown formatting
 
 ### Refactoring
 
-1.  Ensure tests cover existing behavior
-2.  Make incremental changes
-3.  Run tests frequently
-4.  Maintain type safety
-5.  Keep coverage above 90%
+1. Ensure tests cover existing behavior
+2. Make incremental changes
+3. Run tests frequently
+4. Maintain type safety
+5. Keep coverage above 90%
 
 ## Communication Style
 
 When working on this project:
 
--  **Keep it simple** - Use everyday language, not jargon
--  **Be a teacher** - Explain what you're doing and why
--  **Stay grounded** - No decorative language or emojis
--  **Be precise** - Technically correct, accurate code examples
+- **Keep it simple** - Use everyday language, not jargon
+- **Be a teacher** - Explain what you're doing and why
+- **Stay grounded** - No decorative language or emojis
+- **Be precise** - Technically correct, accurate code examples
 
 See AGENTS.md for detailed communication guidelines.
 
 ## Additional Resources
 
--  **AGENTS.md** - Comprehensive agent instructions
--  **CONTRIBUTING.md** - Contribution guidelines
--  **DEVELOPMENT.md** - Development workflow
--  **docs/** - User documentation
--  **docs_tech/** - Technical documentation
--  **QUICKSTART.md** - Quick start guide
+- **AGENTS.md** - Comprehensive agent instructions
+- **CONTRIBUTING.md** - Contribution guidelines
+- **DEVELOPMENT.md** - Development workflow
+- **docs/** - User documentation
+- **docs_tech/** - Technical documentation
+- **QUICKSTART.md** - Quick start guide

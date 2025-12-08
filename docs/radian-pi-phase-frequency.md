@@ -29,15 +29,15 @@ Before diving in, here's what you need to know:
 
 You probably know degrees:
 
--  Full circle = 360°
--  Right angle = 90°
--  Half circle = 180°
+- Full circle = 360°
+- Right angle = 90°
+- Half circle = 180°
 
 Radians are similar, but use π (pi):
 
--  Full circle = 2π radians (about 6.28)
--  Right angle = π/2 radians (about 1.57)
--  Half circle = π radians (about 3.14)
+- Full circle = 2π radians (about 6.28)
+- Right angle = π/2 radians (about 1.57)
+- Half circle = π radians (about 3.14)
 
 ### Quick Conversions
 
@@ -53,9 +53,9 @@ Radians are similar, but use π (pi):
 
 **Radians make wave math simpler.** Here's why:
 
-1.  **Sine and cosine work naturally with radians**
-2.  **One full wave cycle = 2π radians** (no conversion needed)
-3.  **All the formulas are cleaner**
+1. **Sine and cosine work naturally with radians**
+2. **One full wave cycle = 2π radians** (no conversion needed)
+3. **All the formulas are cleaner**
 
 ```python
 # With radians (simple)
@@ -87,11 +87,11 @@ wave = np.sin(np.radians(theta))
 
 **Reading the clock:**
 
--  **3:00** = 0 radians (or 2π) - Start position
--  **12:00** = π/2 radians - Quarter way
--  **9:00** = π radians - Halfway
--  **6:00** = 3π/2 radians - Three-quarters
--  **3:00 again** = 2π radians - Full circle
+- **3:00** = 0 radians (or 2π) - Start position
+- **12:00** = π/2 radians - Quarter way
+- **9:00** = π radians - Halfway
+- **6:00** = 3π/2 radians - Three-quarters
+- **3:00 again** = 2π radians - Full circle
 
 ### How Sine Waves Use the Clock
 
@@ -119,22 +119,22 @@ Think of phase like these familiar things:
 
 **Like a song:**
 
--  Phase tells you **where you are** in the song
--  0 = beginning
--  π = middle
--  2π = end (back to beginning)
+- Phase tells you **where you are** in the song
+- 0 = beginning
+- π = middle
+- 2π = end (back to beginning)
 
 **Like a clock:**
 
--  Phase tells you **what time it is** in the cycle
--  Each wave cycle is like the hour hand going around once
--  Phase wraps around: after 2π, you're back to 0
+- Phase tells you **what time it is** in the cycle
+- Each wave cycle is like the hour hand going around once
+- Phase wraps around: after 2π, you're back to 0
 
 **Like reading a book:**
 
--  Phase tells you **which page** you're on in the cycle
--  Each cycle is one chapter
--  When you finish (2π), the next cycle starts at page 1 (0)
+- Phase tells you **which page** you're on in the cycle
+- Each cycle is one chapter
+- When you finish (2π), the next cycle starts at page 1 (0)
 
 ### Phase in Your Generator
 
@@ -151,9 +151,9 @@ def generate(self, theta, u):
 
 **What theta contains:**
 
--  2048 numbers from 0 to just under 2π
--  Each number is a position in your wave cycle
--  Evenly spaced (like frames in a flipbook)
+- 2048 numbers from 0 to just under 2π
+- Each number is a position in your wave cycle
+- Evenly spaced (like frames in a flipbook)
 
 ---
 
@@ -165,9 +165,9 @@ def generate(self, theta, u):
 
 π shows up in circles (and waves are circular):
 
--  **Circumference of circle** = 2πr
--  **Full wave cycle** = 2π radians
--  **Half a cycle** = π radians
+- **Circumference of circle** = 2πr
+- **Full wave cycle** = 2π radians
+- **Half a cycle** = π radians
 
 ### Common π Values You'll Use
 
@@ -201,9 +201,9 @@ octave_up = np.sin(2 * theta)    # Double frequency
 
 ### The Basics
 
--  **1 Hz** = 1 cycle per second
--  **440 Hz** = 440 cycles per second (musical A note)
--  **44,100 Hz** = sample rate (how many samples per second)
+- **1 Hz** = 1 cycle per second
+- **440 Hz** = 440 cycles per second (musical A note)
+- **44,100 Hz** = sample rate (how many samples per second)
 
 ### Frequency in Wavetables
 
@@ -410,20 +410,20 @@ return np.sin(frequency_multiplier * theta)
 
 **Key Takeaways:**
 
-1.  **Radians are natural for waves** - Use them, not degrees
-2.  **2π = one full cycle** - Goes from 0 to 2π and wraps
-3.  **Theta = position in cycle** - Array from 0 to 2π
-4.  **Phase = where you are** - Like time on a clock
-5.  **Frequency = how fast** - Multiply theta to change speed
-6.  **π is just a number** - About 3.14, makes circles work
+1. **Radians are natural for waves** - Use them, not degrees
+2. **2π = one full cycle** - Goes from 0 to 2π and wraps
+3. **Theta = position in cycle** - Array from 0 to 2π
+4. **Phase = where you are** - Like time on a clock
+5. **Frequency = how fast** - Multiply theta to change speed
+6. **π is just a number** - About 3.14, makes circles work
 
 **For Wavetable Generators:**
 
--  `theta` is your phase array (0 to 2π)
--  Use `np.sin(theta)` to get wave height
--  Multiply theta to change frequency
--  Add to theta to shift phase
--  Mix waves using `u` parameter
+- `theta` is your phase array (0 to 2π)
+- Use `np.sin(theta)` to get wave height
+- Multiply theta to change frequency
+- Add to theta to shift phase
+- Mix waves using `u` parameter
 
 **Start simple:** Copy a working example and experiment. The math will make sense as you use it!
 
@@ -431,9 +431,9 @@ return np.sin(frequency_multiplier * theta)
 
 ## Need More Help?
 
--  **Try the examples** - Copy and run them to see what happens
--  **Experiment** - Change numbers and listen to the results
--  **Ask questions** - Math is easier when you're making sounds
--  **Read other docs** - Check `wavetable_generators.md` for more examples
+- **Try the examples** - Copy and run them to see what happens
+- **Experiment** - Change numbers and listen to the results
+- **Ask questions** - Math is easier when you're making sounds
+- **Read other docs** - Check `wavetable_generators.md` for more examples
 
 Remember: **You don't need to master all the math to create great wavetables.** Start with the examples and build from there!

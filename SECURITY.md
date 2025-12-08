@@ -14,8 +14,8 @@ Older versions may not receive security patches.
 We value the security of our users and contributors. If you've found a vulnerability:
 
 - **Where to report:**  
-  For sensitive security issues, please email **kristoffer.ekstrand@gmail.com**.
-  For non-sensitive issues, open a new *issue* or start a *discussion* in the Security category.
+  For sensitive security issues, please email **<kristoffer.ekstrand@gmail.com>**.
+  For non-sensitive issues, open a new _issue_ or start a _discussion_ in the Security category.
 - **Response Time:**  
   Because this project is maintained by volunteers, response times and patches may take up to **6 months**. We appreciate your patience and understanding!
 - **DIY fixes welcome:**  
@@ -27,29 +27,32 @@ We value the security of our users and contributors. If you've found a vulnerabi
 
 This project implements several security best practices:
 
--  **Code Quality**: All code passes strict linting (Ruff) and type checking (mypy)
--  **Type Safety**: Complete type hints with strict mypy checking
--  **Security Scanning**: Automated security checks with Bandit
--  **Testing**: 88% test coverage with comprehensive test suite
--  **Dependencies**: Automated dependency updates via Dependabot
--  **CI/CD**: Automated testing and security scanning on all pull requests
--  **Input Validation**: All user inputs are validated before processing
+- **Code Quality**: All code passes strict linting (Ruff) and type checking (mypy)
+- **Type Safety**: Complete type hints with strict mypy checking
+- **Security Scanning**: Automated security checks with Bandit
+- **Testing**: 88% test coverage with comprehensive test suite
+- **Dependencies**: Automated dependency updates via Dependabot
+- **CI/CD**: Automated testing and security scanning on all pull requests
+- **Input Validation**: All user inputs are validated before processing
 
 ## Security Considerations
 
 ### Audio File Generation
--  This project generates audio files (WAV format) which are safe for use
--  Generated files contain only mathematical waveform data
--  No executable code or scripts are embedded in generated files
+
+- This project generates audio files (WAV format) which are safe for use
+- Generated files contain only mathematical waveform data
+- No executable code or scripts are embedded in generated files
 
 ### Dependencies
--  Minimal dependencies (numpy, soundfile)
--  All dependencies are actively maintained and regularly updated
--  Dependabot automatically checks for security vulnerabilities
+
+- Minimal dependencies (numpy, soundfile)
+- All dependencies are actively maintained and regularly updated
+- Dependabot automatically checks for security vulnerabilities
 
 ### Data Privacy
--  This project does not collect, store, or transmit any user data
--  All processing happens locally on your machine
--  Generated wavetables are stored only in the specified output directory
+
+- This project does not collect, store, or transmit any user data
+- All processing happens locally on your machine
+- Generated wavetables are stored only in the specified output directory
 
 Thank you for helping keep mighty-morphin-mathemagical-wavetables safe for everyone!

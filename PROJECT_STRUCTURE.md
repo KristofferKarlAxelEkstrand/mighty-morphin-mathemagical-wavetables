@@ -31,16 +31,16 @@ wavetable_generators/
 
 **What belongs here:**
 
--  ✅ All custom wavetable generators
--  ✅ Your experimental generators
--  ✅ Production-ready generators
+- ✅ All custom wavetable generators
+- ✅ Your experimental generators
+- ✅ Production-ready generators
 
 **How it works:**
 
--  Each file contains one generator class
--  Use `@register_generator("name")` decorator
--  Generators are automatically discovered
--  File name doesn't matter - decorator name does!
+- Each file contains one generator class
+- Use `@register_generator("name")` decorator
+- Generators are automatically discovered
+- File name doesn't matter - decorator name does!
 
 **Example:**
 
@@ -96,10 +96,10 @@ wavetable_synthesis/
 
 **When to edit core files:**
 
--  Adding new processing features
--  Extending BaseGenerator functionality
--  Adding new export formats
--  Improving CLI features
+- Adding new processing features
+- Extending BaseGenerator functionality
+- Adding new export formats
+- Improving CLI features
 
 **Most users never need to edit these files!**
 
@@ -117,10 +117,10 @@ wavetable_tests/
 
 **What belongs here:**
 
--  ✅ Unit tests for core functionality
--  ✅ Integration tests
--  ✅ Generator-specific tests
--  ✅ Regression tests for bugs
+- ✅ Unit tests for core functionality
+- ✅ Integration tests
+- ✅ Generator-specific tests
+- ✅ Regression tests for bugs
 
 **Running tests:**
 
@@ -165,8 +165,8 @@ wavetable_dist/
 
 **What belongs here:**
 
--  ✅ Generated WAV files (output)
--  ✅ Automatically created by the generator
+- ✅ Generated WAV files (output)
+- ✅ Automatically created by the generator
 
 **Naming convention:**
 
@@ -176,9 +176,9 @@ wavetable_dist/
 
 **This directory:**
 
--  Created automatically when you generate wavetables
--  Can be changed with `--output` flag
--  Should be in `.gitignore` (output files don't belong in git)
+- Created automatically when you generate wavetables
+- Can be changed with `--output` flag
+- Should be in `.gitignore` (output files don't belong in git)
 
 ---
 
@@ -193,17 +193,17 @@ docs/
 
 **What belongs here:**
 
--  ✅ User-facing documentation
--  ✅ Tutorials and guides
--  ✅ Educational content
--  ✅ Examples and walkthroughs
+- ✅ User-facing documentation
+- ✅ Tutorials and guides
+- ✅ Educational content
+- ✅ Examples and walkthroughs
 
 **Documentation style:**
 
--  Clear and simple language
--  Practical examples
--  Educational focus
--  Well-organized
+- Clear and simple language
+- Practical examples
+- Educational focus
+- Well-organized
 
 ---
 
@@ -217,9 +217,9 @@ docs_tech/
 
 **What belongs here:**
 
--  ✅ Tool documentation
--  ✅ Technical reference material
--  ✅ Development tooling guides
+- ✅ Tool documentation
+- ✅ Technical reference material
+- ✅ Development tooling guides
 
 ---
 
@@ -227,39 +227,39 @@ docs_tech/
 
 ### Documentation
 
--  `README.md` - Project overview and quick start
--  `QUICKSTART.md` - Fast introduction (5 minutes)
--  `CONTRIBUTING.md` - Contribution guidelines
--  `CHANGELOG.md` - Version history
--  `AGENTS.md` - For AI assistants and tools
--  `PIP.MD` - Python package management reference
+- `README.md` - Project overview and quick start
+- `QUICKSTART.md` - Fast introduction (5 minutes)
+- `CONTRIBUTING.md` - Contribution guidelines
+- `CHANGELOG.md` - Version history
+- `AGENTS.md` - For AI assistants and tools
+- `PIP.MD` - Python package management reference
 
 ### Configuration
 
--  `pyproject.toml` - Python project configuration (dependencies, tools)
--  `package.json` - Node.js dependencies (for Prettier, husky)
--  `package-lock.json` - Locked Node.js dependencies
+- `pyproject.toml` - Python project configuration (dependencies, tools)
+- `package.json` - Node.js dependencies (for Prettier, husky)
+- `package-lock.json` - Locked Node.js dependencies
 
 ### Scripts
 
--  `setup.sh` - Quick setup script for first-time users
--  `auto_activate.sh` - Auto-activation script for virtual environment
+- `setup.sh` - Quick setup script for first-time users
+- `auto_activate.sh` - Auto-activation script for virtual environment
 
 ### IDE Configuration
 
--  `.vscode/` - VS Code settings and tasks
--  `.editorconfig` - Editor configuration
--  `wavetable-generator.code-workspace` - VS Code workspace
+- `.vscode/` - VS Code settings and tasks
+- `.editorconfig` - Editor configuration
+- `wavetable-generator.code-workspace` - VS Code workspace
 
 ### Git Configuration
 
--  `.gitignore` - Files to ignore in git
--  `.husky/` - Git hook scripts
+- `.gitignore` - Files to ignore in git
+- `.husky/` - Git hook scripts
 
 ### Python Configuration
 
--  `.venv/` - Virtual environment (created by setup, not in git)
--  `wavetable_synthesis.egg-info/` - Package metadata (created by pip)
+- `.venv/` - Virtual environment (created by setup, not in git)
+- `wavetable_synthesis.egg-info/` - Package metadata (created by pip)
 
 ---
 
@@ -345,9 +345,9 @@ Check `.gitignore` for complete list.
 
 ### "Where can I find generator examples?"
 
--  `wavetable_generators/example.py` - Template
--  `wavetable_generators/sine_to_triangle.py` - Production example
--  `wavetable_generators/square_pwm_tz.py` - Another example
+- `wavetable_generators/example.py` - Template
+- `wavetable_generators/sine_to_triangle.py` - Production example
+- `wavetable_generators/square_pwm_tz.py` - Another example
 
 ---
 
@@ -355,23 +355,23 @@ Check `.gitignore` for complete list.
 
 ### For New Contributors
 
-1.  **Start with:** `wavetable_generators/example.py`
-2.  **Read:** `README.md` and `QUICKSTART.md`
-3.  **Study:** Existing generators in `wavetable_generators/`
-4.  **Create:** Your generator in `wavetable_generators/`
+1. **Start with:** `wavetable_generators/example.py`
+2. **Read:** `README.md` and `QUICKSTART.md`
+3. **Study:** Existing generators in `wavetable_generators/`
+4. **Create:** Your generator in `wavetable_generators/`
 
 ### For Documentation Writers
 
-1.  **User docs:** `docs/` directory
-2.  **Technical docs:** `docs_tech/` directory
-3.  **General info:** Root `.md` files
+1. **User docs:** `docs/` directory
+2. **Technical docs:** `docs_tech/` directory
+3. **General info:** Root `.md` files
 
 ### For Core Contributors
 
-1.  **Core engine:** `wavetable_synthesis/core/`
-2.  **Export:** `wavetable_synthesis/export/`
-3.  **CLI:** `wavetable_synthesis/cli/`
-4.  **Tests:** `wavetable_tests/`
+1. **Core engine:** `wavetable_synthesis/core/`
+2. **Export:** `wavetable_synthesis/export/`
+3. **CLI:** `wavetable_synthesis/cli/`
+4. **Tests:** `wavetable_tests/`
 
 ---
 
@@ -413,23 +413,23 @@ Check `.gitignore` for complete list.
 
 ### File Organization
 
--  **One generator per file** - Keeps things simple
--  **Clear file names** - Describe the waveform
--  **Consistent style** - Follow existing patterns
+- **One generator per file** - Keeps things simple
+- **Clear file names** - Describe the waveform
+- **Consistent style** - Follow existing patterns
 
 ### Naming Conventions
 
--  **Generators:** lowercase_with_underscores
--  **Classes:** PascalCase
--  **Functions:** lowercase_with_underscores
--  **Constants:** UPPERCASE_WITH_UNDERSCORES
+- **Generators:** lowercase_with_underscores
+- **Classes:** PascalCase
+- **Functions:** lowercase_with_underscores
+- **Constants:** UPPERCASE_WITH_UNDERSCORES
 
 ### Code Location
 
--  **Generators:** `wavetable_generators/`
--  **Core logic:** `wavetable_synthesis/core/`
--  **Tests:** `wavetable_tests/`
--  **Docs:** `docs/` or `docs_tech/`
+- **Generators:** `wavetable_generators/`
+- **Core logic:** `wavetable_synthesis/core/`
+- **Tests:** `wavetable_tests/`
+- **Docs:** `docs/` or `docs_tech/`
 
 ---
 

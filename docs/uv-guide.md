@@ -65,10 +65,10 @@ uv pip install --upgrade -e ".[dev]"
 
 ## Benefits
 
--  10-100x faster than pip for dependency resolution
--  Compatible with existing pip workflows
--  No changes needed to pyproject.toml
--  Drop-in replacement for pip commands
+- 10-100x faster than pip for dependency resolution
+- Compatible with existing pip workflows
+- No changes needed to pyproject.toml
+- Drop-in replacement for pip commands
 
 ## Migration from pip
 
@@ -96,7 +96,7 @@ Add to GitHub Actions workflow:
 
 ## Notes
 
--  uv is from the same team that created Ruff
--  Written in Rust for maximum performance
--  Fully compatible with pip and existing tools
--  No lock file needed (uses pyproject.toml)
+- uv is from the same team that created Ruff
+- Written in Rust for maximum performance
+- Fully compatible with pip and existing tools
+- No lock file needed (uses pyproject.toml)

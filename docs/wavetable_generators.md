@@ -12,33 +12,33 @@ everything you need to make professional wavetables.
 
 ### Getting Started (15 minutes)
 
--  [What Are Wavetable Generators?](#what-are-wavetable-generators)
--  [Quick Start: Your First Generator](#quick-start-your-first-generator)
--  [Understanding the Two Key Parameters](#understanding-the-two-key-parameters)
+- [What Are Wavetable Generators?](#what-are-wavetable-generators)
+- [Quick Start: Your First Generator](#quick-start-your-first-generator)
+- [Understanding the Two Key Parameters](#understanding-the-two-key-parameters)
 
 ### Core Concepts (20 minutes)
 
--  [Theta (θ): The Phase Parameter](#theta-the-phase-parameter)
--  [U: The Morph Parameter](#u-the-morph-parameter)
--  [Common Wave Formulas](#common-wave-formulas)
+- [Theta (θ): The Phase Parameter](#theta-the-phase-parameter)
+- [U: The Morph Parameter](#u-the-morph-parameter)
+- [Common Wave Formulas](#common-wave-formulas)
 
 ### Practical Guide (30 minutes)
 
--  [Step-by-Step Generator Creation](#step-by-step-generator-creation)
--  [Testing Your Generator](#testing-your-generator)
--  [Best Practices](#best-practices)
+- [Step-by-Step Generator Creation](#step-by-step-generator-creation)
+- [Testing Your Generator](#testing-your-generator)
+- [Best Practices](#best-practices)
 
 ### Advanced Topics (optional)
 
--  [Audio Theory Background](#audio-theory-background)
--  [Error Handling](#error-handling-and-robustness)
--  [Performance Optimization](#performance-considerations)
--  [Advanced Features](#advanced-features)
+- [Audio Theory Background](#audio-theory-background)
+- [Error Handling](#error-handling-and-robustness)
+- [Performance Optimization](#performance-considerations)
+- [Advanced Features](#advanced-features)
 
 ### Reference
 
--  [Code Examples](#examples-in-the-codebase)
--  [Getting Help](#need-help)
+- [Code Examples](#examples-in-the-codebase)
+- [Getting Help](#need-help)
 
 ---
 
@@ -50,10 +50,10 @@ Wavetable generators produce "wavetables" - collections of waveforms that smooth
 
 **Key features:**
 
--  📐 **Mathematical precision** - Not sampled audio, but calculated waveforms
--  🔄 **Smooth morphing** - Gradual transitions between different shapes
--  🎵 **Synthesizer-ready** - Works with Serum, Vital, Pigments, and more
--  🚀 **Automatic discovery** - Just write the code, it's instantly available
+- 📐 **Mathematical precision** - Not sampled audio, but calculated waveforms
+- 🔄 **Smooth morphing** - Gradual transitions between different shapes
+- 🎵 **Synthesizer-ready** - Works with Serum, Vital, Pigments, and more
+- 🚀 **Automatic discovery** - Just write the code, it's instantly available
 
 ---
 
@@ -127,8 +127,8 @@ Every generator uses two parameters: **theta** and **u**.
 
 **Simple analogy:**
 
--  **Theta** = Where you are in the song (measure, beat, note)
--  **U** = Which verse you're singing (verse 1 → chorus → verse 2)
+- **Theta** = Where you are in the song (measure, beat, note)
+- **U** = Which verse you're singing (verse 1 → chorus → verse 2)
 
 ---
 
@@ -151,19 +151,19 @@ theta[2047] ≈ 6.28  # End of cycle (2π)
 
 Think of theta like a clock:
 
--  **0 radians** = 12 o'clock (start)
--  **π/2 radians** = 3 o'clock (quarter turn)
--  **π radians** = 6 o'clock (halfway)
--  **3π/2 radians** = 9 o'clock (three-quarters)
--  **2π radians** = 12 o'clock again (full circle)
+- **0 radians** = 12 o'clock (start)
+- **π/2 radians** = 3 o'clock (quarter turn)
+- **π radians** = 6 o'clock (halfway)
+- **3π/2 radians** = 9 o'clock (three-quarters)
+- **2π radians** = 12 o'clock again (full circle)
 
 ### Why Radians?
 
 Radians are the natural unit for waves because:
 
--  One complete circle = 2π radians (≈ 6.28)
--  Sine and cosine functions expect radians
--  Makes the math simpler and more precise
+- One complete circle = 2π radians (≈ 6.28)
+- Sine and cosine functions expect radians
+- Makes the math simpler and more precise
 
 **Quick conversion:** 2π radians = 360 degrees
 
@@ -191,10 +191,10 @@ return fundamental + 0.5 * second_harmonic + 0.33 * third_harmonic
 
 ### Theta Key Takeaways
 
-1.  Theta tells you **where** in the wave cycle
-2.  Use theta as input to `np.sin()`, `np.cos()`, etc.
-3.  Multiply theta to change frequency (2×theta = octave up)
-4.  Don't worry about the math - start with examples!
+1. Theta tells you **where** in the wave cycle
+2. Use theta as input to `np.sin()`, `np.cos()`, etc.
+3. Multiply theta to change frequency (2×theta = octave up)
+4. Don't worry about the math - start with examples!
 
 ---
 
@@ -204,9 +204,9 @@ return fundamental + 0.5 * second_harmonic + 0.33 * third_harmonic
 
 ### U Basics
 
--  **u = 0.0**: Starting waveform (first frame)
--  **u = 0.5**: Halfway morphed (middle frame)
--  **u = 1.0**: Ending waveform (last frame)
+- **u = 0.0**: Starting waveform (first frame)
+- **u = 0.5**: Halfway morphed (middle frame)
+- **u = 1.0**: Ending waveform (last frame)
 
 ### How U Changes
 
@@ -249,10 +249,10 @@ return np.sign(np.sin(theta) - threshold)
 
 ### U Key Takeaways
 
-1.  Use u to **control** waveform transformation
-2.  U changes **between** frames (not within)
-3.  Always validate: `u = self._validate_u(u)`
-4.  Think of u as a "morph slider" from shape A to shape B
+1. Use u to **control** waveform transformation
+2. U changes **between** frames (not within)
+3. Always validate: `u = self._validate_u(u)`
+4. Think of u as a "morph slider" from shape A to shape B
 
 ---
 
@@ -403,9 +403,9 @@ ls wavetable_dist/pwm_*.wav
 
 Imagine your wavetable as a flipbook animation:
 
--  Each page (frame) has a slightly different drawing
--  Within each page, the drawing is consistent
--  As you flip through pages, the drawing smoothly morphs
+- Each page (frame) has a slightly different drawing
+- Within each page, the drawing is consistent
+- As you flip through pages, the drawing smoothly morphs
 
 ```python
 # How u changes in a 4-frame wavetable:
@@ -421,9 +421,9 @@ Imagine your wavetable as a flipbook animation:
 
 When writing your `generate(theta, u)` method:
 
--  Use `u` to control the overall shape of your waveform
--  `u` affects the entire frame consistently
--  Different frames get different `u` values for morphing
+- Use `u` to control the overall shape of your waveform
+- `u` affects the entire frame consistently
+- Different frames get different `u` values for morphing
 
 ### Quick Test
 
@@ -613,9 +613,9 @@ def get_info(self):
 
 ### Frequency and Pitch
 
--  **Frequency** = How many wave cycles per second (Hz)
--  **Higher frequency** = Higher pitch
--  **Double frequency** = One octave higher
+- **Frequency** = How many wave cycles per second (Hz)
+- **Higher frequency** = Higher pitch
+- **Double frequency** = One octave higher
 
 ```python
 # Fundamental frequency
@@ -632,9 +632,9 @@ wave = np.sin(3 * theta)
 
 Harmonics are integer multiples of the fundamental frequency:
 
--  **1st harmonic** (fundamental): `np.sin(theta)`
--  **2nd harmonic** (octave): `np.sin(2 * theta)`
--  **3rd harmonic** (octave + fifth): `np.sin(3 * theta)`
+- **1st harmonic** (fundamental): `np.sin(theta)`
+- **2nd harmonic** (octave): `np.sin(2 * theta)`
+- **3rd harmonic** (octave + fifth): `np.sin(3 * theta)`
 
 More harmonics = brighter, richer sound:
 
@@ -659,8 +659,8 @@ for n in range(1, 8):
 
 ### Phase and Amplitude
 
--  **Phase** = Position in the cycle (theta)
--  **Amplitude** = Height of the wave (volume)
+- **Phase** = Position in the cycle (theta)
+- **Amplitude** = Height of the wave (volume)
 
 ```python
 # Change amplitude (volume)
@@ -782,10 +782,10 @@ def generate(self, theta, u):
 
 ### Watch Out For
 
--  **NaN values**: From invalid math (0/0, sqrt(-1))
--  **Infinite values**: From division by zero
--  **DC offset**: Should average to ~0
--  **Clipping**: Keep output in [-1, 1]
+- **NaN values**: From invalid math (0/0, sqrt(-1))
+- **Infinite values**: From division by zero
+- **DC offset**: Should average to ~0
+- **Clipping**: Keep output in [-1, 1]
 
 ---
 
@@ -897,9 +897,9 @@ np.max(array)         # Maximum
 
 Look at working generators for inspiration:
 
--  **`example.py`** - Template with 6 commented examples
--  **`sine_to_triangle.py`** - Simple mathematical morph
--  **`square_pwm_tz.py`** - PWM square wave generator
+- **`example.py`** - Template with 6 commented examples
+- **`sine_to_triangle.py`** - Simple mathematical morph
+- **`square_pwm_tz.py`** - PWM square wave generator
 
 ---
 
@@ -907,34 +907,34 @@ Look at working generators for inspiration:
 
 ### Documentation Links
 
--  **README.md** - Project overview and setup
--  **QUICKSTART.md** - 2-minute introduction
--  **CONTRIBUTING.md** - How to contribute
--  **docs/development-setup.md** - Development environment
--  **docs/radian-pi-phase-frequency.md** - Math concepts
+- **README.md** - Project overview and setup
+- **QUICKSTART.md** - 2-minute introduction
+- **CONTRIBUTING.md** - How to contribute
+- **docs/development-setup.md** - Development environment
+- **docs/radian-pi-phase-frequency.md** - Math concepts
 
 ### Quick Debugging
 
 **Generator not working?**
 
-1.  Does it appear in `--list`?
-2.  Does `generate()` return a NumPy array?
-3.  Are values within [-1, 1]?
-4.  Did you validate u?
+1. Does it appear in `--list`?
+2. Does `generate()` return a NumPy array?
+3. Are values within [-1, 1]?
+4. Did you validate u?
 
 **Sound not right?**
 
-1.  Check for DC offset: `wave - np.mean(wave)`
-2.  Normalize: `wave / np.abs(wave).max()`
-3.  Test at u=0, u=0.5, u=1.0
-4.  Listen to the WAV file
+1. Check for DC offset: `wave - np.mean(wave)`
+2. Normalize: `wave / np.abs(wave).max()`
+3. Test at u=0, u=0.5, u=1.0
+4. Listen to the WAV file
 
 **Tests failing?**
 
-1.  Run `pytest -v` for details
-2.  Check virtual environment is active
-3.  Verify imports are correct
-4.  Ensure theta is in radians (0 to 2π)
+1. Run `pytest -v` for details
+2. Check virtual environment is active
+3. Verify imports are correct
+4. Ensure theta is in radians (0 to 2π)
 
 ---
 
@@ -942,17 +942,17 @@ Look at working generators for inspiration:
 
 **To create a generator:**
 
-1.  Copy `example.py`
-2.  Change name, class, and `get_info()`
-3.  Write your wave formula in `generate()`
-4.  Test with `python -m wavetable_synthesis name`
+1. Copy `example.py`
+2. Change name, class, and `get_info()`
+3. Write your wave formula in `generate()`
+4. Test with `python -m wavetable_synthesis name`
 
 **Remember:**
 
--  Theta = position in wave (0 to 2π)
--  U = morph control (0.0 to 1.0)
--  Always validate u
--  Keep output in [-1, 1]
--  Simple is better than complex
+- Theta = position in wave (0 to 2π)
+- U = morph control (0.0 to 1.0)
+- Always validate u
+- Keep output in [-1, 1]
+- Simple is better than complex
 
 **Start simple, experiment, have fun!** 🎵

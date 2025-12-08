@@ -6,11 +6,11 @@ This project uses Python's modern `pathlib.Path` for all file path operations. T
 
 `pathlib.Path` is the modern, pythonic way to handle file paths since Python 3.4+:
 
--  **Object-oriented**: Paths are objects with useful methods and properties
--  **Cross-platform**: Automatically handles Windows vs Unix path differences
--  **Readable**: Uses `/` operator instead of `os.path.join()`
--  **Type-safe**: Better IDE autocomplete and type checking
--  **Powerful**: Rich API for common path operations
+- **Object-oriented**: Paths are objects with useful methods and properties
+- **Cross-platform**: Automatically handles Windows vs Unix path differences
+- **Readable**: Uses `/` operator instead of `os.path.join()`
+- **Type-safe**: Better IDE autocomplete and type checking
+- **Powerful**: Rich API for common path operations
 
 ## Quick Start
 
@@ -412,17 +412,17 @@ def test_wavetable_generation(tmp_path: Path):
 
 ## Additional Resources
 
--  [pathlib documentation](https://docs.python.org/3/library/pathlib.html)
--  [PEP 428 - The pathlib module](https://www.python.org/dev/peps/pep-0428/)
--  [Real Python: Python pathlib tutorial](https://realpython.com/python-pathlib/)
+- [pathlib documentation](https://docs.python.org/3/library/pathlib.html)
+- [PEP 428 - The pathlib module](https://www.python.org/dev/peps/pep-0428/)
+- [Real Python: Python pathlib tutorial](https://realpython.com/python-pathlib/)
 
 ## Summary
 
--  **Always use `pathlib.Path`** for file operations
--  **Accept `Union[str, Path]`** in public APIs for flexibility
--  **Return `Path` objects** from functions
--  **Use the `/` operator** for path joining
--  **Use Path properties** (`.name`, `.stem`, `.suffix`, etc.)
--  **Convert to string only when necessary** (e.g., for external libraries)
+- **Always use `pathlib.Path`** for file operations
+- **Accept `Union[str, Path]`** in public APIs for flexibility
+- **Return `Path` objects** from functions
+- **Use the `/` operator** for path joining
+- **Use Path properties** (`.name`, `.stem`, `.suffix`, etc.)
+- **Convert to string only when necessary** (e.g., for external libraries)
 
 The pathlib approach makes code more readable, maintainable, and cross-platform!

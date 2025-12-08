@@ -26,7 +26,9 @@
         "davidanson.vscode-markdownlint",
         "streetsidesoftware.code-spell-checker",
         "tamasfe.even-better-toml",
-        "eamodio.gitlens"
+        "editorconfig.editorconfig",
+        "eamodio.gitlens",
+        "github.vscode-pull-request-github"
       ],
       "settings": {
         "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",

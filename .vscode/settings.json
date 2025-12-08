@@ -196,5 +196,7 @@
     "**/__pycache__/**": true,
     "**/.pytest_cache/**": true,
     "**/.mypy_cache/**": true
-  }
+  },
+  "npm.enableScriptExplorer": true,
+  "npm.scriptExplorerAction": "run"
 }

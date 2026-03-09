@@ -5,7 +5,7 @@
   "private": true,
   "devDependencies": {
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^16.3.2",
     "markdownlint": "^0.40.0",
     "markdownlint-cli": "^0.47.0",
     "npm-check-updates": "^19.3.1",

@@ -46,7 +46,7 @@ dev = [
     # Type checking
     "mypy>=1.13.0",
     # Security
-    "bandit[toml]>=1.8.0",
+    "bandit[toml]>=1.9.4",
     # Pre-commit hooks
     "pre-commit>=4.0.0",
 ]

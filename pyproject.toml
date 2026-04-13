@@ -52,7 +52,7 @@ dev = [
 ]
 web = [
     "flask>=2.3.0",
-    "flask-cors>=4.0.0",
+    "flask-cors>=6.0.2",
 ]
 docs = [
     "sphinx>=5.0.0",

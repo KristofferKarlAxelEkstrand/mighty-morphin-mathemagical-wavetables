@@ -64,7 +64,7 @@ Wavetable generators produce "wavetables" - collections of waveforms that smooth
 ### Step 1: Copy the Template
 
 ```bash
-cp wavetable_generators/example.py wavetable_generators/my_wave.py
+cp maths/example.py maths/my_wave.py
 ```
 
 ### Step 2: Change Three Things
@@ -332,7 +332,7 @@ This creates a square wave with adjustable width (PWM effect).
 **Step 1: Create the file**
 
 ```bash
-cp wavetable_generators/example.py wavetable_generators/pwm.py
+cp maths/example.py maths/pwm.py
 ```
 
 **Step 2: Update the code**
@@ -390,7 +390,7 @@ python -m wavetable_synthesis pwm
 python -m wavetable_synthesis --list
 
 # Check the output file
-ls wavetable_dist/pwm_*.wav
+ls maths_generated/pwm_*.wav
 ```
 
 **Congratulations!** You've created a working wavetable generator.
@@ -432,21 +432,21 @@ When writing your `generate(theta, u)` method:
 python -m wavetable_synthesis my_generator
 
 # Check output
-ls wavetable_dist/my_generator_*.wav
+ls maths_generated/my_generator_*.wav
 ```
 
 ### Automated Tests
 
-Create a test file in `wavetable_tests/`:
+Create a test file in `generator/wavetable_tests/`:
 
 ```python
-import pytest
 import numpy as np
-from wavetable_generators.my_generator import MyGenerator
+from wavetable_synthesis.core.registry import get_registry
+
 
 def test_my_generator_output():
     """Test generator produces valid output."""
-    gen = MyGenerator()
+    gen = get_registry(verbose=False)["my_generator"]
     theta = np.linspace(0, 2*np.pi, 2048, endpoint=False)
 
     # Test at u=0
@@ -468,7 +468,7 @@ def test_my_generator_output():
 pytest
 
 # Run specific test file
-pytest wavetable_tests/test_my_generator.py -v
+pytest generator/wavetable_tests/test_my_generator.py -v
 
 # Check coverage
 pytest --cov=wavetable_synthesis --cov-report=term
@@ -841,18 +841,18 @@ python -m wavetable_synthesis --batch
 pytest
 
 # Type check
-mypy wavetable_synthesis/ --strict
+mypy generator/wavetable_synthesis/ --strict
 ```
 
 ### File Locations
 
 ```text
-wavetable_generators/      ← Your generator goes here
+maths/      ← Your generator goes here
 ├── example.py            ← Template to copy
 ├── sine_to_triangle.py   ← Working example
 └── my_generator.py       ← Your new generator
 
-wavetable_dist/           ← Generated WAV files
+maths_generated/           ← Generated WAV files
 ├── example_256f_2048s.wav
 └── my_generator_256f_2048s.wav
 ```

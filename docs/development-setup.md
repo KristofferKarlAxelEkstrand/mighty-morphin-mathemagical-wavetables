@@ -30,16 +30,17 @@ For the best experience, install these extensions:
 - **Prettier** (esbenp.prettier-vscode) - Markdown/JSON formatting
 - **EditorConfig** (editorconfig.editorconfig) - Cross-editor consistency
 
-## Pre-commit Hooks
+## Git Hooks (husky)
 
-The project uses pre-commit hooks to run quality checks before commits:
+`npm install` installs husky. On commit, lint-staged checks only staged files:
 
-- Python files: Ruff formatting and linting, mypy type checking
-- Markdown: Prettier + markdownlint
+- Python: Ruff format and lint
+- Markdown: Prettier and markdownlint
 - JSON/YAML: Prettier
-- Security: Bandit checks
 
-Install with: `pre-commit install`
+CI runs Ruff, mypy, and pytest. Do not run `pre-commit install`. It overwrites the husky hook.
+
+See [docs/tech/husky.md](tech/husky.md).
 
 ## Manual Commands
 
@@ -53,7 +54,7 @@ make format
 source .venv/Scripts/activate && ruff format . && ruff check --fix .
 
 # Check types
-source .venv/Scripts/activate && mypy wavetable_synthesis/ --strict
+source .venv/Scripts/activate && mypy generator/wavetable_synthesis/ --strict
 
 # Or use Make for all checks
 make quality

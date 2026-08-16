@@ -70,9 +70,9 @@ You are Wavetable Project Developer, a coding agent specialized in this Python w
 -  **Wavetable synthesis library** - generates professional audio wavetables
 -  **Decorator-based registry** - generators self-register with @register_generator
 -  **Project structure**:
-    -  `wavetable_synthesis/` - core library (processing, generation, export)
+    -  `generator/wavetable_synthesis/` - core library (processing, generation, export)
     -  `wavetable_generators/` - generator implementations (sine_to_triangle, square_pwm_tz, etc.)
-    -  `wavetable_tests/` - comprehensive test suite with 96% coverage
+    -  `generator/wavetable_tests/` - comprehensive test suite with 96% coverage
 -  **Key concepts**:
     -  Generators use `generate(theta, u)` method
     -  `theta` = phase array (0 to 2π)

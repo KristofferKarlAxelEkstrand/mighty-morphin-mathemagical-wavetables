@@ -5,7 +5,6 @@
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Code style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 **Use math to create sound!**
 
@@ -52,7 +51,7 @@ python -m wavetable_synthesis sine_to_triangle
 ```text
 Generating sine_to_triangle wavetable...
    Frames: 256, Rate: 44100Hz, Bits: 16
-Success! File: wavetable_dist/sine_to_triangle_256frames_44100Hz_16bit.wav
+Success! File: maths_generated/sine_to_triangle_256frames_44100Hz_16bit.wav
 ```
 
 Your wavetable is ready! Load it into any wavetable synthesizer.
@@ -124,7 +123,7 @@ Want to make your own wave shapes? It's simple!
 ### Step 1: Copy the Template
 
 ```bash
-cp wavetable_generators/example.py wavetable_generators/my_wave.py
+cp maths/example.py maths/my_wave.py
 ```
 
 ### Step 2: Edit Your Generator
@@ -178,7 +177,7 @@ Options:
   --frames N     Number of morphing steps (default: 256)
   --rate N       Sample rate: 44100, 48000, 96000 (default: 44100)
   --bits N       Bit depth: 16, 24, 32 (default: 16)
-  --output DIR   Where to save files (default: wavetable_dist)
+  --output DIR   Where to save files (default: maths_generated)
   --list         Show all available generators
   --batch        Generate all wavetables with all configurations
 ```
@@ -209,17 +208,16 @@ python -m wavetable_synthesis --batch
 
 ```text
 wavetable-generator/
-├── wavetable_generators/       # Your generator implementations
+├── maths/                      # Your wave formulas (edit these)
 │   ├── example.py             # Template + working generator
 │   ├── sine_to_triangle.py    # Production generators
 │   └── square_pwm_tz.py
-├── wavetable_synthesis/        # Core library (don't edit)
-│   ├── core/                  # Generation engine
-│   ├── export/                # WAV export
-│   └── cli/                   # Command-line interface
-├── wavetable_tests/           # Comprehensive test suite
+├── generator/                  # Engine (usually don't edit)
+│   ├── wavetable_synthesis/    # Core library
+│   └── wavetable_tests/        # Test suite
 ├── docs/                      # Documentation & guides
-└── wavetable_dist/            # Generated WAV files (output)
+│   └── tech/                  # Tooling notes
+└── maths_generated/            # Generated WAV files (output)
 ```
 
 ---
@@ -237,11 +235,11 @@ cd wavetable-generator
 bash setup.sh
 ```
 
-The setup script automatically:
+The setup script:
 
 - Creates a Python virtual environment (`.venv`)
 - Installs the package in development mode
-- Installs all dependencies
+- Installs Node tools (`npm install`) so husky git hooks work
 
 ### Manual Setup (Alternative)
 
@@ -253,8 +251,9 @@ cd wavetable-generator
 # Create virtual environment
 python -m venv .venv
 
-# Activate it (Windows Git Bash)
-source .venv/Scripts/activate
+# Activate it
+source .venv/bin/activate          # Linux/macOS
+# source .venv/Scripts/activate    # Windows Git Bash
 
 # Install package in development mode
 pip install -e .
@@ -262,17 +261,20 @@ pip install -e .
 
 ### Development Setup (Optional)
 
-Install additional development tools for contributing:
+Install extra tools for contributing:
 
 ```bash
 # Activate virtual environment
-source .venv/Scripts/activate
+source .venv/bin/activate
 
 # Install dev dependencies (pytest, ruff, mypy, etc.)
 pip install -e ".[dev]"
 
+# Install husky git hooks (needs Node 22+)
+npm install
+
 # Run tests to verify installation
-pytest wavetable_tests/
+pytest generator/wavetable_tests/
 ```
 
 ---
@@ -300,14 +302,9 @@ ruff check --fix .    # Check and auto-fix issues
 ruff format .         # Format code
 ```
 
-### Pre-commit Hooks
+### Git Hooks
 
-Automated quality checks before commits:
-
-```bash
-pre-commit install    # One-time setup
-git commit           # Hooks run automatically
-```
+`npm install` installs husky. Hooks run on `git commit`.
 
 ### Development Container
 
@@ -333,8 +330,7 @@ Open in VS Code or GitHub Codespaces for instant, pre-configured setup.
 - [DEVELOPMENT.md](DEVELOPMENT.md) - Development workflow
 - [docs/development-setup.md](docs/development-setup.md) - Environment setup
 - [docs/pathlib-guide.md](docs/pathlib-guide.md) - Modern path handling
-- [docs/uv-guide.md](docs/uv-guide.md) - Fast package installer (optional)
-- [PIP.MD](PIP.MD) - Python package management
+- [docs/tech/husky.md](docs/tech/husky.md) - Git hooks
 - [AGENTS.md](AGENTS.md) - For AI assistants and automated tools
 
 ---
@@ -363,7 +359,7 @@ source .venv/bin/activate
 
 ### Generator Not Found
 
-Make sure your generator file is in the `wavetable_generators/` directory and has the `@register_generator()` decorator.
+Make sure your generator file is in the `maths/` directory and has the `@register_generator()` decorator.
 
 ### Import Errors
 
@@ -379,8 +375,8 @@ WAV files are raw audio - they need to be loaded into a wavetable synthesizer (S
 ### Need More Help?
 
 - Check the documentation in `docs/`
-- Look at working examples in `wavetable_generators/`
-- Review test files in `wavetable_tests/` for usage patterns
+- Look at working examples in `maths/`
+- Review test files in `generator/wavetable_tests/` for usage patterns
 
 ---
 

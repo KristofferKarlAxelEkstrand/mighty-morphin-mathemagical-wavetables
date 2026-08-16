@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "roles": {
+    "team-lead": {
+      "risk": "high",
+      "candidates": [["devin", "swe-1-7", ""]]
+    },
+    "dev-1": {
+      "risk": "medium",
+      "candidates": [["devin", "swe-1-7", ""]]
+    },
+    "dev-2": {
+      "risk": "high",
+      "candidates": [["devin", "swe-1-7", ""]]
+    },
+    "scout": {
+      "risk": "medium",
+      "candidates": [["devin", "swe-1-7", ""]]
+    },
+    "quality": {
+      "risk": "high",
+      "candidates": [["devin", "swe-1-7", ""]]
+    },
+    "tests": {
+      "risk": "low",
+      "candidates": [["devin", "swe-1-7", ""]]
+    },
+    "fixer": {
+      "risk": "low",
+      "candidates": [
+        ["devin", "SWE-1.6", ""],
+        ["devin", "swe-1-7", ""]
+      ]
+    },
+    "fixer-2": {
+      "risk": "low",
+      "candidates": [
+        ["devin", "SWE-1.6", ""],
+        ["devin", "swe-1-7", ""]
+      ]
+    },
+    "tech-writer": {
+      "risk": "low",
+      "candidates": [
+        ["devin", "SWE-1.6", ""],
+        ["devin", "swe-1-7", ""]
+      ]
+    },
+    "architect": {
+      "risk": "high",
+      "candidates": [["codex", "gpt-5.6-sol", "high"]]
+    },
+    "security": {
+      "risk": "high",
+      "candidates": [["devin", "GLM-5.2 High", "high"]]
+    },
+    "release": {
+      "risk": "high",
+      "candidates": [["codex", "gpt-5.6-sol", "medium"]]
+    }
+  }
+}

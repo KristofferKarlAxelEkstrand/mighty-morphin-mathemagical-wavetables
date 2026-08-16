@@ -21,13 +21,11 @@ python -m pip install --upgrade pip
 echo "Installing package with dev dependencies..."
 pip install -e ".[dev]"
 
-# Install pre-commit hooks (only if .git exists)
-if [ -d ".git" ]; then
-    echo "Installing pre-commit hooks..."
-    pre-commit install || echo "Warning: pre-commit install failed, continuing..."
-else
-    echo "Skipping pre-commit hooks (no .git directory)"
-fi
+# Node tools: husky (git hooks), prettier, markdownlint, office-space
+echo "Installing Node tools (husky, prettier)..."
+npm install
+# husky sets core.hooksPath to .husky/_. Drop a leftover Python hook.
+rm -f .git/hooks/pre-commit
 
 echo "Development environment setup complete!"
 echo ""

@@ -1,4 +1,4 @@
-.PHONY: help install install-dev clean test test-cov lint format type-check quality pre-commit run list validate batch
+.PHONY: help install install-dev clean test test-cov lint format type-check quality hooks run list validate batch
 
 # Default target - show help
 help:
@@ -8,7 +8,7 @@ help:
 	@echo "Setup Commands:"
 	@echo "  make install          Install package in development mode"
 	@echo "  make install-dev      Install with all dev dependencies"
-	@echo "  make pre-commit       Install pre-commit hooks"
+	@echo "  make hooks            Install husky git hooks (npm install)"
 	@echo ""
 	@echo "Testing Commands:"
 	@echo "  make test            Run all tests"
@@ -40,30 +40,30 @@ install-dev:
 	pip install -e ".[dev]"
 	@echo "✅ Development dependencies installed"
 
-pre-commit:
-	pre-commit install
-	@echo "✅ Pre-commit hooks installed"
+hooks:
+	npm install
+	@echo "✅ Husky git hooks installed"
 
 # Testing
 test:
-	pytest wavetable_tests/
+	pytest generator/wavetable_tests/
 
 test-cov:
-	pytest wavetable_tests/ --cov=wavetable_synthesis --cov-report=term-missing --cov-report=html
+	pytest generator/wavetable_tests/ --cov=wavetable_synthesis --cov-report=term-missing --cov-report=html
 
 test-verbose:
-	pytest wavetable_tests/ -v
+	pytest generator/wavetable_tests/ -v
 
 # Code Quality
 lint:
-	ruff check wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+	ruff check generator/ maths/
 
 format:
-	ruff format wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-	ruff check --fix wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+	ruff format generator/ maths/
+	ruff check --fix generator/ maths/
 
 type-check:
-	mypy wavetable_synthesis/ --strict
+	mypy generator/wavetable_synthesis/ --strict
 
 quality: lint type-check
 	@echo "✅ All quality checks passed!"
@@ -91,6 +91,7 @@ clean:
 	rm -rf build/
 	rm -rf dist/
 	rm -rf *.egg-info
+	rm -rf generator/*.egg-info
 	rm -rf .pytest_cache/
 	rm -rf .mypy_cache/
 	rm -rf .ruff_cache/

@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "name": "powerrangers",
+  "repositoryRoot": "../../..",
+  "state": {
+    "records": "records",
+    "checkpointOnStages": [
+      "human",
+      "blocked"
+    ]
+  },
+  "tasks": {
+    "stages": [
+      "queued",
+      "implementing",
+      "review",
+      "qa",
+      "human",
+      "blocked",
+      "done"
+    ],
+    "transitions": {
+      "queued": [
+        "implementing",
+        "blocked"
+      ],
+      "implementing": [
+        "review",
+        "blocked"
+      ],
+      "review": [
+        "implementing",
+        "qa",
+        "blocked"
+      ],
+      "qa": [
+        "implementing",
+        "done",
+        "human",
+        "blocked"
+      ],
+      "human": [
+        "implementing",
+        "done",
+        "blocked"
+      ],
+      "blocked": [
+        "implementing",
+        "review"
+      ],
+      "done": []
+    }
+  },
+  "messages": {
+    "types": [
+      "task",
+      "report",
+      "blocked",
+      "feedback",
+      "approved",
+      "rejected",
+      "nit",
+      "test",
+      "deps",
+      "npm-request",
+      "prompt-updated",
+      "question",
+      "bug",
+      "feature",
+      "review",
+      "answer",
+      "handoff",
+      "run-request"
+    ]
+  },
+  "review": {
+    "machineChecks": [
+      {
+        "label": "workflow-integrity",
+        "command": [
+          "node",
+          "{packageRoot}/check-workflow.js",
+          "{workflow}"
+        ]
+      },
+      {
+        "label": "ruff-check",
+        "command": [
+          "python",
+          "-m",
+          "ruff",
+          "check",
+          "generator/",
+          "maths/"
+        ]
+      },
+      {
+        "label": "pytest-handoff",
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "--no-cov",
+          "generator/wavetable_tests"
+        ]
+      }
+    ]
+  }
+}

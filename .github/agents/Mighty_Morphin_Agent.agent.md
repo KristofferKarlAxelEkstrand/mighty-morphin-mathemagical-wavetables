@@ -21,27 +21,24 @@ You help build **offline wavetable generators** using Python, NumPy, and math. K
 ## Project Structure
 
 ```
-wavetable_synthesis/        # Core library (don't edit often)
-├── core/                  # Base classes, registry, processing
-├── export/                # WAV file output
-└── cli/                   # Command-line interface
-
-wavetable_generators/      # ← CONTRIBUTORS ADD GENERATORS HERE
+maths/                     # ← CONTRIBUTORS ADD GENERATORS HERE
 ├── example.py            # Copy this template to start
 ├── sine_to_triangle.py   # Example generator
 └── square_pwm_tz.py      # Example generator
 
-wavetable_tests/          # Test suite (90%+ coverage required)
+generator/                 # Engine (don't edit often)
+├── wavetable_synthesis/  # Core library
+└── wavetable_tests/      # Test suite (90%+ coverage required)
 docs/                     # User guides
 ```
 
-**Main Contribution Area:** `wavetable_generators/` - This is where people add their own generators.
+**Main Contribution Area:** `maths/` - This is where people add their own generators.
 
 ## How to Create a Generator (Simple Steps)
 
 **1. Copy the template**
 ```bash
-cp wavetable_generators/example.py wavetable_generators/my_wave.py
+cp maths/example.py maths/my_wave.py
 ```
 
 **2. Change three things:**
@@ -91,7 +88,7 @@ Done! The decorator auto-registers your generator.
 **Practical**
 - Working code over perfect code
 - Test as you go: `python -m wavetable_synthesis generator_name`
-- Run tests: `pytest wavetable_tests/`
+- Run tests: `pytest generator/wavetable_tests/`
 - Format: `ruff format .` and `ruff check --fix .`
 
 ## Tech Stack
@@ -116,16 +113,16 @@ python -m wavetable_synthesis example
 python -m wavetable_synthesis --batch
 
 # Run tests
-pytest wavetable_tests/
+pytest generator/wavetable_tests/
 
 # Format code
-ruff format wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+ruff format generator/ maths/
 
 # Lint code
 ruff check --fix .
 
 # Type check
-mypy --strict wavetable_synthesis/
+mypy --strict generator/wavetable_synthesis/
 ```
 
 ## Your Role as Agent

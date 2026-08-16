@@ -47,16 +47,6 @@ dev = [
     "mypy>=1.13.0",
     # Security
     "bandit[toml]>=1.8.0",
-    # Pre-commit hooks
-    "pre-commit>=4.0.0",
-]
-web = [
-    "flask>=2.3.0",
-    "flask-cors>=4.0.0",
-]
-docs = [
-    "sphinx>=5.0.0",
-    "sphinx-rtd-theme>=1.2.0",
 ]
 
 [project.scripts]
@@ -75,11 +65,12 @@ zip-safe = false
 include-package-data = true
 
 [tool.setuptools.packages.find]
-where = ["."]
-exclude = ["test*", "docs*"]
+where = ["generator"]
+include = ["wavetable_synthesis*"]
+exclude = ["test*", "docs*", "maths"]
 
 [tool.setuptools.package-data]
-"wavetable_synthesis" = ["wavetable_generators/*.py"]
+"wavetable_synthesis" = ["py.typed"]
 
 [tool.mypy]
 python_version = "3.13"
@@ -102,20 +93,14 @@ module = [
 ]
 ignore_missing_imports = true
 
-[[tool.mypy.overrides]]
-module = [
-    "test_basic",
-    "test_advanced",
-    "test_integration",
-    "test_wavetable_generation"
-]
-disallow_untyped_defs = false
-
 [tool.pytest.ini_options]
 minversion = "7.0"
 addopts = "-ra -q --cov=wavetable_synthesis --cov-report=term-missing"
 testpaths = [
-    "wavetable_tests",
+    "generator/wavetable_tests",
+]
+pythonpath = [
+    "generator",
 ]
 python_files = "test_*.py"
 python_classes = "Test*"
@@ -150,7 +135,7 @@ extend-exclude = [
     ".tox",
     ".venv",
     "build",
-    "wavetable_dist",
+    "maths_generated",
     "dist",
     "node_modules",
 ]
@@ -188,6 +173,7 @@ select = [
 # Disable specific rules that conflict with project style
 ignore = [
     "PLR0913",  # Too many arguments
+    "PLR0917",  # Too many positional arguments (same functions as PLR0913)
     "PLR2004",  # Magic value used in comparison
     "ISC001",   # Conflicts with formatter
     "COM812",   # Trailing comma conflicts with formatter
@@ -211,11 +197,11 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401", "PLE0605"]  # Allow unused imports and dynamic __all__ in __init__.py
-"wavetable_tests/**" = ["ARG", "PLR", "PLC0415", "PT015", "B011", "B009", "PT017", "PT006", "RUF003", "RUF043"]  # Relax test file rules
-"wavetable_generators/**" = ["PLR0915"]  # Allow more statements in generator implementations
-"wavetable_synthesis/__init__.py" = ["PLC0415", "UP035"]  # Allow lazy imports and legacy typing in package init
-"wavetable_synthesis/cli/__init__.py" = ["PLC0415"]  # Allow lazy imports in CLI module
-"wavetable_synthesis/cli/cli.py" = ["PLC0415", "PLR0912", "PLR0915"]  # Allow imports in functions and complexity in CLI
+"generator/wavetable_tests/**" = ["ARG", "PLR", "PLC0415", "PT015", "B011", "B009", "PT017", "PT006", "RUF003", "RUF043"]  # Relax test file rules
+"maths/**" = ["PLR0915"]  # Allow more statements in generator implementations
+"generator/wavetable_synthesis/__init__.py" = ["PLC0415", "UP035"]  # Allow lazy imports and legacy typing in package init
+"generator/wavetable_synthesis/cli/__init__.py" = ["PLC0415"]  # Allow lazy imports in CLI module
+"generator/wavetable_synthesis/cli/cli.py" = ["PLC0415", "PLR0912", "PLR0915"]  # Allow imports in functions and complexity in CLI
 
 [tool.ruff.lint.isort]
 known-first-party = ["wavetable_synthesis"]
@@ -233,5 +219,5 @@ line-ending = "auto"
 
 # Bandit security linting configuration
 [tool.bandit]
-exclude_dirs = ["wavetable_tests", "wavetable_generators", ".venv", "build", "dist"]
+exclude_dirs = ["generator/wavetable_tests", "maths", ".venv", "build", "dist"]
 skips = ["B101"]  # Skip assert_used check (OK in tests)

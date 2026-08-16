@@ -40,7 +40,7 @@ pip install -e .[dev]
 pytest --cov=wavetable_synthesis --cov-report=html
 
 # Run specific test file
-pytest wavetable_tests/test_wavetable_generation.py
+pytest generator/wavetable_tests/test_wavetable_generation.py
 
 # Or use Make
 make test
@@ -57,7 +57,7 @@ ruff format .
 ruff check --fix .
 
 # Type checking
-mypy --strict wavetable_synthesis/
+mypy --strict generator/wavetable_synthesis/
 
 # Or use Make
 make format
@@ -87,22 +87,13 @@ make batch
 ## Project Structure
 
 ```text
-wavetable_synthesis/     # Core library
-├── cli/                # Command-line interface
-├── core/               # Base classes and processing
-│   ├── base_generator.py
-│   ├── decorator_registry.py
-│   ├── generator.py
-│   └── processing.py
-└── export/             # WAV file export
-
-wavetable_generators/   # Generator implementations
-├── example.py          # Template generator
-├── linear_interpolation.py
-├── sine_to_triangle.py
-└── square_pwm_tz.py
-
-wavetable_tests/        # Comprehensive test suite
+maths/                   # Wave formulas (edit these)
+generator/               # Engine (usually don't edit)
+├── wavetable_synthesis/ # Core library
+│   ├── cli/
+│   ├── core/
+│   └── export/
+└── wavetable_tests/     # Test suite
 ```
 
 ## Code Quality Standards
@@ -143,11 +134,11 @@ wavetable_tests/        # Comprehensive test suite
 1. **Copy example.py** as a template
 2. **Extend BaseGenerator** class
 3. **Implement generate(theta, u)** method
-    - `theta`: phase array (0 to 2π)
-    - `u`: morph parameter (0 to 1)
+   - `theta`: phase array (0 to 2π)
+   - `u`: morph parameter (0 to 1)
 4. **Use decorator** `@register_generator("name")`
 5. **Add validation** with `_validate_u(u)`
-6. **Write tests** in `wavetable_tests/`
+6. **Write tests** in `generator/wavetable_tests/`
 7. **Test CLI** with `python -m wavetable_synthesis generator_name`
 
 ### Files Not to Modify

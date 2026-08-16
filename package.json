@@ -7,7 +7,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "markdownlint": "^0.40.0",
-    "markdownlint-cli": "^0.47.0",
+    "markdownlint-cli": "^0.49.1",
     "npm-check-updates": "^19.3.1",
     "prettier": "^3.7.4"
   },
@@ -15,9 +15,9 @@
     "prepare": "husky",
     "lint:md": "markdownlint \"**/*.md\" --ignore node_modules",
     "lint:md:fix": "markdownlint \"**/*.md\" --fix --ignore node_modules",
-    "lint:py": "python -m ruff check wavetable_synthesis/ wavetable_generators/ wavetable_tests/",
-    "lint:py:fix": "python -m ruff check --fix wavetable_synthesis/ wavetable_generators/ wavetable_tests/ && python -m ruff format wavetable_synthesis/ wavetable_generators/ wavetable_tests/",
-    "type:check": "python -m mypy wavetable_synthesis/",
+    "lint:py": "python -m ruff check generator/ maths/",
+    "lint:py:fix": "python -m ruff check --fix generator/ maths/ && python -m ruff format generator/ maths/",
+    "type:check": "python -m mypy generator/wavetable_synthesis/",
     "format": "prettier --write \"**/*.{md,json,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{md,json,yml,yaml}\"",
     "update": "npx npm-check-updates && npx npm-check-updates -u && npm install"
@@ -25,17 +25,7 @@
   "engines": {
     "node": ">=22.0.0"
   },
-  "lint-staged": {
-    "*.md": [
-      "prettier --write",
-      "markdownlint --fix"
-    ],
-    "*.{json,yml,yaml}": [
-      "prettier --write"
-    ],
-    "*.py": [
-      "python -m ruff format",
-      "python -m ruff check --fix"
-    ]
+  "dependencies": {
+    "@kristoffer-karl-axel-ekstrand/office-space": "^0.9.1"
   }
 }

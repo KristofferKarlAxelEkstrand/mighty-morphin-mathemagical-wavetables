@@ -7,23 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Git hook is husky (`npm install`). Setup and the devcontainer no longer run
+  `pre-commit install`. That command overwrites the husky hook.
+- Wave formulas live in `maths/` at the repo root. That folder is not a package. The engine
+  loads each `.py` file automatically. The old `wavetable_generators/` package is gone.
+- The library and tests live under `generator/`. Import names stay `wavetable_synthesis`.
+  Run tests with `pytest generator/wavetable_tests/`.
+- Technical notes live in `docs/tech/`. The old `docs_tech/` folder is gone.
+- Generated WAV files go in `maths_generated/`. The old `wavetable_dist/` name is gone.
+
 ### Added - Modern Development Tooling
 
 - **Ruff** - Ultra-fast Python linter and formatter
 - 10-100x faster than traditional tools
 - Auto-fixes most code quality issues
 - Comprehensive configuration in pyproject.toml
-- **Pre-commit hooks** (.pre-commit-config.yaml)
-- Automated code quality checks before commits
-- Includes Ruff, mypy, file checks, markdown linting, and security checks
+- **Git hooks** (husky + lint-staged)
+- Automated Ruff, Prettier, and markdownlint checks on commit
 - **Make task runner** (Makefile)
 - Simple commands for common development tasks
 - `make help`, `make test`, `make lint`, `make format`, etc.
 - **Development container** (.devcontainer/)
 - Ready-to-use VS Code/GitHub Codespaces environment
 - Zero setup required
-- **uv documentation** (docs/uv-guide.md)
-- Optional 10-100x faster package installer
 - **.python-version file**
 - Python 3.10 specification for version managers
 
@@ -38,6 +46,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Unused extras: Flask (`web`) and Sphinx (`docs`)
+- Stale files: `auto_activate.sh`, `PIP.MD`, `docs/uv-guide.md`,
+  `CI_OPTIMIZATION.md`, `docs/tech/python.md`
+- `pre-commit` Python extra (husky is the hook)
 - Legacy linting dependencies (Black, isort, Flake8, Pylint)
 - Duplicate task runner (justfile) - kept Makefile only
 - Redundant documentation files

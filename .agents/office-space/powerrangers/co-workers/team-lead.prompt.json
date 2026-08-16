@@ -1,0 +1,13 @@
+{
+  "display": "Team Lead",
+  "cli": "codex",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "permission_mode": "danger-full-access",
+  "enabled": true,
+  "lead": true,
+  "implementer": false,
+  "reviewer": false,
+  "qa": false,
+  "start_mode": "resident"
+}

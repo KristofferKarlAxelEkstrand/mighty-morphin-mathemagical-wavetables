@@ -4,12 +4,13 @@ This project uses Husky for git hooks to maintain code quality.
 
 ## Pre-commit Hook
 
-Before each commit, the following automatically happens:
+Before each commit, lint-staged runs on staged files:
 
-1.  **Prettier** formats all markdown, JSON, YAML files
-2.  **Markdownlint** fixes common markdown issues
+1. **Ruff** formats and lints Python
+2. **Prettier** formats Markdown, JSON, and YAML
+3. **markdownlint** checks Markdown
 
-This ensures all committed files are properly formatted and linted.
+See `docs/tech/husky.md`.
 
 ## Manual Commands
 

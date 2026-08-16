@@ -1,3 +1,17 @@
-echo "🔍 Running pre-commit checks..."
-npx lint-staged
-echo "✅ Pre-commit checks completed!"
+# GUI git does not activate .venv. Put project Python first.
+if [ -x .venv/bin/python ]; then
+  export PATH="$(pwd)/.venv/bin:$PATH"
+elif [ -x .venv/Scripts/python ]; then
+  export PATH="$(pwd)/.venv/Scripts:$PATH"
+else
+  echo "No .venv found. Run: python -m venv .venv && pip install -e \".[dev]\""
+  exit 1
+fi
+
+if ! python -c "import ruff" 2>/dev/null; then
+  echo "ruff is not installed in .venv. Run: pip install -e \".[dev]\""
+  exit 1
+fi
+
+# One task at a time. Parallel Prettier + Ruff ran out of memory on large commits.
+npx lint-staged --concurrent false

@@ -51,15 +51,18 @@ echo
 if [[ ! $REPLY =~ ^[Nn]$ ]]; then
     echo "📥 Installing development dependencies..."
     pip install -e ".[dev]"
+fi
 
-    # Install pre-commit hooks
-    read -p "Install pre-commit hooks for automatic code quality checks? (Y/n) " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Nn]$ ]]; then
-        echo "🔧 Installing pre-commit hooks..."
-        pre-commit install
-        echo "✅ Pre-commit hooks installed!"
-    fi
+# Node tools: husky (git hooks), prettier, markdownlint, office-space
+if command -v npm >/dev/null 2>&1; then
+    echo "📥 Installing Node tools (husky, prettier)..."
+    npm install
+    # husky sets core.hooksPath to .husky/_. Drop a leftover Python hook.
+    rm -f .git/hooks/pre-commit
+    echo "✅ Husky git hooks installed"
+else
+    echo "⚠️  npm not found. Skip git hooks."
+    echo "   Install Node 22+ and run: npm install"
 fi
 
 echo ""
@@ -75,7 +78,7 @@ echo ""
 echo "Quick start commands:"
 echo "  python -m wavetable_synthesis --list            # List generators"
 echo "  python -m wavetable_synthesis sine_to_triangle  # Generate wavetable"
-echo "  pytest wavetable_tests/                        # Run tests"
+echo "  pytest generator/wavetable_tests/              # Run tests"
 echo ""
 echo "Modern development commands (recommended):"
 echo "  make help      # Show all available commands (using Make)"

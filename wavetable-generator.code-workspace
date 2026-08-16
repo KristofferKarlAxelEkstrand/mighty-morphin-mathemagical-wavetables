@@ -17,7 +17,7 @@
     "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": {
       "*.py": "${capture}.pyc, ${capture}.pyi",
-      "pyproject.toml": "setup.py, setup.cfg, MANIFEST.in, requirements*.txt, PIP.MD",
+      "pyproject.toml": "setup.py, setup.cfg, MANIFEST.in, requirements*.txt",
       "package.json": "package-lock.json, .nvmrc, .npmrc, .prettierrc, .prettierignore",
       "README.md": "QUICKSTART.md, AGENTS.md",
       ".gitignore": ".gitattributes, .editorconfig, .envrc",
@@ -30,9 +30,8 @@
     "recommendations": [
       "ms-python.python",
       "ms-python.debugpy",
-      "ms-python.black-formatter",
-      "ms-python.pylint",
-      "ms-python.isort",
+      "charliermarsh.ruff",
+      "ms-python.vscode-pylance",
       "esbenp.prettier-vscode",
       "streetsidesoftware.code-spell-checker",
       "editorconfig.editorconfig",

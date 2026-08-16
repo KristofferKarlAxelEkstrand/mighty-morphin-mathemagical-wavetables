@@ -1,7 +1,6 @@
-# Pre-commit hooks for automated code quality checks
-# Install: pre-commit install
-# Run manually: pre-commit run --all-files
-# Update hooks: pre-commit autoupdate
+# Optional quality config for `pre-commit run --all-files` and pre-commit.ci.
+# The git hook is husky (npm install). Do not run `pre-commit install` —
+# it overwrites the husky hook.
 
 repos:
   # Ruff - Modern, fast Python linter (replaces Black, isort, Flake8, and more)
@@ -23,7 +22,7 @@ repos:
         additional_dependencies:
           - numpy>=2.0.0
           - soundfile>=0.13.0
-        files: ^wavetable_synthesis/
+        files: ^generator/wavetable_synthesis/
 
   # General file checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -55,7 +54,7 @@ repos:
       - id: bandit
         args: [-c, pyproject.toml]
         additional_dependencies: ["bandit[toml]"]
-        exclude: ^(wavetable_tests/|wavetable_generators/)
+        exclude: ^(generator/wavetable_tests/|maths/)
 
 # Configuration for pre-commit.ci service (optional)
 ci:

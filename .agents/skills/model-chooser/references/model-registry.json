@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "researched_at": "2026-07-22",
+  "stale_after_days": 30,
+  "effort_values": ["none", "minimal", "low", "medium", "high", "xhigh", "max", "ultra"],
+  "cli_effort": {
+    "codex": {
+      "mode": "native-config",
+      "values": ["none", "minimal", "low", "medium", "high", "xhigh", "max", "ultra"]
+    },
+    "antigravity": { "mode": "native-flag", "values": ["low", "medium", "high"] },
+    "devin": { "mode": "model-variant", "values": ["low", "medium", "high", "xhigh", "max"] },
+    "cursor": { "mode": "model-variant", "values": ["low", "medium", "high", "xhigh", "max"] },
+    "claude": { "mode": "unsupported", "values": [] },
+    "copilot": { "mode": "unsupported", "values": [] },
+    "grok": {
+      "mode": "native-flag",
+      "values": ["low", "medium", "high"]
+    }
+  },
+  "workspace_entitlements": [
+    {
+      "cli": "devin",
+      "model": "swe-1-7",
+      "cost": "free",
+      "source": "user-report",
+      "observed_at": "2026-07-22"
+    }
+  ],
+  "families": {
+    "openai-gpt": {
+      "provider": "OpenAI",
+      "evidence": "documented",
+      "roles": ["lead", "review", "dsp", "coding", "qa"]
+    },
+    "anthropic-claude": {
+      "provider": "Anthropic",
+      "evidence": "documented",
+      "roles": ["lead", "review", "coding"]
+    },
+    "google-gemini": {
+      "provider": "Google",
+      "evidence": "documented",
+      "roles": ["lead", "coding", "qa"]
+    },
+    "cognition-swe": {
+      "provider": "Cognition",
+      "evidence": "documented",
+      "roles": ["coding", "qa"]
+    },
+    "zai-glm": { "provider": "Z.ai", "evidence": "documented", "roles": ["coding", "qa"] },
+    "moonshot-kimi": { "provider": "Moonshot", "evidence": "partial", "roles": ["coding"] },
+    "deepseek": { "provider": "DeepSeek", "evidence": "documented", "roles": ["coding"] },
+    "xai-grok": { "provider": "xAI", "evidence": "documented", "roles": ["coding", "review"] },
+    "nvidia-nemotron": { "provider": "NVIDIA", "evidence": "documented", "roles": ["coding"] },
+    "cursor-composer": {
+      "provider": "Cursor",
+      "evidence": "documented",
+      "roles": ["coding", "qa"]
+    },
+    "openai-gpt-oss": { "provider": "OpenAI", "evidence": "documented", "roles": ["coding"] },
+    "router": { "provider": "mixed", "evidence": "unknown", "roles": [] },
+    "private": { "provider": "unknown", "evidence": "unknown", "roles": [] },
+    "unknown": { "provider": "unknown", "evidence": "unknown", "roles": [] }
+  },
+  "family_patterns": [
+    { "pattern": "(^|[- _])claude|opus|sonnet|haiku|fable", "family": "anthropic-claude" },
+    { "pattern": "gemini", "family": "google-gemini" },
+    { "pattern": "swe[- .]?1", "family": "cognition-swe" },
+    { "pattern": "glm", "family": "zai-glm" },
+    { "pattern": "kimi", "family": "moonshot-kimi" },
+    { "pattern": "deepseek", "family": "deepseek" },
+    { "pattern": "grok", "family": "xai-grok" },
+    { "pattern": "nemotron", "family": "nvidia-nemotron" },
+    { "pattern": "composer", "family": "cursor-composer" },
+    { "pattern": "gpt[-_ ]?oss", "family": "openai-gpt-oss" },
+    { "pattern": "(^|[- _])gpt|codex", "family": "openai-gpt" },
+    { "pattern": "adaptive|auto$", "family": "router" },
+    { "pattern": "private|inkling", "family": "private" }
+  ]
+}

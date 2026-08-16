@@ -31,7 +31,7 @@ The project emphasizes mathematical purity - all wavetables are created through 
 **Offline Generation Focus**: This is an offline wavetable generator, not a real-time audio engine. Wavetables are pre-rendered and stored as WAV files for use in synthesizers.
 
 - **Infrastructure Efficiency**: Core processing, export, and CLI should be efficient for batch generation
-- **Generator Simplicity**: Generators in `wavetable_generators/` prioritize clarity and educational value over raw performance
+- **Generator Simplicity**: Generators in `maths/` prioritize clarity and educational value over raw performance
 - **Acceptable Trade-offs**: Since generation happens offline (not live audio), slower generators are perfectly fine
 - **Efficiency Welcome**: Fast generators are great but not required - simplicity and correctness come first
 
@@ -46,55 +46,54 @@ This design enables beginners to create generators using clear, readable code wi
 - **Modern packaging** with pyproject.toml
 - **Decorator-based architecture** for generator registration
 - **Comprehensive linting** with Ruff (replaces Black, isort, Flake8, Pylint) and MyPy
-- **Pre-commit hooks** with Husky and lint-staged
+- **Git hooks** with Husky and lint-staged
 
 ## Project Structure
 
 ```text
-wavetable_synthesis/     # Core library
-├── __init__.py         # Package initialization
-├── __main__.py         # CLI entry point
-├── py.typed            # Type checking marker
-├── cli/               # Command-line interface
-│   ├── __init__.py
-│   └── cli.py         # Main CLI implementation
-├── core/              # Base classes and processing
-│   ├── __init__.py
-│   ├── base_generator.py     # BaseGenerator class
-│   ├── config.py             # Configuration management
-│   ├── constants.py          # Mathematical constants
-│   ├── decorator_registry.py # @register_generator decorator
-│   ├── generator.py          # Core generation logic
-│   ├── processing.py         # Audio processing utilities
-│   ├── registry.py           # Generator registry
-│   └── wavetable_generator.py # Main generator interface
-└── export/            # WAV file export
-    ├── __init__.py
-    └── wav.py         # WAV export functionality
+generator/               # Engine (library + tests)
+├── wavetable_synthesis/ # Core library (import name unchanged)
+│   ├── __init__.py         # Package initialization
+│   ├── __main__.py         # CLI entry point
+│   ├── py.typed            # Type checking marker
+│   ├── cli/               # Command-line interface
+│   │   ├── __init__.py
+│   │   └── cli.py         # Main CLI implementation
+│   ├── core/              # Base classes and processing
+│   │   ├── __init__.py
+│   │   ├── base_generator.py     # BaseGenerator class
+│   │   ├── config.py             # Configuration management
+│   │   ├── constants.py          # Mathematical constants
+│   │   ├── decorator_registry.py # @register_generator decorator
+│   │   ├── discover.py           # Loads maths/*.py
+│   │   ├── generator.py          # Core generation logic
+│   │   ├── processing.py         # Audio processing utilities
+│   │   ├── registry.py           # Generator registry
+│   │   └── wavetable_generator.py # Main generator interface
+│   └── export/            # WAV file export
+│       ├── __init__.py
+│       └── wav.py         # WAV export functionality
+└── wavetable_tests/       # Comprehensive test suite
+    ├── conftest.py        # pytest configuration and fixtures
+    ├── test_advanced.py   # Advanced functionality tests
+    ├── test_integration.py # Integration tests
+    ├── test_wavetable_generation.py # Core generation tests
+    └── [additional test files]
 
-wavetable_generators/   # Generator implementations
-├── __init__.py        # Package initialization
+maths/   # Wave formulas (not a package — drop a .py file here)
+├── README.md          # Copy example.py, edit the formula
 ├── example.py         # Template generator (sine to sawtooth)
 ├── linear_interpolation.py # Linear interpolation morphing
 ├── sine_to_triangle.py # Sine to triangle morph generator
 └── square_pwm_tz.py   # Through-zero PWM square wave
 
-wavetable_tests/       # Comprehensive test suite
-├── conftest.py        # pytest configuration and fixtures
-├── test_advanced.py   # Advanced functionality tests
-├── test_integration.py # Integration tests
-├── test_wavetable_generation.py # Core generation tests
-└── [additional test files]
-
 docs/                  # Documentation
 ├── development-setup.md
 ├── pathlib-guide.md
 ├── radian-pi-phase-frequency.md
-└── wavetable_generators.md
-
-docs_tech/            # Technical documentation
-├── husky.md
-└── python.md
+├── wavetable_generators.md
+└── tech/              # Tooling notes
+    └── husky.md
 ```
 
 ## Development Setup
@@ -107,17 +106,29 @@ pip install -e .[dev]
 pytest --cov=wavetable_synthesis --cov-report=html
 
 # Type checking
-mypy --strict wavetable_synthesis/
+mypy --strict generator/wavetable_synthesis/
 
 # Code quality checks
-ruff format wavetable_synthesis/ wavetable_generators/ wavetable_tests/
-ruff check --fix wavetable_synthesis/ wavetable_generators/ wavetable_tests/
+ruff format generator/ maths/
+ruff check --fix generator/ maths/
 
 # Generate wavetables
 python -m wavetable_synthesis generator_name
 python -m wavetable_synthesis --batch  # Generate all
 python -m wavetable_synthesis --list   # List generators
 ```
+
+## Office-space
+
+Host workflow: `.agents/office-space/powerrangers/`. Skills:
+
+- `office-space-onboard` — first run and keep/refresh
+- `office-space-team-design` — mission, roles, gates, backlog
+- `office-space-protocol` — mail, tasks, Slack, memory
+- `wavetable-generator` — `generate(theta, u)` and the audio contract
+
+After an office-space package bump: `whats-new` → `skills refresh --check|--write` →
+`partials refresh --check|--write --workflow powerrangers` → `sync --write` → `doctor`.
 
 ## CLI Capabilities
 
@@ -231,9 +242,9 @@ Think of a good programming teacher or DSP instructor who:
 - **Wavetable synthesis library** - generates professional audio wavetables
 - **Decorator-based registry** - generators self-register with @register_generator
 - **Project structure**:
-- `wavetable_synthesis/` - core library (processing, generation, export)
-- `wavetable_generators/` - generator implementations (example, linear_interpolation, sine_to_triangle, square_pwm_tz)
-- `wavetable_tests/` - comprehensive test suite with 90% coverage
+- `generator/wavetable_synthesis/` - core library (processing, generation, export)
+- `maths/` - generator implementations (example, linear_interpolation, sine_to_triangle, square_pwm_tz)
+- `generator/wavetable_tests/` - comprehensive test suite with 90% coverage
 - **Key concepts**:
 - Generators use `generate(theta, u)` method
 - `theta` = phase array (0 to 2π)
@@ -336,11 +347,11 @@ Wavetable Project Developer: "Simple setup: Create virtual environment, then `pi
 - Test with pytest after changes
 - Use type hints for clarity
 - Follow the project's patterns (decorators, BaseGenerator)
-- Keep generators in wavetable_generators/ folder
+- Keep generators in maths/ folder
 - Explain in simple words
 - Keep answers short and helpful
 - Use modern tooling: Ruff (linting/formatting), mypy (type checking)
 - Maintain 90%+ test coverage
-- Follow pre-commit hooks for quality assurance
+- Follow husky git hooks for quality assurance
 
 Remember: Wavetable Project Developer helps users with this Python wavetable project by keeping everything simple, following modern Python best practices, and making generators easy to create.

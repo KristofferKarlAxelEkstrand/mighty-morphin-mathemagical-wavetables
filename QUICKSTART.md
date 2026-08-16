@@ -74,7 +74,7 @@ python -m wavetable_synthesis sine_to_triangle
 ```text
 Generating sine_to_triangle wavetable...
    Frames: 256, Rate: 44100Hz, Bits: 16
-Success! File: wavetable_dist/sine_to_triangle_256frames_44100Hz_16bit.wav
+Success! File: maths_generated/sine_to_triangle_256frames_44100Hz_16bit.wav
 ```
 
 **Congratulations!** 🎉 You just created your first wavetable!
@@ -87,7 +87,7 @@ Your wavetable is saved here:
 
 ```text
 mighty-morphin-mathemagical-wavetables/
-└── wavetable_dist/
+└── maths_generated/
     └── sine_to_triangle_256frames_44100Hz_16bit.wav  ← Your file!
 ```
 
@@ -179,12 +179,12 @@ Ready to make your own waveforms? Follow these simple steps:
 
 ```bash
 # Create new generator file
-cp wavetable_generators/example.py wavetable_generators/my_wave.py
+cp maths/example.py maths/my_wave.py
 ```
 
 ### Step 2: Edit Your Generator
 
-Open `wavetable_generators/my_wave.py` and customize:
+Open `maths/my_wave.py` and customize:
 
 ```python
 import numpy as np
@@ -293,7 +293,7 @@ source .venv/bin/activate
 
 ### Generator Not Found
 
-- Check the file is in `wavetable_generators/` directory
+- Check the file is in the `maths/` directory
 - Make sure you have the `@register_generator("name")` decorator
 - File name doesn't matter - decorator name does!
 

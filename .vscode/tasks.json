@@ -4,8 +4,8 @@
     {
       "label": "Run Tests",
       "type": "shell",
-      "command": ".venv/Scripts/python",
-      "args": ["-m", "pytest", "wavetable_tests/", "-v"],
+      "command": ".venv/bin/python",
+      "args": ["-m", "pytest", "generator/wavetable_tests/", "-v"],
       "group": {
         "kind": "test",
         "isDefault": true
@@ -34,11 +34,11 @@
     {
       "label": "Run Tests with Coverage",
       "type": "shell",
-      "command": ".venv/Scripts/python",
+      "command": ".venv/bin/python",
       "args": [
         "-m",
         "pytest",
-        "wavetable_tests/",
+        "generator/wavetable_tests/",
         "--cov=wavetable_synthesis",
         "--cov-report=term-missing",
         "--cov-report=html"
@@ -55,7 +55,7 @@
     {
       "label": "Run Current Test File",
       "type": "shell",
-      "command": ".venv/Scripts/python",
+      "command": ".venv/bin/python",
       "args": ["-m", "pytest", "${file}", "-v"],
       "group": "test",
       "presentation": {
@@ -69,8 +69,8 @@
     {
       "label": "Type Check (mypy)",
       "type": "shell",
-      "command": ".venv/Scripts/python",
-      "args": ["-m", "mypy", "wavetable_synthesis/", "--strict", "--show-error-codes"],
+      "command": ".venv/bin/python",
+      "args": ["-m", "mypy", "generator/wavetable_synthesis/", "--strict", "--show-error-codes"],
       "group": "build",
       "presentation": {
         "echo": true,
@@ -96,8 +96,8 @@
     {
       "label": "Lint Python (Ruff)",
       "type": "shell",
-      "command": ".venv/Scripts/python",
-      "args": ["-m", "ruff", "check", "wavetable_synthesis/", "wavetable_generators/", "wavetable_tests/"],
+      "command": ".venv/bin/python",
+      "args": ["-m", "ruff", "check", "generator/", "maths/"],
       "group": "build",
       "presentation": {
         "echo": true,
@@ -124,8 +124,8 @@
     {
       "label": "Format Python (Ruff)",
       "type": "shell",
-      "command": ".venv/Scripts/python",
-      "args": ["-m", "ruff", "format", "wavetable_synthesis/", "wavetable_generators/", "wavetable_tests/"],
+      "command": ".venv/bin/python",
+      "args": ["-m", "ruff", "format", "generator/", "maths/"],
       "group": "build",
       "presentation": {
         "echo": true,
@@ -144,7 +144,7 @@
     {
       "label": "Lint Python (Ruff) --fix",
       "type": "shell",
-      "command": ".venv/Scripts/python",
+      "command": ".venv/bin/python",
       "args": ["-m", "ruff", "check", "--fix", "."],
       "presentation": {
         "echo": true,
@@ -157,7 +157,7 @@
     {
       "label": "Generate Wavetable (Prompt)",
       "type": "shell",
-      "command": ".venv/Scripts/python",
+      "command": ".venv/bin/python",
       "args": ["-m", "wavetable_synthesis", "${input:generatorName}"],
       "group": "build",
       "presentation": {
@@ -171,7 +171,7 @@
     {
       "label": "Generate All Wavetables (Batch)",
       "type": "shell",
-      "command": ".venv/Scripts/python",
+      "command": ".venv/bin/python",
       "args": ["-m", "wavetable_synthesis", "--batch"],
       "group": "build",
       "presentation": {
@@ -185,7 +185,7 @@
     {
       "label": "List Generators",
       "type": "shell",
-      "command": ".venv/Scripts/python",
+      "command": ".venv/bin/python",
       "args": ["-m", "wavetable_synthesis", "--list"],
       "group": "build",
       "presentation": {
@@ -202,7 +202,7 @@
       "command": "powershell.exe",
       "args": [
         "-Command",
-        "Remove-Item -Recurse -Force -ErrorAction SilentlyContinue build,dist,wavetable_dist,htmlcov,.pytest_cache,.coverage,*.egg-info; Write-Host 'Cleaned build artifacts'"
+        "Remove-Item -Recurse -Force -ErrorAction SilentlyContinue build,dist,maths_generated,htmlcov,.pytest_cache,.coverage,*.egg-info; Write-Host 'Cleaned build artifacts'"
       ],
       "group": "build",
       "presentation": {
@@ -216,7 +216,7 @@
     {
       "label": "Quick Test (Current File)",
       "type": "shell",
-      "command": ".venv/Scripts/python",
+      "command": ".venv/bin/python",
       "args": ["-m", "pytest", "${file}", "-v", "-x"],
       "group": "test",
       "presentation": {
@@ -252,7 +252,7 @@
     {
       "label": "Install Development Dependencies",
       "type": "shell",
-      "command": ".venv/Scripts/python",
+      "command": ".venv/bin/python",
       "args": ["-m", "pip", "install", "-e", ".[dev]"],
       "group": "build",
       "presentation": {

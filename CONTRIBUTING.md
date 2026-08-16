@@ -49,16 +49,16 @@ Follow the guidelines below based on what you're contributing.
 
 ```bash
 # Run all tests
-pytest wavetable_tests/
+pytest generator/wavetable_tests/
 
 # Run with coverage
-pytest wavetable_tests/ --cov=wavetable_synthesis
+pytest generator/wavetable_tests/ --cov=wavetable_synthesis
 
 # Check types
-mypy wavetable_synthesis/ --strict
+mypy generator/wavetable_synthesis/ --strict
 
 # Check code style
-ruff check wavetable_synthesis/ wavetable_generators/
+ruff check generator/ maths/
 
 # Or use Make for all checks
 make quality
@@ -81,14 +81,14 @@ We use modern, fast code quality tools:
 
 - **Ruff** for linting and formatting
 - **mypy** for type checking (strict mode)
-- **pre-commit** for automated checks
+- **husky** for git hooks (`npm install`)
 
 **Format your code:**
 
 ```bash
 # Format and fix issues with Ruff
-ruff format wavetable_generators/ wavetable_synthesis/
-ruff check --fix wavetable_generators/ wavetable_synthesis/
+ruff format maths/ generator/
+ruff check --fix maths/ generator/
 
 # Or use Make:
 make format
@@ -131,7 +131,7 @@ The easiest way to contribute! Here's how:
 ### Step 1: Create Your Generator File
 
 ```bash
-cp wavetable_generators/example.py wavetable_generators/your_name.py
+cp maths/example.py maths/your_name.py
 ```
 
 ### Step 2: Implement Your Generator
@@ -228,12 +228,12 @@ python -m wavetable_synthesis your_name
 python -m wavetable_synthesis --list
 
 # Run the test suite
-pytest wavetable_tests/ -v
+pytest generator/wavetable_tests/ -v
 ```
 
 ### Step 4: Add Tests (Optional but Appreciated)
 
-Create tests in `wavetable_tests/`:
+Create tests in `generator/wavetable_tests/`:
 
 ```python
 def test_your_generator(generator_registry):
@@ -342,7 +342,6 @@ Documentation is just as important as code!
 - `QUICKSTART.md` - Fast introduction
 - `docs/wavetable_generators.md` - Generator creation guide
 - `docs/radian-pi-phase-frequency.md` - Math concepts
-- `PIP.MD` - Python package management
 
 ---
 
@@ -365,16 +364,16 @@ Documentation is just as important as code!
 
 ```bash
 # Run all tests
-pytest wavetable_tests/
+pytest generator/wavetable_tests/
 
 # Run with coverage report
-pytest wavetable_tests/ --cov=wavetable_synthesis --cov-report=term-missing
+pytest generator/wavetable_tests/ --cov=wavetable_synthesis --cov-report=term-missing
 
 # Run specific test file
-pytest wavetable_tests/test_wavetable_generation.py
+pytest generator/wavetable_tests/test_wavetable_generation.py
 
 # Run with verbose output
-pytest wavetable_tests/ -v
+pytest generator/wavetable_tests/ -v
 ```
 
 ---
@@ -429,7 +428,7 @@ Project maintainers have the right to remove, edit, or reject comments, commits,
 ## 📞 Questions?
 
 - **Documentation:** Check `docs/` folder
-- **Examples:** Look at existing generators in `wavetable_generators/`
+- **Examples:** Look at existing generators in `maths/`
 - **Issues:** Open an issue on GitHub
 - **Discussion:** Start a discussion on GitHub
 

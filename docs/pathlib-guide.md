@@ -147,22 +147,20 @@ for path in paths:
 
 ### Generator Discovery
 
-Our generator auto-discovery uses pathlib:
+The engine loads formula files from `maths/` with pathlib. That folder is not a package:
 
 ```python
 from pathlib import Path
-import importlib
+import importlib.util
 
-# Get current directory
-_current_dir = Path(__file__).parent
-
-# Iterate over Python files
-for filepath in _current_dir.iterdir():
-    if filepath.suffix == ".py" and filepath.name != "__init__.py":
-        # Get module name without extension
-        module_name = filepath.stem
-        importlib.import_module(f".{module_name}", package=__name__)
+maths_dir = Path(__file__).resolve().parents[2] / "maths"
+for path in maths_dir.glob("*.py"):
+    if path.name.startswith("_"):
+        continue
+    spec = importlib.util.spec_from_file_location(f"maths.{path.stem}", path)
 ```
+
+See `generator/wavetable_synthesis/core/discover.py`.
 
 ## Migration from os.path
 

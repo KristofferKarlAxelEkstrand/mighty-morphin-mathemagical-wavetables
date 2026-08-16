@@ -6,23 +6,24 @@ This document explains the organization of the Wavetable Generator project - whe
 
 ```text
 wavetable-generator/
-├── wavetable_generators/       # ← Your generators go here!
-├── wavetable_synthesis/        # Core library (don't edit)
-├── wavetable_tests/           # Test suite
-├── wavetable_dist/            # Generated WAV files (output)
+├── maths/       # ← Your generators go here!
+├── generator/                  # Engine (usually don't edit)
+│   ├── wavetable_synthesis/    # Core library
+│   └── wavetable_tests/        # Test suite
+├── maths_generated/            # Generated WAV files (output)
 ├── docs/                      # Documentation
-├── docs_tech/                 # Technical documentation
+│   └── tech/                  # Tooling notes
 ├── .venv/                     # Virtual environment (created by setup)
 └── [config files]             # Project configuration
 ```
 
-## 🎨 wavetable_generators/ - Your Workspace
+## 🎨 maths/ - Your Workspace
 
 **This is where you create generators!**
 
 ```text
-wavetable_generators/
-├── __init__.py               # Makes this a Python package
+maths/
+├── README.md                 # Copy the template, edit the formula
 ├── example.py                # Template + working generator ← Start here!
 ├── sine_to_triangle.py       # Production example
 ├── square_pwm_tz.py          # Another production example
@@ -45,7 +46,7 @@ wavetable_generators/
 **Example:**
 
 ```python
-# File: wavetable_generators/my_wave.py
+# File: maths/my_wave.py
 
 from wavetable_synthesis.core.decorator_registry import register_generator
 from wavetable_synthesis.core.base_generator import BaseGenerator
@@ -64,34 +65,34 @@ python -m wavetable_synthesis my_wave
 
 ---
 
-## ⚙️ wavetable_synthesis/ - Core Library
+## ⚙️ generator/ - Engine
 
 **This is the engine - usually you don't edit these files**
 
+The import name is still `wavetable_synthesis`. The tests live next to the library.
+
 ```text
-wavetable_synthesis/
-├── __init__.py               # Package initialization
-├── __main__.py               # Makes package runnable as module
-├── py.typed                  # Marks package as type-hinted
-│
-├── core/                     # Generation engine
-│   ├── __init__.py
-│   ├── base_generator.py     # BaseGenerator class ← Extend this!
-│   ├── decorator_registry.py # Auto-discovery system
-│   ├── wavetable_generator.py # Main generation logic
-│   ├── processing.py         # Audio processing (normalize, DC remove)
-│   ├── constants.py          # Mathematical constants (TAU, etc.)
-│   ├── config.py             # Configuration settings
-│   └── registry.py           # Generator registry management
-│
-├── export/                   # WAV file export
-│   ├── __init__.py
-│   └── wav.py                # WAV file writing
-│
-└── cli/                      # Command-line interface
-    ├── __init__.py
-    ├── cli.py                # Main CLI logic
-    └── test_cli.py           # CLI tests
+generator/
+└── wavetable_synthesis/
+    ├── __init__.py               # Package initialization
+    ├── __main__.py               # Makes package runnable as module
+    ├── py.typed                  # Marks package as type-hinted
+    ├── core/                     # Generation engine
+    │   ├── __init__.py
+    │   ├── base_generator.py     # BaseGenerator class ← Extend this!
+    │   ├── decorator_registry.py # Auto-discovery system
+    │   ├── wavetable_generator.py # Main generation logic
+    │   ├── processing.py         # Audio processing (normalize, DC remove)
+    │   ├── constants.py          # Mathematical constants (TAU, etc.)
+    │   ├── config.py             # Configuration settings
+    │   └── registry.py           # Generator registry management
+    ├── export/                   # WAV file export
+    │   ├── __init__.py
+    │   └── wav.py                # WAV file writing
+    └── cli/                      # Command-line interface
+        ├── __init__.py
+        ├── cli.py                # Main CLI logic
+        └── test_cli.py           # CLI tests
 ```
 
 **When to edit core files:**
@@ -105,10 +106,10 @@ wavetable_synthesis/
 
 ---
 
-## 🧪 wavetable_tests/ - Test Suite
+## 🧪 generator/wavetable_tests/ - Test Suite
 
 ```text
-wavetable_tests/
+generator/wavetable_tests/
 ├── conftest.py                    # Pytest fixtures and configuration
 ├── test_wavetable_generation.py   # Core generation tests
 ├── test_integration.py            # Integration tests
@@ -126,19 +127,19 @@ wavetable_tests/
 
 ```bash
 # Run all tests
-pytest wavetable_tests/
+pytest generator/wavetable_tests/
 
 # Run with coverage
-pytest wavetable_tests/ --cov=wavetable_synthesis
+pytest generator/wavetable_tests/ --cov=wavetable_synthesis
 
 # Run specific test file
-pytest wavetable_tests/test_wavetable_generation.py
+pytest generator/wavetable_tests/test_wavetable_generation.py
 ```
 
 **Adding tests for your generator:**
 
 ```python
-# In wavetable_tests/test_wavetable_generation.py
+# In generator/wavetable_tests/test_wavetable_generation.py
 
 def test_my_generator(generator_registry):
     """Test my new generator."""
@@ -154,10 +155,10 @@ def test_my_generator(generator_registry):
 
 ---
 
-## 📦 wavetable_dist/ - Output Directory
+## 📦 maths_generated/ - Output Directory
 
 ```text
-wavetable_dist/
+maths_generated/
 ├── sine_to_triangle_256frames_44100Hz_16bit.wav
 ├── square_pwm_tz_256frames_44100Hz_16bit.wav
 └── [your generated wavetables].wav
@@ -188,7 +189,9 @@ wavetable_dist/
 docs/
 ├── wavetable_generators.md         # Complete generator guide
 ├── radian-pi-phase-frequency.md    # Math concepts explained
-└── development-setup.md            # Dev environment setup
+├── development-setup.md            # Dev environment setup
+└── tech/                           # Tooling notes
+    └── husky.md
 ```
 
 **What belongs here:**
@@ -207,12 +210,11 @@ docs/
 
 ---
 
-## 🔧 docs_tech/ - Technical Documentation
+## 🔧 docs/tech/ - Technical Documentation
 
 ```text
-docs_tech/
-├── python.md      # Python language and tools
-└── husky.md       # Git hooks automation
+docs/tech/
+└── husky.md       # Git hooks (husky + lint-staged)
 ```
 
 **What belongs here:**
@@ -232,18 +234,16 @@ docs_tech/
 - `CONTRIBUTING.md` - Contribution guidelines
 - `CHANGELOG.md` - Version history
 - `AGENTS.md` - For AI assistants and tools
-- `PIP.MD` - Python package management reference
 
 ### Configuration
 
 - `pyproject.toml` - Python project configuration (dependencies, tools)
-- `package.json` - Node.js dependencies (for Prettier, husky)
+- `package.json` - Node tools (husky, Prettier, office-space)
 - `package-lock.json` - Locked Node.js dependencies
 
 ### Scripts
 
 - `setup.sh` - Quick setup script for first-time users
-- `auto_activate.sh` - Auto-activation script for virtual environment
 
 ### IDE Configuration
 
@@ -267,10 +267,10 @@ docs_tech/
 
 ### Creating a New Generator
 
-**Location:** `wavetable_generators/your_name.py`
+**Location:** `maths/your_name.py`
 
 ```python
-# wavetable_generators/my_cool_wave.py
+# maths/my_cool_wave.py
 from wavetable_synthesis.core.decorator_registry import register_generator
 from wavetable_synthesis.core.base_generator import BaseGenerator
 
@@ -282,7 +282,7 @@ class MyCoolWaveGenerator(BaseGenerator):
 
 ### Adding Tests
 
-**Location:** `wavetable_tests/test_wavetable_generation.py` (or new file)
+**Location:** `generator/wavetable_tests/test_wavetable_generation.py` (or new file)
 
 ```python
 # Add to existing test file or create new one
@@ -295,7 +295,7 @@ def test_my_cool_wave(generator_registry):
 
 **For users:** `docs/your_guide.md`
 
-**For developers:** `docs_tech/your_tech_doc.md`
+**For developers:** `docs/tech/your_tech_doc.md`
 
 **For general info:** Update `README.md` or create root-level `.md` file
 
@@ -309,7 +309,7 @@ These are automatically generated or machine-specific:
 .venv/                    # Virtual environment
 __pycache__/              # Python bytecode
 *.pyc                     # Python compiled files
-wavetable_dist/           # Generated WAV files
+maths_generated/           # Generated WAV files
 *.egg-info/               # Package metadata
 htmlcov/                  # Coverage reports
 .coverage                 # Coverage data
@@ -325,29 +325,29 @@ Check `.gitignore` for complete list.
 
 ### "Where is the generator registry?"
 
-`wavetable_synthesis/core/decorator_registry.py`
+`generator/wavetable_synthesis/core/decorator_registry.py`
 
 ### "Where is the WAV export code?"
 
-`wavetable_synthesis/export/wav.py`
+`generator/wavetable_synthesis/export/wav.py`
 
 ### "Where are the mathematical constants?"
 
-`wavetable_synthesis/core/constants.py`
+`generator/wavetable_synthesis/core/constants.py`
 
 ### "Where is the CLI code?"
 
-`wavetable_synthesis/cli/cli.py`
+`generator/wavetable_synthesis/cli/cli.py`
 
 ### "Where should my new generator go?"
 
-`wavetable_generators/your_generator_name.py`
+`maths/your_generator_name.py`
 
 ### "Where can I find generator examples?"
 
-- `wavetable_generators/example.py` - Template
-- `wavetable_generators/sine_to_triangle.py` - Production example
-- `wavetable_generators/square_pwm_tz.py` - Another example
+- `maths/example.py` - Template
+- `maths/sine_to_triangle.py` - Production example
+- `maths/square_pwm_tz.py` - Another example
 
 ---
 
@@ -355,23 +355,23 @@ Check `.gitignore` for complete list.
 
 ### For New Contributors
 
-1. **Start with:** `wavetable_generators/example.py`
+1. **Start with:** `maths/example.py`
 2. **Read:** `README.md` and `QUICKSTART.md`
-3. **Study:** Existing generators in `wavetable_generators/`
-4. **Create:** Your generator in `wavetable_generators/`
+3. **Study:** Existing generators in `maths/`
+4. **Create:** Your generator in `maths/`
 
 ### For Documentation Writers
 
 1. **User docs:** `docs/` directory
-2. **Technical docs:** `docs_tech/` directory
+2. **Technical docs:** `docs/tech/` directory
 3. **General info:** Root `.md` files
 
 ### For Core Contributors
 
-1. **Core engine:** `wavetable_synthesis/core/`
-2. **Export:** `wavetable_synthesis/export/`
-3. **CLI:** `wavetable_synthesis/cli/`
-4. **Tests:** `wavetable_tests/`
+1. **Core engine:** `generator/wavetable_synthesis/core/`
+2. **Export:** `generator/wavetable_synthesis/export/`
+3. **CLI:** `generator/wavetable_synthesis/cli/`
+4. **Tests:** `generator/wavetable_tests/`
 
 ---
 
@@ -386,19 +386,19 @@ Check `.gitignore` for complete list.
    ↓
 3. Registry (core/registry.py) finds generator
    ↓
-4. Generator (wavetable_generators/*.py) creates waveforms
+4. Generator (maths/*.py) creates waveforms
    ↓
 5. Processing (core/processing.py) cleans audio
    ↓
 6. Export (export/wav.py) saves WAV file
    ↓
-7. WAV file in wavetable_dist/
+7. WAV file in maths_generated/
 ```
 
 ### Generator Discovery
 
 ```text
-1. Python imports wavetable_generators/
+1. The engine loads each file in maths/
    ↓
 2. @register_generator decorator runs
    ↓
@@ -426,10 +426,10 @@ Check `.gitignore` for complete list.
 
 ### Code Location
 
-- **Generators:** `wavetable_generators/`
-- **Core logic:** `wavetable_synthesis/core/`
-- **Tests:** `wavetable_tests/`
-- **Docs:** `docs/` or `docs_tech/`
+- **Generators:** `maths/`
+- **Core logic:** `generator/wavetable_synthesis/core/`
+- **Tests:** `generator/wavetable_tests/`
+- **Docs:** `docs/` or `docs/tech/`
 
 ---
 

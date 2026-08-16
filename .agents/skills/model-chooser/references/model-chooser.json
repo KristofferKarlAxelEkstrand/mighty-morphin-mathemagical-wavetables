@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "adapters": {
+    "devin": {
+      "provenance": "devin models list --format json",
+      "command": ["devin", "models", "list", "--format", "json"],
+      "timeout_ms": 10000,
+      "model_field": "model",
+      "cost_tier_field": "cost_tier",
+      "cost_summary_field": "cost_summary",
+      "parser": "devin-models"
+    },
+    "cursor": {
+      "provenance": "cursor-agent models",
+      "command": ["cursor-agent", "models"],
+      "timeout_ms": 10000,
+      "model_field": "model",
+      "cost_tier_field": "cost_tier",
+      "cost_summary_field": "cost_summary",
+      "parser": "cursor-models"
+    },
+    "grok": {
+      "provenance": "grok models",
+      "command": ["grok", "models"],
+      "timeout_ms": 10000,
+      "model_field": "model",
+      "cost_tier_field": "cost_tier",
+      "cost_summary_field": "cost_summary",
+      "parser": "grok-models"
+    }
+  }
+}

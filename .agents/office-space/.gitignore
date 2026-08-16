@@ -1,0 +1,10 @@
+# Runtime directories created while agents are running.
+# These are recreated on demand and should not be tracked.
+*/.temp/
+*/mail/
+*/slack/
+*/health/
+*/memory/
+# Leftover directories from package selftests / probes.
+selftest-*/
+probe-wf/

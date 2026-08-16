@@ -6,9 +6,15 @@ __pycache__
 .mypy_cache
 .coverage
 wavetable_dist
+maths_generated
 dist
+build
 wavetables
 *.wav
+*.egg-info
 package-lock.json
-# Agent files use YAML frontmatter - don't auto-format
+# Agent trees: YAML frontmatter and large skill sets. Do not format on commit.
+.agents
+.claude
+.devin
 .github/agents/**/*.agent.md

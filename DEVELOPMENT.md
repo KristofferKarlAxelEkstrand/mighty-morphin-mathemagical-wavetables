@@ -7,6 +7,7 @@ Modern development setup for Mighty Morphin Mathemagical Wavetables.
 ### Prerequisites
 
 - **Python 3.10+** (3.10, 3.11, 3.12, or 3.13)
+- **Node 22+** and **npm** (husky git hooks, Prettier, office-space)
 - **Git** for version control
 
 ### Setup
@@ -24,7 +25,7 @@ python -m venv .venv
 source .venv/bin/activate  # Linux/macOS
 # or: source .venv/Scripts/activate  # Windows Git Bash
 pip install -e ".[dev]"
-pre-commit install
+npm install
 ```
 
 ## Development Tools
@@ -64,29 +65,19 @@ make list          # List generators
 make run GEN=name  # Run specific generator
 ```
 
-### Pre-commit Hooks
+### Git Hooks (husky)
 
-Automatically check code quality before commits:
+`npm install` installs husky. On commit, lint-staged runs Ruff on Python and Prettier plus markdownlint on docs.
 
 ```bash
 # Install hooks (one-time)
-pre-commit install
+npm install
 
 # Hooks run automatically on git commit
 git commit -m "your message"
-
-# Run manually
-pre-commit run --all-files
 ```
 
-**What gets checked:**
-
-- Ruff linting and formatting
-- Type checking with mypy
-- File quality (trailing whitespace, EOF, etc.)
-- YAML/JSON/TOML syntax
-- Markdown linting
-- Security checks with Bandit
+CI runs Ruff, mypy, and pytest. Those checks are the quality bar. Do not run `pre-commit install`. It overwrites the husky hook.
 
 ## Development Workflow
 
@@ -126,18 +117,18 @@ git push origin feature/my-feature
 
 ```bash
 # Run all tests
-pytest wavetable_tests/
+pytest generator/wavetable_tests/
 # or: make test
 
 # With coverage
-pytest wavetable_tests/ --cov=wavetable_synthesis --cov-report=html
+pytest generator/wavetable_tests/ --cov=wavetable_synthesis --cov-report=html
 # or: make test-cov
 
 # Verbose output
-pytest wavetable_tests/ -v
+pytest generator/wavetable_tests/ -v
 
 # Specific test file
-pytest wavetable_tests/test_wavetable_generation.py
+pytest generator/wavetable_tests/test_wavetable_generation.py
 ```
 
 **Coverage requirement:** 90%+
@@ -171,7 +162,7 @@ make format
 
 ```bash
 # Check types
-mypy wavetable_synthesis/ --strict
+mypy generator/wavetable_synthesis/ --strict
 
 # Using Make
 make type-check
@@ -189,7 +180,7 @@ Quick guide - see [docs/wavetable_generators.md](docs/wavetable_generators.md) f
 
 ```bash
 # 1. Copy template
-cp wavetable_generators/example.py wavetable_generators/my_generator.py
+cp maths/example.py maths/my_generator.py
 
 # 2. Edit and implement
 # - Extend BaseGenerator
@@ -232,8 +223,8 @@ asdf install python 3.10
 
 ```bash
 # Setup
-make install-dev       # Install dependencies
-make pre-commit        # Install git hooks
+make install-dev       # Install Python dependencies
+make hooks             # Install husky git hooks
 
 # Development
 make test              # Run tests
@@ -264,15 +255,11 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-### Pre-commit Hook Issues
+### Git Hook Issues
 
 ```bash
-# Reinstall hooks
-pre-commit uninstall
-pre-commit install
-
-# Clear cache
-pre-commit clean
+# Reinstall husky hooks
+npm run prepare
 ```
 
 ### Import Errors
@@ -287,7 +274,7 @@ pip install -e .
 - [Ruff Documentation](https://docs.astral.sh/ruff/)
 - [pytest Documentation](https://docs.pytest.org/)
 - [MyPy Documentation](https://mypy.readthedocs.io/)
-- [Pre-commit Documentation](https://pre-commit.com/)
+- [Husky Documentation](https://typicode.github.io/husky/)
 
 ## Contributing
 

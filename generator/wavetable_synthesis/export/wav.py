@@ -129,8 +129,7 @@ def save_wavetable(  # pylint: disable=too-many-arguments,too-many-positional-ar
     return filepath
 
 
-# pylint: disable=too-many-arguments,too-many-positional-arguments
-def export_wavetable(
+def export_wavetable(  # pylint: disable=too-many-arguments,too-many-positional-arguments
     name: str,
     data: np.ndarray,
     output_dir: str | Path = DEFAULT_OUTPUT_DIR,

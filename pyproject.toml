@@ -42,7 +42,7 @@ dev = [
     "pytest>=8.0.0",
     "pytest-cov>=6.0.0",
     # Linting and formatting
-    "ruff>=0.9.0",
+    "ruff>=0.15.10",
     # Type checking
     "mypy>=1.13.0",
     # Security

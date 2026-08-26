@@ -40,7 +40,7 @@ dependencies = [
 dev = [
     # Testing
     "pytest>=8.0.0",
-    "pytest-cov>=6.0.0",
+    "pytest-cov>=7.1.0",
     # Linting and formatting
     "ruff>=0.9.0",
     # Type checking

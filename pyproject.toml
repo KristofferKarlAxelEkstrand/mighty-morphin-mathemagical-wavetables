@@ -33,7 +33,7 @@ classifiers = [
 ]
 dependencies = [
     "numpy>=2.0.0",
-    "soundfile>=0.13.0",
+    "soundfile>=0.13.1",
 ]
 
 [project.optional-dependencies]
